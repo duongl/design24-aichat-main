@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { AlertTriangle, Wifi, WifiOff, Plus } from 'lucide-react';
+import { AlertTriangle, Wifi, WifiOff, Plus, Menu } from 'lucide-react';
 import { ChatSidebar } from './ChatSidebar';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
@@ -7,6 +7,7 @@ import { ApiKeySetup } from './ApiKeySetup';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { geminiService } from '@/services/geminiApi';
 import { useToast } from '@/hooks/use-toast';
@@ -22,6 +23,7 @@ interface TypingMessage {
 
 export function Chatbox() {
   const [isApiKeyConfigured, setIsApiKeyConfigured] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   
   const {
     chatSessions,
@@ -162,6 +164,7 @@ export function Chatbox() {
 
   const handleNewChat = () => {
     createNewChat();
+    setIsMobileSidebarOpen(false); // Close mobile sidebar after creating new chat
     toast({
       title: "Tạo cuộc trò chuyện mới",
       description: "Bạn có thể bắt đầu cuộc trò chuyện mới.",
@@ -171,6 +174,7 @@ export function Chatbox() {
 
   const handleSelectChat = (chatId: string) => {
     loadChatSession(chatId);
+    setIsMobileSidebarOpen(false); // Close mobile sidebar after selecting chat
   };
 
   const handleDeleteChat = (chatId: string) => {
@@ -210,8 +214,8 @@ export function Chatbox() {
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
-      {/* Sidebar - Hidden on mobile, can be enhanced with a toggle later */}
-      <div className="hidden md:block">
+      {/* Desktop Sidebar */}
+      <div className="hidden md:block w-80">
         <ChatSidebar
           chatSessions={chatSessions}
           currentChatId={currentChatId}
@@ -223,11 +227,39 @@ export function Chatbox() {
         />
       </div>
 
+      {/* Mobile Sidebar */}
+      <Sheet open={isMobileSidebarOpen} onOpenChange={setIsMobileSidebarOpen}>
+        <SheetContent side="left" className="w-80 p-0">
+          <ChatSidebar
+            chatSessions={chatSessions}
+            currentChatId={currentChatId}
+            onNewChat={handleNewChat}
+            onSelectChat={handleSelectChat}
+            onDeleteChat={handleDeleteChat}
+            onRenameChat={handleRenameChat}
+            onClearAllChats={handleClearAllChats}
+          />
+        </SheetContent>
+      </Sheet>
+
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-card border-b border-border p-4 flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0">
+            {/* Mobile Menu Button */}
+            <Sheet open={isMobileSidebarOpen} onOpenChange={setIsMobileSidebarOpen}>
+              <SheetTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="md:hidden p-2"
+                >
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+            </Sheet>
+            
             <div className="w-8 h-8 bg-chat-gradient rounded-lg flex items-center justify-center flex-shrink-0">
               <span className="text-primary-foreground font-bold text-sm">AI</span>
             </div>

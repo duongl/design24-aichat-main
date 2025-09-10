@@ -59,7 +59,7 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
       // Italic text
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       // Code blocks
-      .replace(/```([\s\S]*?)```/g, '<pre class="bg-muted p-3 rounded-md mt-2 mb-2 text-sm overflow-x-auto"><code>$1</code></pre>')
+      .replace(/```([\s\S]*?)```/g, '<pre class="bg-muted p-3 rounded-md mt-2 mb-2 text-sm overflow-x-auto whitespace-pre-wrap break-words"><code>$1</code></pre>')
       // Inline code
       .replace(/`(.*?)`/g, '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>')
       // Line breaks
@@ -80,14 +80,14 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
       </div>
 
       {/* Message Content */}
-      <div className={`flex-1 max-w-[80%] ${isUser ? 'text-right' : ''}`}>
-        <div className={`inline-block max-w-full ${
+      <div className={`flex-1 min-w-0 ${isUser ? 'text-right' : ''}`}>
+        <div className={`inline-block w-full max-w-full ${
           isUser 
             ? 'bg-chat-gradient text-primary-foreground' 
             : 'bg-card border border-border'
         } rounded-2xl p-4 shadow-soft`}>
           <div 
-            className="text-sm leading-relaxed"
+            className="text-sm leading-relaxed break-words overflow-wrap-anywhere"
             dangerouslySetInnerHTML={{ __html: formatMessage(displayedMessage) }}
           />
           

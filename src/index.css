@@ -215,6 +215,26 @@
     background-clip: text;
   }
 
+  /* Text overflow handling for mobile */
+  .break-words {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Mobile responsive text */
+  @media (max-width: 768px) {
+    .break-words {
+      word-break: break-all;
+      overflow-wrap: anywhere;
+    }
+  }
+
   /* Button variants using design system */
   .btn-primary {
     background: var(--chat-gradient);

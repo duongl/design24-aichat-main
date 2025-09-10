@@ -366,8 +366,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
         </header>
 
         {/* Messages Area */}
-        <ScrollArea className="flex-1 p-4">
-          <div className="max-w-4xl mx-auto">
+        <ScrollArea className="flex-1 p-2 sm:p-4">
+          <div className="max-w-4xl mx-auto w-full">
             {!geminiService.isConfigured() && (
               <Alert className="mb-4">
                 <AlertTriangle className="h-4 w-4" />

@@ -1,16 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
-import { AlertTriangle, Wifi, WifiOff, Plus, Menu } from 'lucide-react';
+import { AlertTriangle, Wifi, WifiOff, Plus, Menu, Key } from 'lucide-react';
 import { ChatSidebar } from './ChatSidebar';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 import { ApiKeySetup } from './ApiKeySetup';
+import { ChangePasswordModal } from './ChangePasswordModal';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useChatSessions } from '@/hooks/useChatSessions';
 import { geminiService } from '@/services/geminiApi';
+import { secureRateLimitingService as rateLimitingService } from '@/services/secureRateLimiting';
 import { useToast } from '@/hooks/use-toast';
+import { UserRole, USER_ROLE_CONFIGS } from '@/types/auth';
 import logoDesign24 from '@/assets/design24-logo.webp';
 
 interface TypingMessage {
@@ -21,9 +24,16 @@ interface TypingMessage {
   isTyping: boolean;
 }
 
-export function Chatbox() {
+interface ChatboxProps {
+  userRole: UserRole;
+}
+
+export function Chatbox({ userRole }: ChatboxProps) {
   const [isApiKeyConfigured, setIsApiKeyConfigured] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+  const [currentUserRole, setCurrentUserRole] = useState(userRole);
+  const [rateLimitInfo, setRateLimitInfo] = useState(rateLimitingService.getRateLimitInfo(userRole));
   
   const {
     chatSessions,
@@ -47,6 +57,16 @@ export function Chatbox() {
   useEffect(() => {
     setIsApiKeyConfigured(geminiService.isConfigured());
   }, []);
+
+  // Update rate limit info when user role changes
+  useEffect(() => {
+    setRateLimitInfo(rateLimitingService.getRateLimitInfo(currentUserRole));
+    
+    // Cảnh báo nếu phát hiện device mới (có thể là hack attempt)
+    if (rateLimitingService.isNewDevice()) {
+      console.warn('New device detected - rate limiting reset');
+    }
+  }, [currentUserRole]);
 
   // Monitor online status
   useEffect(() => {
@@ -101,6 +121,19 @@ export function Chatbox() {
       return;
     }
 
+    // Check rate limit
+    const canSend = await rateLimitingService.canSendMessage(currentUserRole);
+    if (!canSend) {
+      const userConfig = USER_ROLE_CONFIGS[currentUserRole];
+      toast({
+        title: "Đã vượt quá giới hạn tin nhắn",
+        description: `Bạn đã sử dụng hết ${userConfig.dailyLimit} tin nhắn/ngày. Vui lòng thử lại vào ngày mai.`,
+        variant: "destructive",
+        duration: 5000,
+      });
+      return;
+    }
+
     // Add user message
     addMessage(message, true);
     setIsLoading(true);
@@ -126,9 +159,13 @@ export function Chatbox() {
       });
 
       // Wait for typing animation to complete, then add the actual message
-      setTimeout(() => {
+      setTimeout(async () => {
         addMessage(response, false);
         setTypingMessage(null);
+        
+        // Increment rate limit usage after successful response
+        await rateLimitingService.incrementUsage(currentUserRole);
+        setRateLimitInfo(rateLimitingService.getRateLimitInfo(currentUserRole));
       }, Math.min(response.length * 20, 3000)); // Dynamic timing based on response length
 
     } catch (error) {
@@ -210,6 +247,17 @@ export function Chatbox() {
     createNewChat();
   };
 
+  const handlePasswordChanged = (newRole: UserRole) => {
+    setCurrentUserRole(newRole);
+    setRateLimitInfo(rateLimitingService.getRateLimitInfo(newRole));
+    
+    toast({
+      title: "Đã đổi gói dịch vụ",
+      description: `Chuyển sang gói ${newRole === UserRole.ADMIN ? 'Admin' : newRole === UserRole.USER ? 'User' : 'Beta'} thành công.`,
+      duration: 3000,
+    });
+  };
+
   // API key is now integrated, no setup required
 
   return (
@@ -267,13 +315,31 @@ export function Chatbox() {
               <h2 className="font-semibold text-lg truncate">
                 {currentChat?.title || 'Trợ lý AI'}
               </h2>
-              <p className="text-xs text-muted-foreground truncate">
-                DESIGN24 • Trợ lý AI Đa lĩnh vực
-              </p>
+              <div className="flex items-center gap-2">
+                <p className="text-xs text-muted-foreground truncate">
+                  DESIGN24 • Trợ lý AI Đa lĩnh vực
+                </p>
+                {/* Rate limit info - hidden on mobile and tablet */}
+                <div className="hidden lg:flex items-center gap-1 text-xs">
+                  <span className="text-muted-foreground">
+                    {rateLimitingService.getFormattedLimitInfo(currentUserRole)}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Change Password Button - visible on all devices */}
+            <Button 
+              onClick={() => setIsChangePasswordModalOpen(true)}
+              variant="ghost"
+              size="sm"
+              title="Đổi gói dịch vụ"
+            >
+              <Key className="w-4 h-4" />
+            </Button>
+            
             {/* Mobile New Chat Button */}
             <Button 
               onClick={handleNewChat}
@@ -374,6 +440,14 @@ export function Chatbox() {
           disabled={!currentChatId || !geminiService.isConfigured() || !isOnline}
         />
       </div>
+
+      {/* Change Password Modal */}
+      <ChangePasswordModal
+        isOpen={isChangePasswordModalOpen}
+        onClose={() => setIsChangePasswordModalOpen(false)}
+        onPasswordChanged={handlePasswordChanged}
+        currentRole={currentUserRole}
+      />
     </div>
   );
 }

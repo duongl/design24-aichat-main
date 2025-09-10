@@ -3,10 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Lock, Eye, EyeOff } from 'lucide-react';
+import { Lock, Eye, EyeOff, Crown, User, TestTube } from 'lucide-react';
+import { UserRole } from '@/types/auth';
+import { getUserAuth } from '@/config/auth';
 
 interface PasswordProtectionProps {
-  onPasswordCorrect: () => void;
+  onPasswordCorrect: (userRole: UserRole) => void;
 }
 
 export function PasswordProtection({ onPasswordCorrect }: PasswordProtectionProps) {
@@ -25,11 +27,15 @@ export function PasswordProtection({ onPasswordCorrect }: PasswordProtectionProp
     // Simulate a small delay for better UX
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    if (password === '090900') {
+    // Check password using auth config
+    const userAuth = getUserAuth(password);
+    
+    if (userAuth) {
       localStorage.setItem('password_verified', 'true');
-      onPasswordCorrect();
+      localStorage.setItem('user_role', userAuth.role);
+      onPasswordCorrect(userAuth.role);
     } else {
-      setError('Mật khẩu không đúng. Vui lòng thử lại.');
+      setError('Mật khẩu không đúng hoặc chưa được cấp. Vui lòng liên hệ Học viện Design24 để được hỗ trợ.');
       setPassword('');
     }
     
@@ -45,7 +51,7 @@ export function PasswordProtection({ onPasswordCorrect }: PasswordProtectionProp
           </div>
           <CardTitle className="text-slate-100 text-xl">Yêu Cầu Truy Cập</CardTitle>
           <CardDescription className="text-slate-400">
-            Vui lòng nhập mật khẩu để tiếp tục.
+            Vui lòng nhập mật khẩu được cấp để tiếp tục.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

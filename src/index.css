@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* DESIGN24 Chatbox Design System - Dark Blue Professional Theme */
+
+@layer base {
+  :root {
+    /* DESIGN24 Brand Color Palette - Dark Blue Theme */
+    --color-primary-50: 225 100% 96%;
+    --color-primary-100: 225 100% 92%;
+    --color-primary-200: 227 84% 81%;
+    --color-primary-300: 229 79% 70%;
+    --color-primary-400: 233 75% 63%;
+    --color-primary-500: 237 71% 58%;
+    --color-primary-600: 238 100% 55%;
+    --color-primary-700: 238 100% 48%;
+    --color-primary-800: 239 100% 37%;
+    --color-primary-900: 240 88% 30%;
+    --color-primary-950: 241 92% 18%;
+
+    /* Semantic Design System */
+    --background: 0 0% 100%;
+    --foreground: 241 92% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 241 92% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 241 92% 18%;
+
+    --primary: 238 100% 48%;
+    --primary-foreground: 0 0% 100%;
+    
+    --primary-gradient-start: 238 100% 55%;
+    --primary-gradient-end: 239 100% 37%;
+
+    --secondary: 225 100% 96%;
+    --secondary-foreground: 241 92% 18%;
+
+    --muted: 225 100% 96%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 225 100% 92%;
+    --accent-foreground: 241 92% 18%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 225 84% 81%;
+    --input: 225 84% 81%;
+    --ring: 238 100% 48%;
+
+    --sidebar-background: 225 100% 96%;
+    --sidebar-foreground: 241 92% 18%;
+    --sidebar-primary: 238 100% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 100% 92%;
+    --sidebar-accent-foreground: 241 92% 18%;
+    --sidebar-border: 225 84% 81%;
+
+    --radius: 0.75rem;
+
+    /* Custom Design System Extensions */
+    --chat-gradient: linear-gradient(135deg, hsl(var(--primary-gradient-start)), hsl(var(--primary-gradient-end)));
+    --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.1);
+    --shadow-strong: 0 10px 40px -4px hsl(var(--primary) / 0.2);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 241 92% 8%;
+    --foreground: 225 100% 96%;
+
+    --card: 241 92% 12%;
+    --card-foreground: 225 100% 96%;
+
+    --popover: 241 92% 12%;
+    --popover-foreground: 225 100% 96%;
+
+    --primary: 238 100% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 88% 20%;
+    --secondary-foreground: 225 100% 96%;
+
+    --muted: 240 88% 20%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 88% 25%;
+    --accent-foreground: 225 100% 96%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 88% 20%;
+    --input: 240 88% 20%;
+    --ring: 238 100% 55%;
+
+    --sidebar-background: 241 92% 12%;
+    --sidebar-foreground: 225 100% 96%;
+    --sidebar-primary: 238 100% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 88% 20%;
+    --sidebar-accent-foreground: 225 100% 96%;
+    --sidebar-border: 240 88% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/30;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--chat-gradient);
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply opacity-80;
+  }
+
+  /* Firefox scrollbar */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--muted));
+  }
+}
+
+@layer components {
+  /* Chat Animation Keyframes */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Chat Specific Styles */
+  .chat-animation-left {
+    animation: slideInLeft 0.3s ease-out;
+  }
+
+  .chat-animation-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .typing-dots {
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  /* Gradient text for branding */
+  .gradient-text {
+    background: var(--chat-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Button variants using design system */
+  .btn-primary {
+    background: var(--chat-gradient);
+    @apply text-primary-foreground font-medium rounded-lg px-4 py-2 shadow-soft transition-all duration-300;
+    @apply hover:shadow-strong hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground font-medium rounded-lg px-4 py-2 border border-border;
+    transition: var(--transition-smooth);
+    @apply hover:bg-accent hover:shadow-soft;
+  }
+
+  .btn-destructive {
+    @apply bg-destructive text-destructive-foreground font-medium rounded-lg px-4 py-2;
+    transition: var(--transition-smooth);
+    @apply hover:bg-destructive/90 hover:shadow-soft;
+  }
+}

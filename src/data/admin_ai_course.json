@@ -1,0 +1,437 @@
+{
+  "admin_ai_course": {
+    "id": "admin-ai-course",
+    "title": "Ứng dụng AI trong Hành chính công",
+    "version": "1.0.0",
+    "last_updated": "2025-08-28",
+    "description": "Chương trình đào tạo 2 ngày, thiên về thực hành, áp dụng ngay vào công việc hành chính công.",
+    "modules": [
+      {
+        "id": "01-digital-transformation-overview",
+        "title": "Tổng quan về chuyển đổi số và ứng dụng AI trong hành chính công",
+        "objectives": [
+          "Hiểu rõ khái niệm chuyển đổi số trong hành chính công",
+          "Nắm bắt lợi ích và rủi ro khi ứng dụng AI",
+          "Xác định vai trò AI trong cải cách hành chính",
+          "Đánh giá tiềm năng tối ưu quy trình làm việc",
+          "Xây dựng roadmap chuyển đổi số phù hợp"
+        ],
+        "skills": [
+          "Phân tích quy trình hành chính hiện tại",
+          "Đánh giá khả năng ứng dụng AI trong từng khâu",
+          "Quản lý rủi ro chuyển đổi số",
+          "Lập kế hoạch triển khai từng bước",
+          "Đo lường hiệu quả cải tiến quy trình",
+          "Thuyết phục và đào tạo đội ngũ"
+        ],
+        "tools": [
+          "Microsoft 365 Government",
+          "Google Workspace for Government",
+          "Zalo OA for Business",
+          "Microsoft Power Platform",
+          "Tableau Public"
+        ],
+        "workflows": [
+          {
+            "name": "Đánh giá hiện trạng và lập kế hoạch chuyển đổi số",
+            "steps": [
+              "B1: Rà soát toàn bộ quy trình hành chính hiện tại",
+              "B2: Xác định điểm nghẽn và khâu tốn thời gian",
+              "B3: Đánh giá mức độ sẵn sàng của nhân sự và hạ tầng",
+              "B4: Ưu tiên các quy trình có tác động lớn và dễ triển khai",
+              "B5: Xây dựng roadmap 6-12 tháng với các mốc kiểm tra",
+              "B6: Thiết lập KPI đo lường hiệu quả"
+            ]
+          }
+        ],
+        "examples": [
+          "Cơ quan A giảm 70% thời gian xử lý hồ sơ nhờ tự động hóa quy trình tiếp nhận và phân loại",
+          "Sở B tăng 90% độ hài lòng người dân khi triển khai chatbot hỗ trợ tra cứu thủ tục 24/7"
+        ],
+        "faqs": [
+          {
+            "q": "Làm thế nào để thuyết phục lãnh đạo đầu tư vào chuyển đổi số?",
+            "a": "Trình bày số liệu cụ thể về chi phí-lợi ích, bắt đầu với pilot project nhỏ để chứng minh hiệu quả, so sánh với cơ quan khác đã thành công."
+          },
+          {
+            "q": "Nhân viên lớn tuổi có thể thích ứng được với AI không?",
+            "a": "Có thể, nếu được đào tạo từng bước, sử dụng công cụ đơn giản, có hỗ trợ kỹ thuật tại chỗ và thấy được lợi ích thiết thực ngay."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["chuyển đổi số", "digital transformation", "AI hành chính", "cải cách hành chính", "quy trình số", "eGovernment", "hiệu quả quản lý", "tự động hóa", "innovation", "modernization"],
+          "match_threshold": 0.72
+        }
+      },
+      {
+        "id": "02-document-writing-ai",
+        "title": "Kỹ năng soạn thảo và xử lý văn bản bằng AI",
+        "objectives": [
+          "Sử dụng AI để soạn công văn chuẩn mực và nhanh chóng",
+          "Tự động tóm tắt và chỉnh sửa văn bản dài",
+          "Chuẩn hóa văn bản theo thể thức hành chính",
+          "Kiểm tra lỗi chính tả và ngữ pháp tự động",
+          "Tạo template và mẫu văn bản thông minh"
+        ],
+        "skills": [
+          "Viết prompt hiệu quả cho soạn thảo văn bản",
+          "Sử dụng AI để cấu trúc nội dung logic",
+          "Kiểm tra và đối chiếu thông tin tự động",
+          "Chỉnh sửa tone và style phù hợp ngữ cảnh",
+          "Quản lý version và track changes",
+          "Tối ưu hóa quy trình review và phê duyệt"
+        ],
+        "tools": [
+          "Microsoft Word với AI Assistant",
+          "Google Docs với Smart Compose",
+          "Grammarly Business",
+          "Adobe Acrobat Pro",
+          "VietOCR",
+          "eContract platforms"
+        ],
+        "workflows": [
+          {
+            "name": "Soạn thảo công văn bằng AI",
+            "steps": [
+              "B1: Xác định loại văn bản và người nhận",
+              "B2: Thu thập thông tin và dữ liệu cần thiết",
+              "B3: Sử dụng AI để tạo outline và cấu trúc",
+              "B4: Điền nội dung chi tiết với sự hỗ trợ của AI",
+              "B5: Kiểm tra định dạng theo quy chuẩn nhà nước",
+              "B6: Review và hoàn thiện trước khi trình ký"
+            ]
+          }
+        ],
+        "examples": [
+          "Soạn thảo báo cáo tổng kết quý trong 30 phút thay vì 3 giờ nhờ AI phân tích dữ liệu và tạo draft",
+          "Tự động chuẩn hóa 100 công văn theo format mới chỉ trong 1 giờ"
+        ],
+        "faqs": [
+          {
+            "q": "AI có thể thay thế hoàn toàn việc viết văn bản không?",
+            "a": "Không. AI chỉ hỗ trợ tạo draft và gợi ý. Cán bộ vẫn cần review, kiểm tra độ chính xác và điều chỉnh cho phù hợp ngữ cảnh cụ thể."
+          },
+          {
+            "q": "Làm sao đảm bảo bảo mật khi dùng AI soạn văn bản?",
+            "a": "Sử dụng AI on-premise hoặc cloud riêng, không nhập thông tin nhạy cảm, xóa data sau khi sử dụng, và có policy bảo mật rõ ràng."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["soạn thảo văn bản", "công văn", "AI writing", "document processing", "text editing", "văn bản hành chính", "thể thức", "chuẩn hóa", "template", "grammar check"],
+          "match_threshold": 0.72
+        }
+      },
+      {
+        "id": "03-digital-records-management",
+        "title": "Quản lý hồ sơ và dữ liệu điện tử",
+        "objectives": [
+          "Thiết lập hệ thống quản lý văn bản điện tử hiệu quả",
+          "Số hóa và lưu trữ hồ sơ một cách khoa học",
+          "Tìm kiếm và truy xuất thông tin nhanh chóng",
+          "Đảm bảo chia sẻ dữ liệu an toàn và liên thông",
+          "Sao lưu và khôi phục dữ liệu đáng tin cậy"
+        ],
+        "skills": [
+          "Thiết kế cấu trúc thư mục và phân loại hồ sơ",
+          "Sử dụng metadata và tags để quản lý hiệu quả",
+          "Scan và OCR hồ sơ giấy thành file số",
+          "Thiết lập quyền truy cập và workflow phê duyệt",
+          "Tích hợp với hệ thống quản lý tài liệu khác",
+          "Giám sát và audit log hoạt động"
+        ],
+        "tools": [
+          "SharePoint Online",
+          "Microsoft OneDrive for Business",
+          "Google Drive Enterprise",
+          "Adobe Document Cloud",
+          "DocuSign",
+          "VietnamPost eMS"
+        ],
+        "workflows": [
+          {
+            "name": "Số hóa và quản lý hồ sơ điện tử",
+            "steps": [
+              "B1: Rà soát và phân loại hồ sơ hiện có",
+              "B2: Thiết kế cấu trúc thư mục và naming convention",
+              "B3: Scan và OCR hồ sơ giấy thành file PDF searchable",
+              "B4: Gán metadata và tags cho việc tìm kiếm",
+              "B5: Thiết lập quyền truy cập theo vai trò",
+              "B6: Tạo backup schedule và test khôi phục"
+            ]
+          }
+        ],
+        "examples": [
+          "Phòng Tài nguyên giảm 80% thời gian tìm hồ sơ đất đai nhờ hệ thống quản lý điện tử với OCR",
+          "UBND xã triển khai hồ sơ điện tử, người dân có thể tra cứu tiến độ xử lý 24/7"
+        ],
+        "faqs": [
+          {
+            "q": "Chi phí để số hóa toàn bộ hồ sơ giấy có đắt không?",
+            "a": "Chi phí ban đầu cao nhưng sẽ tiết kiệm đáng kể về lâu dài. Có thể triển khai từng giai đoạn, ưu tiên hồ sơ hay sử dụng trước."
+          },
+          {
+            "q": "Hồ sơ số có giá trị pháp lý như hồ sơ giấy không?",
+            "a": "Có, theo Luật Giao dịch điện tử và nghị định hướng dẫn. Cần đảm bảo chữ ký số hợp lệ và lưu trữ đúng quy định."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["quản lý hồ sơ", "văn bản điện tử", "digital records", "document management", "lưu trữ số", "OCR", "metadata", "file sharing", "backup", "archive"],
+          "match_threshold": 0.72
+        }
+      },
+      {
+        "id": "04-statistics-reporting-ai",
+        "title": "Kỹ năng thống kê và lập báo cáo số",
+        "objectives": [
+          "Tạo bảng tính thông minh với công thức tự động",
+          "Xây dựng dashboard trực quan và tương tác",
+          "Sử dụng AI để kiểm tra và đối chiếu dữ liệu",
+          "Tạo báo cáo tự động theo định kỳ",
+          "Phân tích xu hướng và dự báo đơn giản"
+        ],
+        "skills": [
+          "Thiết kế spreadsheet với các hàm nâng cao",
+          "Tạo biểu đồ và visualizations hiệu quả",
+          "Sử dụng AI để làm sạch và chuẩn hóa dữ liệu",
+          "Thiết lập automated reporting workflows",
+          "Phân tích dữ liệu cơ bản và rút insights",
+          "Chia sẻ và collaborative editing realtime"
+        ],
+        "tools": [
+          "Microsoft Excel với AI features",
+          "Google Sheets với Apps Script",
+          "Power BI Desktop",
+          "Tableau Public",
+          "Looker Studio",
+          "Python pandas (cơ bản)"
+        ],
+        "workflows": [
+          {
+            "name": "Tạo báo cáo thống kê tự động",
+            "steps": [
+              "B1: Xác định các chỉ số cần báo cáo và nguồn dữ liệu",
+              "B2: Thiết kế template báo cáo với layout chuẩn",
+              "B3: Kết nối và import dữ liệu từ các hệ thống",
+              "B4: Sử dụng AI để kiểm tra tính nhất quán của dữ liệu",
+              "B5: Tạo biểu đồ và dashboard tự động cập nhật",
+              "B6: Lên lịch gửi báo cáo định kỳ cho stakeholders"
+            ]
+          }
+        ],
+        "examples": [
+          "Sở Y tế tạo dashboard COVID-19 cập nhật realtime, giảm 90% thời gian tổng hợp báo cáo hàng ngày",
+          "Phòng Giáo dục dùng AI để phân tích kết quả học tập và dự báo xu hướng chất lượng giáo dục"
+        ],
+        "faqs": [
+          {
+            "q": "Nhân viên không có nền tảng IT có học được không?",
+            "a": "Được. Bắt đầu với Excel/Google Sheets cơ bản, sau đó nâng cao dần. Các công cụ hiện tại rất user-friendly và có wizard hướng dẫn."
+          },
+          {
+            "q": "Dữ liệu từ nhiều phòng ban khác nhau làm sao tích hợp?",
+            "a": "Cần chuẩn hóa format dữ liệu, sử dụng common ID/code, và có thể dùng database trung gian để consolidate."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["thống kê", "báo cáo số", "dashboard", "data analysis", "Excel AI", "biểu đồ", "visualization", "automated reporting", "KPI", "metrics"],
+          "match_threshold": 0.72
+        }
+      },
+      {
+        "id": "05-online-public-services-ai",
+        "title": "Ứng dụng AI trong dịch vụ công trực tuyến",
+        "objectives": [
+          "Tối ưu hóa quy trình tiếp nhận hồ sơ trực tuyến",
+          "Sử dụng AI để xử lý và phân loại đơn từ tự động",
+          "Triển khai chatbot hỗ trợ người dân 24/7",
+          "Tích hợp AI vào cổng dịch vụ công hiện có",
+          "Cải thiện trải nghiệm người dùng qua personalization"
+        ],
+        "skills": [
+          "Thiết kế user journey cho dịch vụ công số",
+          "Cấu hình chatbot và automated responses",
+          "Tích hợp AI vào form processing workflow",
+          "Monitoring và analytics cho digital services",
+          "A/B testing để tối ưu conversion rate",
+          "Multi-channel support (web, mobile, zalo)"
+        ],
+        "tools": [
+          "Cổng Dịch vụ công Quốc gia",
+          "Zalo Mini App",
+          "Microsoft Bot Framework",
+          "Google Dialogflow",
+          "VietnamPost Digital Platform",
+          "Mobile ID integration"
+        ],
+        "workflows": [
+          {
+            "name": "Triển khai dịch vụ công AI-powered",
+            "steps": [
+              "B1: Phân tích user journey và pain points hiện tại",
+              "B2: Thiết kế automated workflow cho từng loại hồ sơ",
+              "B3: Cấu hình AI để routing và pre-processing đơn từ",
+              "B4: Tích hợp với hệ thống back-end và cơ sở dữ liệu",
+              "B5: Testing với real users và thu thập feedback",
+              "B6: Go-live và continuous improvement based on analytics"
+            ]
+          }
+        ],
+        "examples": [
+          "UBND huyện triển khai AI chatbot, giảm 60% cuộc gọi hotline và tăng 300% hồ sơ nộp online",
+          "TP.HCM dùng AI để phân loại và xử lý 10,000+ đơn đăng ký kinh doanh mỗi tháng với độ chính xác 95%"
+        ],
+        "faqs": [
+          {
+            "q": "AI có thể thay thế cán bộ tiếp nhận hồ sơ không?",
+            "a": "Không hoàn toàn. AI xử lý các case đơn giản và routing, cán bộ sẽ focus vào các case phức tạp và quyết định cuối cùng."
+          },
+          {
+            "q": "Chi phí vận hành chatbot có cao không?",
+            "a": "Chi phí thấp hơn nhiều so với hotline truyền thống. Chatbot có thể xử lý hàng nghìn inquiry đồng thời mà không cần tăng nhân sự."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["dịch vụ công", "công trực tuyến", "eService", "chatbot", "automated processing", "digital government", "cổng dịch vụ", "AI customer service", "online applications", "public portal"],
+          "match_threshold": 0.72
+        }
+      },
+      {
+        "id": "06-information-security-data-protection",
+        "title": "An toàn thông tin và bảo mật dữ liệu số",
+        "objectives": [
+          "Nhận diện và đánh giá rủi ro bảo mật thông tin",
+          "Triển khai các biện pháp bảo vệ dữ liệu cơ bản",
+          "Quản lý tài khoản và thiết bị an toàn",
+          "Xây dựng quy trình ứng phó sự cố bảo mật",
+          "Đào tạo nhận thức an toàn thông tin cho nhân viên"
+        ],
+        "skills": [
+          "Risk assessment và vulnerability scanning",
+          "Thiết lập authentication và authorization",
+          "Mã hóa dữ liệu và secure communications",
+          "Incident response và forensics cơ bản",
+          "Security awareness training",
+          "Compliance với quy định pháp luật Việt Nam"
+        ],
+        "tools": [
+          "Microsoft Defender for Business",
+          "Google Security Center",
+          "Kaspersky Endpoint Security",
+          "1Password Business",
+          "VPN solutions",
+          "Backup và encryption tools"
+        ],
+        "workflows": [
+          {
+            "name": "Triển khai bảo mật cơ bản cho cơ quan",
+            "steps": [
+              "B1: Đánh giá rủi ro và lập danh sách tài sản thông tin",
+              "B2: Cài đặt multi-factor authentication cho tất cả tài khoản",
+              "B3: Thiết lập backup tự động và test khôi phục",
+              "B4: Đào tạo nhân viên nhận diện phishing và malware",
+              "B5: Xây dựng incident response plan và contact list",
+              "B6: Regular security audit và update systems"
+            ]
+          }
+        ],
+        "examples": [
+          "Sở Tài chính triển khai zero-trust security, giảm 95% rủi ro data breach khi làm việc remote",
+          "UBND tỉnh dùng AI để monitor security threats realtime, phát hiện và ngăn chặn 50+ tấn công mỗi tháng"
+        ],
+        "faqs": [
+          {
+            "q": "Cơ quan nhỏ có cần đầu tư nhiều vào bảo mật không?",
+            "a": "Cần thiết vì cơ quan nhỏ thường là target dễ tấn công. Có thể bắt đầu với các giải pháp cloud security cost-effective."
+          },
+          {
+            "q": "Làm sao cân bằng giữa bảo mật và convenience?",
+            "a": "Sử dụng SSO, passwordless authentication, và user-friendly security tools. Bảo mật tốt không nhất thiết phải phức tạp."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["an toàn thông tin", "bảo mật dữ liệu", "cybersecurity", "data protection", "information security", "rủi ro bảo mật", "incident response", "authentication", "encryption", "compliance"],
+          "match_threshold": 0.72
+        }
+      },
+      {
+        "id": "07-ai-assistant-prompt-engineering",
+        "title": "Trợ lý AI hành chính (Prompt Engineer Assistant)",
+        "objectives": [
+          "Sử dụng thành thạo trợ lý AI của DESIGN24",
+          "Viết prompt hiệu quả cho các tác vụ hành chính",
+          "Tối ưu hóa workflow với AI assistant integration",
+          "Đảm bảo chất lượng output và accuracy",
+          "Scale up productivity với AI-human collaboration"
+        ],
+        "skills": [
+          "Prompt engineering cho văn bản hành chính",
+          "Context management và conversation flow",
+          "Quality control và fact-checking",
+          "Integration với existing workflows",
+          "Training và fine-tuning AI responses",
+          "Measuring ROI và productivity gains"
+        ],
+        "tools": [
+          "DESIGN24 AI Assistant Platform",
+          "Microsoft Copilot",
+          "Google Workspace AI",
+          "Custom GPT configurations",
+          "API integration tools",
+          "Workflow automation platforms"
+        ],
+        "workflows": [
+          {
+            "name": "Triển khai AI Assistant cho công việc hàng ngày",
+            "steps": [
+              "B1: Training cơ bản về cách sử dụng DESIGN24 AI Assistant",
+              "B2: Xác định các tác vụ lặp lại thường xuyên",
+              "B3: Tạo prompt templates cho từng loại công việc",
+              "B4: Test và fine-tune để đạt accuracy cao",
+              "B5: Integrate vào daily workflow của team",
+              "B6: Monitor usage và continuously improve prompts"
+            ]
+          }
+        ],
+        "examples": [
+          "Văn phòng UBND sử dụng AI Assistant để draft 80% công văn thường quy, tiết kiệm 4 giờ/ngày",
+          "Phòng Kế hoạch dùng AI để generate báo cáo từ raw data, tăng 200% productivity trong việc phân tích số liệu"
+        ],
+        "faqs": [
+          {
+            "q": "AI Assistant có thể học được quy trình riêng của cơ quan không?",
+            "a": "Có, thông qua custom training với dữ liệu cụ thể và fine-tuning prompts theo workflow của từng đơn vị."
+          },
+          {
+            "q": "Có rủi ro gì khi sử dụng AI Assistant cho công việc nhạy cảm?",
+            "a": "Cần có data governance policy rõ ràng, không input thông tin classified, và luôn có human review cuối cùng."
+          }
+        ],
+        "retrieval": {
+          "keywords": ["trợ lý AI", "AI assistant", "prompt engineering", "DESIGN24 AI", "automation", "productivity", "workflow optimization", "AI collaboration", "chatbot hành chính", "intelligent assistant"],
+          "match_threshold": 0.72
+        }
+      }
+    ],
+    "rulebook": {
+      "scope": [
+        "Câu hỏi về hành chính công, văn bản, hồ sơ, dịch vụ công, bảo mật, thống kê/báo cáo",
+        "KHÔNG trả lời mảng du lịch (tour, hướng dẫn viên, chụp/quay/dựng...)"
+      ],
+      "style_tone": {
+        "tone": "chuyên nghiệp, rõ ràng, thực tế",
+        "formatting": ["bullet", "steps", "checklist ngắn gọn"]
+      },
+      "answer_policy": {
+        "priority": [
+          "Ưu tiên hướng dẫn thực hành, biểu mẫu, quy trình",
+          "Nếu thiếu dữ liệu → nói 'chưa có trong database' và fallback Gemini (không nhắc model/API)"
+        ]
+      }
+    },
+    "metadata": {
+      "owner": "DESIGN24 Academy",
+      "copyright": "©2025 DESIGN24",
+      "source_notes": "Chương trình đào tạo 2 ngày"
+    }
+  }
+}

@@ -59,7 +59,7 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
       // Italic text
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       // Code blocks
-      .replace(/```([\s\S]*?)```/g, '<pre class="bg-muted p-3 rounded-md mt-2 mb-2 text-sm overflow-x-auto whitespace-pre-wrap break-words"><code>$1</code></pre>')
+      .replace(/```([\s\S]*?)```/g, '<pre class="bg-muted p-3 rounded-md mt-2 mb-2 text-sm overflow-x-auto whitespace-pre-wrap break-words overflow-wrap-break-word" style="word-break: break-word; overflow-wrap: break-word; white-space: pre-wrap;"><code>$1</code></pre>')
       // Inline code
       .replace(/`(.*?)`/g, '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>')
       // Line breaks
@@ -81,13 +81,20 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
 
       {/* Message Content */}
       <div className={`flex-1 min-w-0 ${isUser ? 'text-right' : ''}`}>
-        <div className={`inline-block w-full max-w-full ${
+        <div className={`inline-block max-w-[85%] sm:max-w-[80%] chat-message-bubble ${
           isUser 
             ? 'bg-chat-gradient text-primary-foreground' 
             : 'bg-card border border-border'
         } rounded-2xl p-4 shadow-soft`}>
           <div 
-            className="text-sm leading-relaxed break-words overflow-wrap-anywhere"
+            className={`text-sm leading-relaxed break-words overflow-wrap-break-word whitespace-normal ${
+              displayedMessage.length < 20 ? 'short-message' : ''
+            }`}
+            style={{ 
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              whiteSpace: 'normal'
+            }}
             dangerouslySetInnerHTML={{ __html: formatMessage(displayedMessage) }}
           />
           

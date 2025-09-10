@@ -222,17 +222,56 @@
     hyphens: auto;
   }
 
-  .overflow-wrap-anywhere {
-    overflow-wrap: anywhere;
+  .overflow-wrap-break-word {
+    overflow-wrap: break-word;
     word-break: break-word;
+    hyphens: auto;
+    white-space: normal;
   }
 
-  /* Mobile responsive text */
+  /* Mobile responsive text - better word breaking */
   @media (max-width: 768px) {
     .break-words {
-      word-break: break-all;
-      overflow-wrap: anywhere;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      white-space: normal;
     }
+    
+    .overflow-wrap-break-word {
+      overflow-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+      white-space: normal;
+    }
+  }
+
+  /* Chat message bubble improvements */
+  .chat-message-bubble {
+    max-width: fit-content;
+    min-width: auto;
+  }
+
+  /* Short message styling */
+  .chat-message-bubble:has(.short-message) {
+    max-width: fit-content;
+    width: auto;
+  }
+
+  /* Global text wrapping fix */
+  .chat-message-bubble * {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+  }
+
+  /* Ensure all text elements wrap properly */
+  .chat-message-bubble p,
+  .chat-message-bubble div,
+  .chat-message-bubble span {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
   }
 
   /* Button variants using design system */

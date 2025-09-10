@@ -101,7 +101,7 @@ export function ChatSidebar({
             />
           </div>
           <div>
-            <h1 className="font-bold text-lg gradient-text">DESIGN24 X DƯƠNG</h1>
+            <h1 className="font-bold text-lg gradient-text">DESIGN24</h1>
             <p className="text-xs text-muted-foreground">Trợ lý AI</p>
           </div>
         </div>

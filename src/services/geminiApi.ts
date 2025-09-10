@@ -779,7 +779,7 @@ function buildContextFromDB(query: string): string {
     if (about?.knowledge) {
       const k = about.knowledge;
       blocks.push([
-        "🎨 ABOUT DESIGN24 X DƯƠNG",
+        "🎨 ABOUT DESIGN24",
         `Overview: ${k.company_overview}`,
         `Dịch vụ chính: ${k.core_services.join("; ")}`,
         `Giá trị cốt lõi: ${k.values.join(", ")}`,
@@ -806,7 +806,7 @@ function buildContextFromDB(query: string): string {
   if (about?.knowledge) {
     const k = about.knowledge;
     blocks.push([
-      "🔹 DESIGN24 X DƯƠNG (brief)",
+      "🔹 DESIGN24 (brief)",
       `Overview: ${k.company_overview}`,
       `Dịch vụ: ${k.core_services.slice(0,5).join("; ")}`
     ].join("\n"));
@@ -825,7 +825,7 @@ class GeminiService {
   }
 
   private getSystemPrompt(): string {
-    return `Bạn là Trợ lý AI của DESIGN24 X DƯƠNG. 
+    return `Bạn là Trợ lý AI của DESIGN24. 
 
 📌 QUY TẮC ĐỊNH TUYẾN & TRẢ LỜI:
 

@@ -129,7 +129,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
         title: "Đã vượt quá giới hạn tin nhắn",
         description: `Bạn đã sử dụng hết ${userConfig.dailyLimit} tin nhắn/ngày. Vui lòng thử lại vào ngày mai.`,
         variant: "destructive",
-        duration: 5000,
+        duration: 1300,
       });
       return;
     }
@@ -205,7 +205,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     toast({
       title: "Tạo cuộc trò chuyện mới",
       description: "Bạn có thể bắt đầu cuộc trò chuyện mới.",
-      duration: 3500,
+      duration: 1300,
     });
   };
 
@@ -219,7 +219,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     toast({
       title: "Đã xóa cuộc trò chuyện",
       description: "Cuộc trò chuyện đã được xóa.",
-      duration: 3500,
+      duration: 1300,
     });
   };
 
@@ -228,7 +228,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     toast({
       title: "Đã xóa tất cả cuộc trò chuyện",
       description: "Tất cả cuộc trò chuyện đã được xóa.",
-      duration: 3500,
+      duration: 1300,
     });
   };
 
@@ -237,7 +237,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     toast({
       title: "Đã đổi tên cuộc trò chuyện",
       description: `Đã đổi tên thành "${newTitle}".`,
-      duration: 3500,
+      duration: 1300,
     });
   };
 
@@ -254,7 +254,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     toast({
       title: "Đã đổi gói dịch vụ",
       description: `Chuyển sang gói ${newRole === UserRole.ADMIN ? 'Admin' : newRole === UserRole.USER ? 'User' : 'Beta'} thành công.`,
-      duration: 3000,
+      duration: 1300,
     });
   };
 

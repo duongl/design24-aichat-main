@@ -408,6 +408,35 @@
         ],
         "retrieval": {
           "keywords": ["trợ lý AI", "AI assistant", "prompt engineering", "DESIGN24 AI", "automation", "productivity", "workflow optimization", "AI collaboration", "chatbot hành chính", "intelligent assistant"],
+          "json_format_instructions": {
+            "description": "Khi tạo video prompts, sử dụng format JSON tự động nhận biết",
+            "format": "Trả lời trực tiếp với JSON object, không cần ```json wrapper",
+            "structure": {
+              "title": "Tiêu đề video",
+              "description": "Mô tả chi tiết nội dung",
+              "style": "Phong cách visual",
+              "mood": "Tâm trạng, cảm xúc",
+              "camera_motion": "Chuyển động camera",
+              "objects": ["Danh sách đối tượng"],
+              "lighting": "Ánh sáng",
+              "sound": "Âm thanh",
+              "spoken_dialogue (VI)": "Lời thoại tiếng Việt",
+              "spoken_language": "vi",
+              "text_on_screen": null,
+              "render": "Realistic",
+              "image_prompt (EN)": "Mô tả hình ảnh bằng tiếng Anh"
+            },
+            "rules": [
+              "LUÔN thêm giải thích chi tiết trước JSON",
+              "Ví dụ: 'Dựa trên yêu cầu của bạn, đây là JSON prompt cho video [số scene] scene về [chủ đề]:'",
+              "Sau đó mô tả ngắn gọn về nội dung video",
+              "Không sử dụng ```json wrapper",
+              "Mỗi scene là một JSON object riêng biệt",
+              "Tự động nhận biết và format JSON",
+              "Thêm copy button cho từng scene",
+              "TUYỆT ĐỐI KHÔNG hiển thị text 'json' ở đầu prompt"
+            ]
+          },
           "match_threshold": 0.72
         }
       }

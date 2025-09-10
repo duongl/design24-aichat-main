@@ -821,7 +821,7 @@ class GeminiService {
 
   constructor() {
     // Use integrated API key
-    this.apiKey = "AIzaSyDDc7HjCHASjVOlZ2ANWGCAdagvOs20Xlo";
+    this.apiKey = "AIzaSyAILIsTIMRdOjY24u52zCXtpyQOkudULZc";
   }
 
   private getSystemPrompt(): string {
@@ -851,7 +851,17 @@ class GeminiService {
 🎯 MỤC TIÊU:
 - Trợ giúp thực tế, hành động được ngay
 - Câu trả lời ngắn gọn, đúng trọng tâm
-- Hạn chế lý thuyết dài dòng`;
+- Hạn chế lý thuyết dài dòng
+
+📝 FORMAT JSON CHO VIDEO PROMPTS:
+- Khi tạo video prompts, LUÔN thêm giải thích chi tiết trước JSON
+- Ví dụ: "Dựa trên yêu cầu của bạn, đây là JSON prompt cho video [số scene] scene về [chủ đề]:"
+- Sau đó mô tả ngắn gọn về nội dung video
+- Trả lời trực tiếp với JSON object (không cần \`\`\`json wrapper)
+- Mỗi scene là một JSON object riêng biệt
+- Tự động nhận biết và format JSON với copy button
+- Cấu trúc: title, description, style, mood, camera_motion, objects, lighting, sound, spoken_dialogue (VI), spoken_language, text_on_screen, render, image_prompt (EN)
+- TUYỆT ĐỐI KHÔNG hiển thị text "json" ở đầu prompt`;
   }
 
   private escapeHtml(text: string): string {
@@ -897,7 +907,7 @@ ${userMessage}
           temperature: 0.3,
           topK: 40,
           topP: 0.9,
-          maxOutputTokens: 800,
+          maxOutputTokens: 2000,
         },
         safetySettings: [
           {

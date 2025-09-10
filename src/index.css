@@ -274,6 +274,139 @@
     white-space: normal;
   }
 
+  /* JSON Block Styling */
+  .json-block-container {
+    border: 2px solid hsl(var(--primary) / 0.3);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin: 0.75rem 0;
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.1);
+  }
+
+  .json-header {
+    background: hsl(var(--primary) / 0.1);
+    border-bottom: 2px solid hsl(var(--primary) / 0.2);
+    padding: 0.75rem 1rem;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .json-content {
+    background: hsl(var(--background));
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    padding: 1rem;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .json-syntax {
+    color: hsl(var(--foreground));
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .copy-json-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background: transparent !important;
+    color: #6b7280 !important;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 10;
+  }
+
+  .copy-json-btn:hover {
+    background: rgba(107, 114, 128, 0.1) !important;
+    color: #374151 !important;
+    transform: translateY(-1px);
+  }
+
+  /* Ensure copy button is always visible */
+  .json-block-container .copy-json-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Override any hiding styles */
+  .json-header .copy-json-btn {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* JSON Syntax Highlighting - Better contrast */
+  .json-syntax {
+    color: hsl(var(--foreground));
+    font-size: 0.875rem;
+  }
+
+  /* Dark theme JSON colors for better visibility */
+  .dark .json-syntax {
+    color: #e5e5e5;
+  }
+
+  .dark .json-syntax .json-key {
+    color: #4fc3f7;
+    font-weight: 600;
+  }
+
+  .dark .json-syntax .json-string {
+    color: #ffb74d;
+    font-weight: 500;
+  }
+
+  .dark .json-syntax .json-number {
+    color: #81c784;
+    font-weight: 500;
+  }
+
+  .dark .json-syntax .json-boolean {
+    color: #64b5f6;
+    font-weight: 600;
+  }
+
+  .dark .json-syntax .json-null {
+    color: #a0a0a0;
+    font-style: italic;
+  }
+
+  /* Light theme JSON colors */
+  .json-syntax .json-key {
+    color: #1976d2;
+    font-weight: 600;
+  }
+
+  .json-syntax .json-string {
+    color: #d84315;
+    font-weight: 500;
+  }
+
+  .json-syntax .json-number {
+    color: #388e3c;
+    font-weight: 500;
+  }
+
+  .json-syntax .json-boolean {
+    color: #7b1fa2;
+    font-weight: 600;
+  }
+
+  .json-syntax .json-null {
+    color: #616161;
+    font-style: italic;
+  }
+
   /* Button variants using design system */
   .btn-primary {
     background: var(--chat-gradient);

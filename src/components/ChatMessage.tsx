@@ -33,6 +33,46 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
     }
   }, [message, isTyping, isUser]);
 
+  // Handle JSON copy functionality
+  useEffect(() => {
+    const handleCopyJson = async (event: Event) => {
+      const target = event.target as HTMLElement;
+      // Check if clicked element is button or its child (SVG)
+      const button = target.closest('.copy-json-btn') as HTMLElement;
+      if (button) {
+        console.log('Copy button clicked!');
+        const jsonData = button.getAttribute('data-json');
+        if (jsonData) {
+          try {
+            const decodedJson = decodeURIComponent(jsonData);
+            console.log('Copying JSON:', decodedJson.substring(0, 100) + '...');
+            await navigator.clipboard.writeText(decodedJson);
+            
+            // Show success feedback
+            const originalIcon = button.innerHTML;
+            button.innerHTML = '<i class="fa-solid fa-check"></i>';
+            button.classList.add('text-green-500');
+            
+            setTimeout(() => {
+              // Restore original copy icon
+              button.innerHTML = '<i class="fa-regular fa-copy"></i>';
+              button.classList.remove('text-green-500');
+            }, 1500);
+          } catch (error) {
+            console.error('Failed to copy JSON:', error);
+          }
+        }
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('click', handleCopyJson);
+    
+    return () => {
+      document.removeEventListener('click', handleCopyJson);
+    };
+  }, []);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(message);
@@ -51,14 +91,74 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
     });
   };
 
+  const formatJsonSyntax = (jsonString: string): string => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      const formatted = JSON.stringify(parsed, null, 2);
+      
+      // Add syntax highlighting classes
+      return formatted
+        .replace(/"([^"]+)":/g, '<span class="json-key">"$1":</span>')
+        .replace(/: "([^"]*)"/g, ': <span class="json-string">"$1"</span>')
+        .replace(/: (\d+)/g, ': <span class="json-number">$1</span>')
+        .replace(/: (true|false)/g, ': <span class="json-boolean">$1</span>')
+        .replace(/: null/g, ': <span class="json-null">null</span>');
+    } catch (e) {
+      return jsonString;
+    }
+  };
+
   const formatMessage = (text: string) => {
+    // Auto-detect and format JSON blocks (only for AI messages)
+    let formatted = text;
+    
+    // Only format JSON for AI messages, not user messages
+    if (isUser) {
+      // For user messages, just do basic formatting
+      return formatted
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`(.*?)`/g, '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>')
+        .replace(/\n/g, '<br>');
+    }
+    
+    // Remove "json" text at the beginning of lines and standalone "json" words
+    formatted = formatted.replace(/^json\s*/gm, '');
+    formatted = formatted.replace(/\bjson\b\s*/g, '');
+    
+    // Detect JSON blocks (even without ```json markers)
+    // Improved regex to better match JSON objects
+    const jsonRegex = /(\{(?:[^{}]|{[^{}]*})*\})/g;
+    formatted = formatted.replace(jsonRegex, (match) => {
+      try {
+        // Try to parse as JSON to validate
+        JSON.parse(match);
+        // If valid JSON, format it with syntax highlighting
+        const formattedJson = formatJsonSyntax(match);
+        
+        console.log('Creating JSON block with copy button');
+        return `<div class="json-block-container mb-4">
+          <div class="json-header">
+            <span class="text-sm font-semibold text-primary">JSON Scene</span>
+            <button class="copy-json-btn" data-json='${encodeURIComponent(match)}' title="Copy JSON">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+          <pre class="json-content overflow-x-auto whitespace-pre-wrap break-words" style="word-break: break-word; overflow-wrap: break-word; white-space: pre-wrap;"><code class="json-syntax">${formattedJson}</code></pre>
+        </div>`;
+      } catch (e) {
+        // If not valid JSON, return original text
+        return match;
+      }
+    });
+
     // Convert markdown-like formatting to HTML
-    let formatted = text
+    formatted = formatted
       // Bold text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       // Italic text
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      // Code blocks
+      // Code blocks (traditional markdown)
       .replace(/```([\s\S]*?)```/g, '<pre class="bg-muted p-3 rounded-md mt-2 mb-2 text-sm overflow-x-auto whitespace-pre-wrap break-words overflow-wrap-break-word" style="word-break: break-word; overflow-wrap: break-word; white-space: pre-wrap;"><code>$1</code></pre>')
       // Inline code
       .replace(/`(.*?)`/g, '<code class="bg-muted px-1 py-0.5 rounded text-sm">$1</code>')

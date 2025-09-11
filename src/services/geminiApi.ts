@@ -27,7 +27,7 @@ const COURSE_DATABASE = {
     "title": "Prompt Engineering – AI Image",
     "version": "1.0.0",
     "last_updated": "2025-08-30",
-    "description": "Hướng dẫn đầy đủ tạo ảnh AI cho Stable Diffusion / Flux Kontext (inpainting/outpainting) và Midjourney; kèm negative prompt & tham số chi tiết.",
+    "description": "Rulebook chuẩn để viết prompt ảnh cho Stable Diffusion / Flux (chỉnh sửa theo ngữ cảnh – inpainting/outpainting) và Midjourney/DALL·E/Gemini Image (tạo ảnh mới). Tập trung vào cấu trúc chuẩn, từ khóa và negative prompt.",
     "skills": [
       "Viết prompt ảnh (subject, style, lighting, quality, context)",
       "Dùng Negative Prompt để loại lỗi (blurry, lowres, bad anatomy, watermark…)",
@@ -37,13 +37,14 @@ const COURSE_DATABASE = {
     ],
     "tools": ["Stable Diffusion", "Flux Kontext", "Midjourney", "DALL·E", "Gemini Image"],
     "rulebook": {
-      "what_is_flux_kontext": "Công cụ AI chỉnh sửa ảnh theo ngữ cảnh: thêm/xóa chi tiết, đổi màu, thay nhân vật, khôi phục chi tiết, tạo biến thể; mạnh về inpainting/outpainting (context-aware).",
-      "what_is_midjourney": "Công cụ AI tạo ảnh mới từ prompt; mạnh về sáng tạo, concept art, style đa dạng (realistic, anime, cinematic, futuristic…).",
+      "what_is_flux_kontext": "Flux Kontext: Chuyên chỉnh sửa theo ngữ cảnh (inpainting/outpainting), thêm/xóa chi tiết mà vẫn khớp ánh sáng – phối cảnh.",
+      "what_is_midjourney": "Midjourney: Tạo ảnh mới từ prompt, mạnh về style/concept art.",
       "core_rules": [
-        "Prompt = Mô tả + Phong cách + Ánh sáng + Chất lượng + Bối cảnh",
-        "Negative Prompt = Lọc lỗi thường gặp",
-        "Luôn viết tiếng Anh; không xuống dòng; dùng dấu phẩy phân tách",
-        "Đặt từ khóa quan trọng lên đầu prompt"
+        "Viết tiếng Anh, một dòng, phân tách bằng dấu phẩy",
+        "Prompt = Subject + Style + Lighting + Quality + Background/Context",
+        "Negative Prompt = Các lỗi cần tránh (blurry, lowres, watermark…)",
+        "Đặt từ khóa quan trọng lên đầu",
+        "QUAN TRỌNG: Khi được yêu cầu tạo prompt ảnh, LUÔN trả lời cả 2 phần: Prompt (tiếng Anh) và Negative Prompt (tiếng Anh), không cần đợi yêu cầu rõ ràng"
       ],
       "keyword_library": {
         "art_styles": [
@@ -79,8 +80,8 @@ const COURSE_DATABASE = {
         "grainy, noisy, oversaturated, underexposed"
       ],
       "prompt_structure": {
-        "flux_sd": "Prompt: [subject], [style], [lighting], [quality], [background/context] | Negative Prompt: [lỗi cần tránh]",
-        "midjourney": "/imagine prompt: [subject], [style], [lighting], [quality], [background] --ar [ratio] --v [version] --q [quality] --style raw"
+        "flux_sd": "Prompt: [subject], [style], [lighting], [quality], [background/context] | Negative Prompt: [những lỗi cần tránh]",
+        "midjourney": "/imagine prompt: [subject], [style], [lighting], [quality], [background] --ar [ratio] --v [version] --q [quality] --style raw --seed [number] --chaos [0-100] --niji"
       },
       "midjourney_params": {
         "ar": "Aspect Ratio (1:1, 16:9, 9:16, 21:9, 4:3)",
@@ -92,8 +93,13 @@ const COURSE_DATABASE = {
         "niji": "Anime/manga mode"
       },
       "when_to_use": {
-        "flux": "Khi có ảnh gốc và cần chỉnh sửa theo ngữ cảnh (inpainting/outpainting, thay đổi/khôi phục chi tiết).",
-        "midjourney": "Khi cần tạo mới hoàn toàn hoặc tìm ý tưởng sáng tạo (poster, concept art, minh họa)."
+        "flux": "Có ảnh gốc cần chỉnh sửa/inpainting/outpainting, thêm/xóa chi tiết nhưng vẫn khớp ánh sáng – bối cảnh.",
+        "midjourney": "Tạo mới hoàn toàn hoặc concept art."
+      },
+      "response_format": {
+        "image_prompt": "Khi tạo prompt ảnh (không phải video), trả lời BÌNH THƯỜNG với dấu phẩy:\n**Prompt:** [dòng tiếng Anh, dùng dấu phẩy]\n**Negative Prompt:** [dòng tiếng Anh loại bỏ lỗi, dùng dấu phẩy]",
+        "example": "**Prompt:** A Vietnamese girl wearing traditional Ao Dai, standing by lotus pond at sunset, golden hour lighting, cinematic composition, ultra detailed, 8K\n**Negative Prompt:** blurry, lowres, extra fingers, watermark, cartoon, fantasy render",
+        "note": "Prompt ảnh = dấu phẩy bình thường. Prompt video = JSON với objects[], title, description, etc."
       }
     },
     "examples": [
@@ -237,7 +243,8 @@ const COURSE_DATABASE = {
         ],
         "description_must_end_with": [
           "The spoken dialogue finishes slightly before the end of the scene, allowing a smooth visual transition.",
-          "This scene should end with the same framing and objects as the beginning of the next scene, and the spoken dialogue should finish slightly before the scene ends, to allow a smooth cut in the final video."
+          "This scene should end with the same framing and objects as the beginning of the next scene, and the spoken dialogue should finish slightly before the scene ends, to allow a smooth cut in the final video.",
+          "Do not display any subtitles in the video."
         ]
       },
       "export": {

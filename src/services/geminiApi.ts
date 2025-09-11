@@ -1,6 +1,8 @@
 // Gemini API service with secure key management
 // API key is stored securely and not exposed in source code
 
+import { userProfileService } from './userProfile';
+
 interface GeminiResponse {
   candidates: Array<{
     content: {
@@ -851,7 +853,9 @@ class GeminiService {
   }
 
   private getSystemPrompt(): string {
-    return `Bạn là Trợ lý AI của DESIGN24. 
+    const userContext = userProfileService.buildContextString();
+    
+    return `Bạn là Trợ lý AI của DESIGN24.${userContext} 
 
 📌 QUY TẮC ĐỊNH TUYẾN & TRẢ LỜI:
 

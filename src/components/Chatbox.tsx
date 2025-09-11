@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { AlertTriangle, Wifi, WifiOff, Plus, Menu, Key } from 'lucide-react';
+import { AlertTriangle, Wifi, WifiOff, Plus, Menu, Key, User } from 'lucide-react';
 import { ChatSidebar } from './ChatSidebar';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 import { ApiKeySetup } from './ApiKeySetup';
 import { ChangePasswordModal } from './ChangePasswordModal';
+import { UserProfileModal } from './UserProfileModal';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -32,6 +33,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
   const [isApiKeyConfigured, setIsApiKeyConfigured] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
+  const [isUserProfileModalOpen, setIsUserProfileModalOpen] = useState(false);
   const [currentUserRole, setCurrentUserRole] = useState(userRole);
   const [rateLimitInfo, setRateLimitInfo] = useState(rateLimitingService.getRateLimitInfo(userRole));
   
@@ -339,13 +341,22 @@ export function Chatbox({ userRole }: ChatboxProps) {
 
           <div className="flex items-center gap-2">
             {/* API Key Button (lock icon) */}
-            <Button 
+            <Button
               onClick={() => setIsChangePasswordModalOpen(true)}
               variant="ghost"
               size="sm"
               title="Nhập Gemini API Key"
             >
               <Key className="w-4 h-4" />
+            </Button>
+            
+            <Button
+              onClick={() => setIsUserProfileModalOpen(true)}
+              variant="ghost"
+              size="sm"
+              title="Profile & Preferences"
+            >
+              <User className="w-4 h-4" />
             </Button>
             
             {/* Mobile New Chat Button */}
@@ -454,6 +465,12 @@ export function Chatbox({ userRole }: ChatboxProps) {
         isOpen={isChangePasswordModalOpen}
         onClose={() => setIsChangePasswordModalOpen(false)}
         onApiKeySet={handleApiKeySet}
+      />
+
+      {/* User Profile Modal */}
+      <UserProfileModal
+        isOpen={isUserProfileModalOpen}
+        onClose={() => setIsUserProfileModalOpen(false)}
       />
     </div>
   );

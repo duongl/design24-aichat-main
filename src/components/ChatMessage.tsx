@@ -33,45 +33,7 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
     }
   }, [message, isTyping, isUser]);
 
-  // Handle JSON copy functionality
-  useEffect(() => {
-    const handleCopyJson = async (event: Event) => {
-      const target = event.target as HTMLElement;
-      // Check if clicked element is button or its child (SVG)
-      const button = target.closest('.copy-json-btn') as HTMLElement;
-      if (button) {
-        console.log('Copy button clicked!');
-        const jsonData = button.getAttribute('data-json');
-        if (jsonData) {
-          try {
-            const decodedJson = decodeURIComponent(jsonData);
-            console.log('Copying JSON:', decodedJson.substring(0, 100) + '...');
-            await navigator.clipboard.writeText(decodedJson);
-            
-            // Show success feedback
-            const originalIcon = button.innerHTML;
-            button.innerHTML = '<i class="fa-solid fa-check"></i>';
-            button.classList.add('text-green-500');
-            
-            setTimeout(() => {
-              // Restore original copy icon
-              button.innerHTML = '<i class="fa-regular fa-copy"></i>';
-              button.classList.remove('text-green-500');
-            }, 1500);
-          } catch (error) {
-            console.error('Failed to copy JSON:', error);
-          }
-        }
-      }
-    };
-
-    // Add event listener
-    document.addEventListener('click', handleCopyJson);
-    
-    return () => {
-      document.removeEventListener('click', handleCopyJson);
-    };
-  }, []);
+  // Removed JSON copy button behavior
 
   const handleCopy = async () => {
     try {
@@ -108,6 +70,8 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
     }
   };
 
+  // Removed JSON Scene detection – JSON will render as plain text
+
   const formatMessage = (text: string) => {
     // Auto-detect and format JSON blocks (only for AI messages)
     let formatted = text;
@@ -122,35 +86,7 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
         .replace(/\n/g, '<br>');
     }
     
-    // Remove "json" text at the beginning of lines and standalone "json" words
-    formatted = formatted.replace(/^json\s*/gm, '');
-    formatted = formatted.replace(/\bjson\b\s*/g, '');
-    
-    // Detect JSON blocks (even without ```json markers)
-    // Improved regex to better match JSON objects
-    const jsonRegex = /(\{(?:[^{}]|{[^{}]*})*\})/g;
-    formatted = formatted.replace(jsonRegex, (match) => {
-      try {
-        // Try to parse as JSON to validate
-        JSON.parse(match);
-        // If valid JSON, format it with syntax highlighting
-        const formattedJson = formatJsonSyntax(match);
-        
-        console.log('Creating JSON block with copy button');
-        return `<div class="json-block-container mb-4">
-          <div class="json-header">
-            <span class="text-sm font-semibold text-primary">JSON Scene</span>
-            <button class="copy-json-btn" data-json='${encodeURIComponent(match)}' title="Copy JSON">
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
-          <pre class="json-content overflow-x-auto whitespace-pre-wrap break-words" style="word-break: break-word; overflow-wrap: break-word; white-space: pre-wrap;"><code class="json-syntax">${formattedJson}</code></pre>
-        </div>`;
-      } catch (e) {
-        // If not valid JSON, return original text
-        return match;
-      }
-    });
+    // Keep JSON as plain text; do not wrap in special block or add copy button
 
     // Convert markdown-like formatting to HTML
     formatted = formatted

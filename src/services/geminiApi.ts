@@ -818,10 +818,18 @@ function buildContextFromDB(query: string): string {
 class GeminiService {
   private apiKey: string;
   private endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+  private readonly SYSTEM_API_KEY = "AIzaSyAILIsTIMRdOjY24u52zCXtpyQOkudULZc";
 
   constructor() {
-    // Use integrated API key
-    this.apiKey = "AIzaSyAILIsTIMRdOjY24u52zCXtpyQOkudULZc";
+    // System default API key (fallback)
+    const systemKey = this.SYSTEM_API_KEY;
+    let personalKey = '';
+    try {
+      personalKey = localStorage.getItem('gemini_personal_api_key') || '';
+    } catch {
+      personalKey = '';
+    }
+    this.apiKey = personalKey || systemKey;
   }
 
   private getSystemPrompt(): string {
@@ -971,12 +979,34 @@ ${userMessage}
 
   // Method to check if API key is configured
   isConfigured(): boolean {
-    return true; // Always configured with integrated API key
+    return Boolean(this.apiKey);
   }
 
   // Method to set API key (not needed with integrated key)
   setApiKey(apiKey: string): void {
-    // No-op since we use integrated API key
+    this.apiKey = apiKey;
+    try {
+      if (apiKey) {
+        localStorage.setItem('gemini_personal_api_key', apiKey);
+      } else {
+        localStorage.removeItem('gemini_personal_api_key');
+      }
+    } catch {
+      // Ignore storage errors (private mode, etc.)
+    }
+  }
+
+  getPersonalApiKey(): string | null {
+    try {
+      return localStorage.getItem('gemini_personal_api_key');
+    } catch {
+      return null;
+    }
+  }
+
+  usingPersonalKey(): boolean {
+    const stored = this.getPersonalApiKey();
+    return !!stored && stored.length > 0;
   }
 }
 

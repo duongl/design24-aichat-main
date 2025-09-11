@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Lock, Eye, EyeOff, Crown, User, TestTube } from 'lucide-react';
 import { UserRole } from '@/types/auth';
-import { getUserAuth } from '@/config/auth';
+import { validateEntryPass, getUserAuth } from '@/config/auth';
 
 interface PasswordProtectionProps {
   onPasswordCorrect: (userRole: UserRole) => void;
@@ -27,16 +27,23 @@ export function PasswordProtection({ onPasswordCorrect }: PasswordProtectionProp
     // Simulate a small delay for better UX
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    // Check password using auth config
-    const userAuth = getUserAuth(password);
-    
-    if (userAuth) {
+    // Entry gate: accept Design24AI to enter chat without selecting role
+    if (validateEntryPass(password)) {
       localStorage.setItem('password_verified', 'true');
-      localStorage.setItem('user_role', userAuth.role);
-      onPasswordCorrect(userAuth.role);
+      // default role for rate limit when user hasn't chosen: USER (50/day)
+      localStorage.setItem('user_role', UserRole.USER);
+      onPasswordCorrect(UserRole.USER);
     } else {
-      setError('Mật khẩu không đúng hoặc chưa được cấp. Vui lòng liên hệ Học viện Design24 để được hỗ trợ.');
-      setPassword('');
+      // Backward compatibility: also allow direct role passwords
+      const userAuth = getUserAuth(password);
+      if (userAuth) {
+        localStorage.setItem('password_verified', 'true');
+        localStorage.setItem('user_role', userAuth.role);
+        onPasswordCorrect(userAuth.role);
+      } else {
+        setError('Mật khẩu không đúng hoặc chưa được cấp. Vui lòng thử lại.');
+        setPassword('');
+      }
     }
     
     setIsLoading(false);

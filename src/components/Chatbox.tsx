@@ -52,10 +52,12 @@ export function Chatbox({ userRole }: ChatboxProps) {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const [usingPersonalKey, setUsingPersonalKey] = useState(geminiService.usingPersonalKey());
 
   // Check if API key is configured on mount
   useEffect(() => {
     setIsApiKeyConfigured(geminiService.isConfigured());
+    setUsingPersonalKey(geminiService.usingPersonalKey());
   }, []);
 
   // Update rate limit info when user role changes
@@ -122,7 +124,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
     }
 
     // Check rate limit
-    const canSend = await rateLimitingService.canSendMessage(currentUserRole);
+    // Skip rate limit when using personal key
+    const canSend = usingPersonalKey ? true : await rateLimitingService.canSendMessage(currentUserRole);
     if (!canSend) {
       const userConfig = USER_ROLE_CONFIGS[currentUserRole];
       toast({
@@ -164,8 +167,10 @@ export function Chatbox({ userRole }: ChatboxProps) {
         setTypingMessage(null);
         
         // Increment rate limit usage after successful response
-        await rateLimitingService.incrementUsage(currentUserRole);
-        setRateLimitInfo(rateLimitingService.getRateLimitInfo(currentUserRole));
+        if (!usingPersonalKey) {
+          await rateLimitingService.incrementUsage(currentUserRole);
+          setRateLimitInfo(rateLimitingService.getRateLimitInfo(currentUserRole));
+        }
       }, Math.min(response.length * 20, 3000)); // Dynamic timing based on response length
 
     } catch (error) {
@@ -243,6 +248,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
 
   const handleApiKeySet = () => {
     setIsApiKeyConfigured(true);
+    setUsingPersonalKey(geminiService.usingPersonalKey());
     // Create a new chat automatically after API key is set
     createNewChat();
   };
@@ -319,23 +325,25 @@ export function Chatbox({ userRole }: ChatboxProps) {
                 <p className="text-xs text-muted-foreground truncate">
                   DESIGN24 • Trợ lý AI Đa lĩnh vực
                 </p>
-                {/* Rate limit info - hidden on mobile and tablet */}
-                <div className="hidden lg:flex items-center gap-1 text-xs">
-                  <span className="text-muted-foreground">
-                    {rateLimitingService.getFormattedLimitInfo(currentUserRole)}
-                  </span>
-                </div>
+                {/* Rate limit info - hide when using personal key */}
+                {!usingPersonalKey && (
+                  <div className="hidden lg:flex items-center gap-1 text-xs">
+                    <span className="text-muted-foreground">
+                      {rateLimitingService.getFormattedLimitInfo(currentUserRole)}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Change Password Button - visible on all devices */}
+            {/* API Key Button (lock icon) */}
             <Button 
               onClick={() => setIsChangePasswordModalOpen(true)}
               variant="ghost"
               size="sm"
-              title="Đổi gói dịch vụ"
+              title="Nhập Gemini API Key"
             >
               <Key className="w-4 h-4" />
             </Button>
@@ -441,12 +449,11 @@ export function Chatbox({ userRole }: ChatboxProps) {
         />
       </div>
 
-      {/* Change Password Modal */}
+      {/* API Key Dialog */}
       <ChangePasswordModal
         isOpen={isChangePasswordModalOpen}
         onClose={() => setIsChangePasswordModalOpen(false)}
-        onPasswordChanged={handlePasswordChanged}
-        currentRole={currentUserRole}
+        onApiKeySet={handleApiKeySet}
       />
     </div>
   );

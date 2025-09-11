@@ -8,6 +8,9 @@ const AUTH_PASSWORDS = {
   [UserRole.BETA]: 'btDesign24'
 };
 
+// Entry pass only to unlock UI, not tied to rate limit/role
+export const ENTRY_PASS = 'Design24AI';
+
 export const getUserAuth = (password: string): UserAuth | null => {
   // Tìm role dựa trên mật khẩu
   const role = Object.entries(AUTH_PASSWORDS).find(
@@ -28,3 +31,6 @@ export const getUserAuth = (password: string): UserAuth | null => {
 
 // Export để sử dụng trong PasswordProtection
 export { AUTH_PASSWORDS };
+
+// Validate only the entry pass for first screen
+export const validateEntryPass = (password: string): boolean => password === ENTRY_PASS;

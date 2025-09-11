@@ -174,6 +174,17 @@ const COURSE_DATABASE = {
             "frame_rate": "24fps"
           }
         },
+        "language_policy": {
+          "summary": "Veo 3 – CHỈ \"spoken_dialogue\" dùng tiếng Việt có dấu; TẤT CẢ field còn lại BẮT BUỘC tiếng Anh (không dấu).",
+          "details": [
+            "title/description/style/mood/camera_motion/lighting/sound: English only",
+            "objects: mảng tiếng Anh, viết thường, không dấu",
+            "text_on_screen.content/font: English only; chỉ dùng cho title card/graphic, không lặp lại thoại",
+            "spoken_dialogue: Vietnamese with accents",
+            "spoken_language: mô tả bằng tiếng Việt về giới tính, vùng miền, độ tuổi, phong cách nói (ví dụ: 'Nữ, miền Tây Nam Bộ, 20s, nhẹ nhàng')"
+          ],
+          "schema": "{ \"title\": \"\", \"description\": \"\", \"style\": \"\", \"mood\": \"\", \"camera_motion\": \"\", \"objects\": [], \"lighting\": \"\", \"sound\": \"\", \"spoken_dialogue\": \"\", \"spoken_language\": \"\", \"text_on_screen\": { \"content\": \"\", \"font\": \"\" }, \"render\": { \"resolution\": \"8K\", \"frame_rate\": \"24fps\" } }"
+        },
         "hard_rules_for_description": [
           "Luôn kết thúc bằng: 'The spoken dialogue finishes slightly before the end of the scene, allowing a smooth visual transition.'",
           "Và: 'This scene should end with the same framing and objects as the beginning of the next scene, and the spoken dialogue should finish slightly before the scene ends, to allow a smooth cut in the final video.'",
@@ -868,15 +879,16 @@ class GeminiService {
 - Câu trả lời ngắn gọn, đúng trọng tâm
 - Hạn chế lý thuyết dài dòng
 
-📝 FORMAT JSON CHO VIDEO PROMPTS:
-- Khi tạo video prompts, LUÔN thêm giải thích chi tiết trước JSON
-- Ví dụ: "Dựa trên yêu cầu của bạn, đây là JSON prompt cho video [số scene] scene về [chủ đề]:"
-- Sau đó mô tả ngắn gọn về nội dung video
-- Trả lời trực tiếp với JSON object (không cần \`\`\`json wrapper)
-- Mỗi scene là một JSON object riêng biệt
-- Tự động nhận biết và format JSON với copy button
-- Cấu trúc: title, description, style, mood, camera_motion, objects, lighting, sound, spoken_dialogue (VI), spoken_language, text_on_screen, render, image_prompt (EN)
-- TUYỆT ĐỐI KHÔNG hiển thị text "json" ở đầu prompt`;
+📝 FORMAT JSON CHO VIDEO PROMPTS (VEO 3):
+- Khi tạo video prompts, LUÔN thêm 1-2 câu mô tả ngắn trước JSON.
+- Trả lời trực tiếp với JSON object (không cần \`\`\`json wrapper).
+- Nguyên tắc NGÔN NGỮ (bắt buộc):
+  • CHỈ field "spoken_dialogue" dùng tiếng Việt có dấu.
+  • TẤT CẢ field còn lại (title, description, style, mood, camera_motion, objects[], lighting, sound, text_on_screen.content/font, render) PHẢI bằng tiếng Anh, không dấu. Tự động dịch sang tiếng Anh nếu user viết tiếng Việt.
+  • objects[] là mảng tiếng Anh, viết thường.
+- Cấu trúc JSON chuẩn:
+  { "title": "", "description": "", "style": "", "mood": "", "camera_motion": "", "objects": [], "lighting": "", "sound": "", "spoken_dialogue": "", "spoken_language": "", "text_on_screen": { "content": "", "font": "" }, "render": { "resolution": "8K", "frame_rate": "24fps" } }
+- Description phải kết thúc bằng 3 dòng quy tắc chuyển cảnh mượt và KHÔNG subtitle. Nếu là cảnh cuối: thêm "Scene fades out slowly in silence." hoặc "Fade out to black."`;
   }
 
   private escapeHtml(text: string): string {

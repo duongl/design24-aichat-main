@@ -148,20 +148,18 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
           isUser ? 'justify-end' : 'justify-start'
         }`}>
           <span>{formatTime(timestamp)}</span>
-          {!isUser && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-auto p-1 hover:bg-accent"
-              onClick={handleCopy}
-            >
-              {copied ? (
-                <Check className="w-3 h-3 text-green-500" />
-              ) : (
-                <Copy className="w-3 h-3" />
-              )}
-            </Button>
-          )}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-auto p-1 hover:bg-accent"
+            onClick={handleCopy}
+          >
+            {copied ? (
+              <Check className="w-3 h-3 text-green-500" />
+            ) : (
+              <Copy className="w-3 h-3" />
+            )}
+          </Button>
         </div>
       </div>
     </div>

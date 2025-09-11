@@ -838,7 +838,7 @@ function buildContextFromDB(query: string): string {
 class GeminiService {
   private apiKey: string;
   private endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
-  private readonly SYSTEM_API_KEY = "AIzaSyAILIsTIMRdOjY24u52zCXtpyQOkudULZc";
+  private readonly SYSTEM_API_KEY = "AIzaSyDmW78S8InwZCxh01otlZ5pObZQKnKdNvU";
 
   constructor() {
     // System default API key (fallback)

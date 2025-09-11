@@ -677,7 +677,7 @@ function buildContextFromDB(query: string): string {
   // 🔹 QUY TẮC ĐỊNH TUYẾN
   
   // ===== PROMPT ENGINEERING – IMAGE =====
-  const askPromptImage = /(prompt\s*(ảnh|image)|flux|stable\s*diffusion|midjourney|dall[ée]|gemini\s*image)/i.test(q);
+  const askPromptImage = /(prompt\s*(ảnh|image)|tạo\s*ảnh|vẽ\s*ảnh|flux|stable\s*diffusion|midjourney|dall[ée]|gemini\s*image)/i.test(q);
   const imgMod = COURSE_DATABASE["ai_prompt_image"] as any;
   if (askPromptImage && imgMod) {
     blocks.push([
@@ -686,7 +686,8 @@ function buildContextFromDB(query: string): string {
       `Core rules: ${imgMod.rulebook.core_rules.join("; ")}`,
       `Negative DB: ${imgMod.rulebook.negative_prompt_db.join("; ")}`,
       `MJ params: ar/v/q/style_raw/chaos/seed/niji`,
-      `Tools: ${imgMod.tools.join(", ")}`
+      `Tools: ${imgMod.tools.join(", ")}`,
+      `QUAN TRỌNG: Khi user yêu cầu tạo ảnh, LUÔN trả lời format:\n**Prompt:** [dòng tiếng Anh, dùng dấu phẩy]\n**Negative Prompt:** [dòng tiếng Anh loại bỏ lỗi, dùng dấu phẩy]\nKHÔNG BAO GIỜ trả lời bằng JSON cho prompt ảnh!`
     ].join("\n"));
     return blocks.join("\n\n").slice(0, 6000);
   }
@@ -883,7 +884,15 @@ class GeminiService {
 - Câu trả lời ngắn gọn, đúng trọng tâm
 - Hạn chế lý thuyết dài dòng
 
-📝 FORMAT JSON CHO VIDEO PROMPTS (VEO 3):
+📝 FORMAT CHO PROMPTS:
+
+🖼️ PROMPT ẢNH (AI Image):
+- Khi user yêu cầu "tạo ảnh", "prompt ảnh", "vẽ ảnh" → LUÔN trả lời format:
+  **Prompt:** [dòng tiếng Anh, dùng dấu phẩy]
+  **Negative Prompt:** [dòng tiếng Anh loại bỏ lỗi, dùng dấu phẩy]
+- KHÔNG BAO GIỜ trả lời bằng JSON cho prompt ảnh!
+
+🎬 PROMPT VIDEO JSON (VEO 3):
 - Khi tạo video prompts, LUÔN thêm 1-2 câu mô tả ngắn trước JSON.
 - Trả lời trực tiếp với JSON object (không cần \`\`\`json wrapper).
 - Nguyên tắc NGÔN NGỮ (bắt buộc):

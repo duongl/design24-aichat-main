@@ -6,6 +6,7 @@ export interface UserProfile {
     language: 'vi' | 'en' | 'mixed';
     videoStyle: 'cinematic' | 'documentary' | 'casual';
     imageStyle: 'realistic' | 'artistic' | 'minimalist';
+    themeColor: 'default' | 'blue' | 'green' | 'purple' | 'orange' | 'red';
   };
   projectContext?: {
     currentProject?: string;
@@ -107,6 +108,7 @@ class UserProfileService {
       if (prefs.language) context += `- Ngôn ngữ ưa thích: ${prefs.language}\n`;
       if (prefs.videoStyle) context += `- Style video: ${prefs.videoStyle}\n`;
       if (prefs.imageStyle) context += `- Style ảnh: ${prefs.imageStyle}\n`;
+      if (prefs.themeColor) context += `- Màu giao diện: ${prefs.themeColor}\n`;
     }
     
     // Project context

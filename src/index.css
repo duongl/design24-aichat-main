@@ -30,11 +30,11 @@
     --popover: 0 0% 100%;
     --popover-foreground: 241 92% 18%;
 
-    --primary: 238 100% 48%;
-    --primary-foreground: 0 0% 100%;
+    --primary: var(--theme-primary, 238 100% 48%);
+    --primary-foreground: var(--theme-primary-foreground, 0 0% 100%);
     
-    --primary-gradient-start: 238 100% 55%;
-    --primary-gradient-end: 239 100% 37%;
+    --primary-gradient-start: var(--theme-gradient-start, 238 100% 55%);
+    --primary-gradient-end: var(--theme-gradient-end, 239 100% 37%);
 
     --secondary: 225 100% 96%;
     --secondary-foreground: 241 92% 18%;
@@ -63,10 +63,53 @@
     --radius: 0.75rem;
 
     /* Custom Design System Extensions */
-    --chat-gradient: linear-gradient(135deg, hsl(var(--primary-gradient-start)), hsl(var(--primary-gradient-end)));
+    --chat-gradient: linear-gradient(135deg, hsl(var(--theme-gradient-start, var(--primary-gradient-start))), hsl(var(--theme-gradient-end, var(--primary-gradient-end))));
     --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.1);
     --shadow-strong: 0 10px 40px -4px hsl(var(--primary) / 0.2);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Theme Color Variables */
+  .theme-default {
+    --theme-primary: 238 100% 48%;
+    --theme-primary-foreground: 0 0% 100%;
+    --theme-gradient-start: 238 100% 55%;
+    --theme-gradient-end: 239 100% 37%;
+  }
+
+  .theme-blue {
+    --theme-primary: 217 91% 60%;
+    --theme-primary-foreground: 0 0% 100%;
+    --theme-gradient-start: 217 91% 65%;
+    --theme-gradient-end: 217 91% 45%;
+  }
+
+  .theme-green {
+    --theme-primary: 142 76% 36%;
+    --theme-primary-foreground: 0 0% 100%;
+    --theme-gradient-start: 142 76% 45%;
+    --theme-gradient-end: 142 76% 25%;
+  }
+
+  .theme-purple {
+    --theme-primary: 262 83% 58%;
+    --theme-primary-foreground: 0 0% 100%;
+    --theme-gradient-start: 262 83% 65%;
+    --theme-gradient-end: 262 83% 45%;
+  }
+
+  .theme-orange {
+    --theme-primary: 25 95% 53%;
+    --theme-primary-foreground: 0 0% 100%;
+    --theme-gradient-start: 25 95% 60%;
+    --theme-gradient-end: 25 95% 40%;
+  }
+
+  .theme-red {
+    --theme-primary: 0 84% 60%;
+    --theme-primary-foreground: 0 0% 100%;
+    --theme-gradient-start: 0 84% 65%;
+    --theme-gradient-end: 0 84% 45%;
   }
 
   .dark {
@@ -79,8 +122,8 @@
     --popover: 241 92% 12%;
     --popover-foreground: 225 100% 96%;
 
-    --primary: 238 100% 55%;
-    --primary-foreground: 0 0% 100%;
+    --primary: var(--theme-primary, 238 100% 55%);
+    --primary-foreground: var(--theme-primary-foreground, 0 0% 100%);
 
     --secondary: 240 88% 20%;
     --secondary-foreground: 225 100% 96%;

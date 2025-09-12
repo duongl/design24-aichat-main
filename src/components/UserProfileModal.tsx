@@ -7,9 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Textarea } from './ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
-import { Trash2, Save, User, Settings, Briefcase } from 'lucide-react';
+import { Trash2, Save, User, Settings, Briefcase, Palette } from 'lucide-react';
 import { userProfileService, UserProfile } from '../services/userProfile';
 import { useToast } from '../hooks/use-toast';
+import { useTheme } from '../hooks/useTheme';
 
 interface UserProfileModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
   const [profile, setProfile] = useState<UserProfile>({});
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { setTheme } = useTheme();
 
   useEffect(() => {
     if (isOpen) {
@@ -209,6 +211,41 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       <SelectItem value="minimalist">Minimalist</SelectItem>
                     </SelectContent>
                   </Select>
+                </div>
+              </div>
+              
+              {/* Theme Color Section */}
+              <div className="mt-4">
+                <Label className="flex items-center gap-2">
+                  <Palette className="w-4 h-4" />
+                  Màu giao diện
+                </Label>
+                <div className="grid grid-cols-3 gap-3 mt-2">
+                  {[
+                    { value: 'default', name: 'Mặc định', color: 'bg-blue-500' },
+                    { value: 'blue', name: 'Xanh dương', color: 'bg-blue-600' },
+                    { value: 'green', name: 'Xanh lá', color: 'bg-green-500' },
+                    { value: 'purple', name: 'Tím', color: 'bg-purple-500' },
+                    { value: 'orange', name: 'Cam', color: 'bg-orange-500' },
+                    { value: 'red', name: 'Đỏ', color: 'bg-red-500' }
+                  ].map((theme) => (
+                    <button
+                      key={theme.value}
+                      type="button"
+                      onClick={() => {
+                        updatePreferences({ themeColor: theme.value as any });
+                        setTheme(theme.value as any);
+                      }}
+                      className={`flex items-center gap-2 p-3 rounded-lg border-2 transition-all ${
+                        (profile.preferences?.themeColor || 'default') === theme.value
+                          ? 'border-primary bg-primary/10'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <div className={`w-4 h-4 rounded-full ${theme.color}`} />
+                      <span className="text-sm font-medium">{theme.name}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </CardContent>

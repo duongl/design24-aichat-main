@@ -20,7 +20,7 @@ export const USER_ROLE_CONFIGS: Record<UserRole, Omit<UserAuth, 'password'>> = {
   },
   [UserRole.USER]: {
     role: UserRole.USER,
-    dailyLimit: 50,
+    dailyLimit: 20,
     displayName: 'User'
   },
   [UserRole.BETA]: {

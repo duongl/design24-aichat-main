@@ -483,14 +483,14 @@ export function Chatbox({ userRole }: ChatboxProps) {
 
         {/* Suggestions */}
         {showSuggestions && currentChat && currentChat.messages.length === 1 && (
-          <div className="px-4 pb-2">
+          <div className="px-2 sm:px-4 pb-2">
             <SuggestionQuestions
               onSuggestionClick={handleSuggestionClick}
               suggestions={[
                 "Hướng dẫn tạo prompt ảnh",
                 "Hướng dẫn tạo prompt video chuẩn Json",
-                "Câu hỏi gợi ý 3",
-                "Câu hỏi gợi ý 4"
+                "10 kỹ năng AI lĩnh vực Thiết kế & Truyền thông đa phương tiện",
+                "Ứng dụng AI trong thủ tục hành chính"
               ]}
             />
           </div>

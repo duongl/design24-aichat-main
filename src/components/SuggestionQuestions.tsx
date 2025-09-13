@@ -18,7 +18,7 @@ export const SuggestionQuestions: React.FC<SuggestionQuestionsProps> = ({
         <Lightbulb className="w-4 h-4 text-muted-foreground" />
         <span className="text-sm text-muted-foreground">Gợi ý câu hỏi</span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         {suggestions.map((suggestion, index) => (
           <Card key={index} className="cursor-pointer hover:bg-muted/50 transition-colors">
             <CardContent className="p-3">
@@ -27,7 +27,9 @@ export const SuggestionQuestions: React.FC<SuggestionQuestionsProps> = ({
                 className="w-full h-auto p-0 text-left justify-start font-normal"
                 onClick={() => onSuggestionClick(suggestion)}
               >
-                <span className="text-sm">{suggestion}</span>
+                <span className="text-sm leading-relaxed break-words hyphens-auto">
+                  {suggestion}
+                </span>
               </Button>
             </CardContent>
           </Card>

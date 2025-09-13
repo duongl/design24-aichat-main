@@ -339,23 +339,23 @@ const COURSE_DATABASE = {
   },
   "01-content-creation": {
     "id": "01-content-creation",
-    "title": "Sáng tạo nội dung",
+    "title": "Sáng tạo nội dung đa phương tiện",
     "version": "1.0.0",
     "last_updated": "2025-08-24",
-    "description": "Tạo nội dung hấp dẫn, từ bài viết đến blog du lịch, tối ưu hóa theo xu hướng thị trường",
+    "description": "Tạo nội dung hấp dẫn cho nhiều nền tảng, từ bài viết đến video, tối ưu hóa theo xu hướng thị trường",
     "skills": [
-      "Viết bài viết du lịch hấp dẫn",
+      "Viết nội dung đa phương tiện hấp dẫn",
       "Tối ưu SEO cho nội dung",
-      "Tạo blog du lịch chuyên nghiệp",
+      "Tạo blog và video chuyên nghiệp",
       "Phân tích xu hướng thị trường",
-      "Content marketing cho du lịch"
+      "Content marketing đa nền tảng"
     ],
     "tools": ["ChatGPT", "Canva", "Notion", "Google Trends", "Social Media Scheduler"],
     "rulebook": {
       "scope": [
-        "Viết blog, bài mạng xã hội, caption video du lịch",
-        "Xây dựng outline SEO cho bài viết du lịch",
-        "Tạo content marketing du lịch theo trends"
+        "Viết blog, bài mạng xã hội, caption video đa phương tiện",
+        "Xây dựng outline SEO cho nội dung đa nền tảng",
+        "Tạo content marketing đa phương tiện theo trends"
       ],
       "style_tone": {
         "tone": "Thân thiện, truyền cảm hứng, chuyên nghiệp",
@@ -390,16 +390,16 @@ const COURSE_DATABASE = {
   },
   "02-photography": {
     "id": "02-photography",
-    "title": "Chụp ảnh",
+    "title": "Chụp ảnh AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Kỹ thuật chụp ảnh đẹp với smartphone, tự động điều chỉnh ánh sáng, màu sắc và cải thiện chất lượng ảnh",
+    "description": "Kỹ thuật chụp ảnh đẹp với smartphone, tự động điều chỉnh ánh sáng, màu sắc và cải thiện chất lượng ảnh bằng AI",
     "skills": [
-      "Chụp ảnh với smartphone",
-      "Điều chỉnh ánh sáng tự nhiên",
-      "Composition và góc chụp",
-      "Chụp ảnh du lịch chuyên nghiệp",
-      "Photography storytelling"
+      "Chụp ảnh với smartphone AI",
+      "Điều chỉnh ánh sáng tự nhiên bằng AI",
+      "Composition và góc chụp AI",
+      "Chụp ảnh đa phương tiện chuyên nghiệp",
+      "AI Photography storytelling"
     ],
     "tools": ["Smartphone Camera", "Camera FV-5", "VSCO", "Open Camera", "Lightroom Mobile"],
     "knowledge": {
@@ -421,16 +421,16 @@ const COURSE_DATABASE = {
   },
   "03-photo-editing": {
     "id": "03-photo-editing",
-    "title": "Xử lý ảnh",
+    "title": "Xử lý ảnh AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Chỉnh sửa ảnh, cải thiện độ sắc nét, điều chỉnh màu sắc và loại bỏ phông nền không cần thiết",
+    "description": "Chỉnh sửa ảnh bằng AI, cải thiện độ sắc nét, điều chỉnh màu sắc và loại bỏ phông nền không cần thiết",
     "skills": [
-      "Chỉnh sửa ảnh cơ bản",
-      "Điều chỉnh màu sắc và độ sáng",
-      "Loại bỏ background",
-      "Tăng độ sắc nét",
-      "Retouching và enhancement"
+      "Chỉnh sửa ảnh AI cơ bản",
+      "Điều chỉnh màu sắc và độ sáng bằng AI",
+      "Loại bỏ background bằng AI",
+      "Tăng độ sắc nét bằng AI",
+      "AI Retouching và enhancement"
     ],
     "tools": ["Photoshop", "Lightroom", "Canva", "Remove.bg", "GIMP", "Snapseed"],
     "knowledge": {
@@ -452,16 +452,16 @@ const COURSE_DATABASE = {
   },
   "04-ad-design": {
     "id": "04-ad-design",
-    "title": "Thiết kế quảng cáo",
+    "title": "Thiết kế đồ họa AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Thiết kế quảng cáo du lịch bắt mắt, phù hợp với xu hướng và nhu cầu khách hàng",
+    "description": "Thiết kế quảng cáo, poster, banner bắt mắt bằng AI, phù hợp với xu hướng và nhu cầu khách hàng",
     "skills": [
-      "Thiết kế banner quảng cáo",
-      "Social media graphics",
-      "Branding cho tour du lịch",
-      "Call-to-action design",
-      "Visual hierarchy"
+      "Thiết kế banner quảng cáo bằng AI",
+      "Social media graphics AI",
+      "Branding đa phương tiện bằng AI",
+      "Call-to-action design AI",
+      "AI Visual hierarchy"
     ],
     "tools": ["Canva", "Figma", "Adobe Illustrator", "Photoshop", "Freepik"],
     "knowledge": {
@@ -483,16 +483,16 @@ const COURSE_DATABASE = {
   },
   "05-video-shooting": {
     "id": "05-video-shooting",
-    "title": "Quay video",
+    "title": "Quay video AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Quay video chất lượng cao bằng smartphone, tự động điều chỉnh ánh sáng và góc quay",
+    "description": "Quay video chất lượng cao bằng smartphone, tự động điều chỉnh ánh sáng và góc quay để tạo thước phim đẹp mắt",
     "skills": [
-      "Quay video với smartphone",
-      "Stabilization và smooth shots",
-      "Lighting cho video",
-      "Camera movement techniques",
-      "B-roll và cutaway shots"
+      "Quay video với smartphone AI",
+      "AI Stabilization và smooth shots",
+      "AI Lighting cho video",
+      "AI Camera movement techniques",
+      "AI B-roll và cutaway shots"
     ],
     "tools": ["Smartphone Camera", "Gimbal", "External microphone", "LED lights", "Tripod"],
     "knowledge": {
@@ -514,16 +514,16 @@ const COURSE_DATABASE = {
   },
   "06-video-editing": {
     "id": "06-video-editing",
-    "title": "Dựng video",
+    "title": "Dựng video AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Dựng video nhanh chóng và dễ dàng bằng CapCut, tự động chọn cảnh quay, ghép nối",
+    "description": "Dựng video nhanh chóng và dễ dàng bằng AI, tự động chọn cảnh quay, ghép nối và tạo video hoàn chỉnh",
     "skills": [
-      "Video editing cơ bản",
-      "Transition và effects",
-      "Color grading cho video",
-      "Synchronize audio-video",
-      "Export optimization"
+      "AI Video editing cơ bản",
+      "AI Transition và effects",
+      "AI Color grading cho video",
+      "AI Synchronize audio-video",
+      "AI Export optimization"
     ],
     "tools": ["CapCut", "DaVinci Resolve", "Adobe Premiere", "InShot", "Filmora"],
     "knowledge": {
@@ -545,16 +545,16 @@ const COURSE_DATABASE = {
   },
   "07-audio": {
     "id": "07-audio",
-    "title": "Âm thanh",
+    "title": "Xử lý âm thanh AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Cải thiện âm thanh trong video, loại bỏ tạp âm và thêm hiệu ứng âm thanh sống động",
+    "description": "Cải thiện âm thanh trong video bằng AI, loại bỏ tạp âm và thêm hiệu ứng âm thanh sống động",
     "skills": [
-      "Audio recording và cleanup",
-      "Noise reduction",
-      "Sound effects và music",
-      "Audio mixing",
-      "Voiceover recording"
+      "AI Audio recording và cleanup",
+      "AI Noise reduction",
+      "AI Sound effects và music",
+      "AI Audio mixing",
+      "AI Voiceover recording"
     ],
     "tools": ["Audacity", "Adobe Audition", "GarageBand", "Reaper", "AI voice tools"],
     "knowledge": {
@@ -576,16 +576,16 @@ const COURSE_DATABASE = {
   },
   "08-vfx": {
     "id": "08-vfx",
-    "title": "Kỹ xảo",
+    "title": "Kỹ xảo AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Tạo ra hiệu ứng hình ảnh và 3D độc đáo cho video du lịch, tăng tính hấp dẫn",
+    "description": "Tạo ra hiệu ứng hình ảnh và 3D độc đáo bằng AI cho nội dung đa phương tiện, tăng tính hấp dẫn",
     "skills": [
-      "Visual effects cơ bản",
-      "Motion graphics",
-      "3D animation",
-      "Compositing",
-      "Text animations"
+      "AI Visual effects cơ bản",
+      "AI Motion graphics",
+      "AI 3D animation",
+      "AI Compositing",
+      "AI Text animations"
     ],
     "tools": ["After Effects", "Blender", "CapCut VFX", "DaVinci Resolve", "Canva Video"],
     "knowledge": {
@@ -607,16 +607,16 @@ const COURSE_DATABASE = {
   },
   "09-voice": {
     "id": "09-voice",
-    "title": "Voice",
+    "title": "Tổng hợp giọng nói AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Tạo giọng nói tự nhiên cho các phần lời thoại trong video hoặc bài giới thiệu",
+    "description": "Tạo giọng nói tự nhiên cho các phần lời thoại trong video hoặc bài giới thiệu bằng AI",
     "skills": [
       "AI voice generation",
-      "Voice cloning",
-      "Text-to-speech optimization",
-      "Voice recording techniques",
-      "Audio post-production"
+      "AI Voice cloning",
+      "AI Text-to-speech optimization",
+      "AI Voice recording techniques",
+      "AI Audio post-production"
     ],
     "tools": ["ElevenLabs", "Murf.ai", "Speechify", "Azure Speech", "Google Text-to-Speech"],
     "knowledge": {
@@ -638,16 +638,16 @@ const COURSE_DATABASE = {
   },
   "10-music-creation": {
     "id": "10-music-creation",
-    "title": "Sáng tạo âm nhạc",
+    "title": "Sáng tạo âm nhạc AI",
     "version": "1.0.0",
     "last_updated": "2025-08-27",
-    "description": "Sáng tác nhạc nền hoặc giai điệu phù hợp với các video du lịch, tạo không khí độc đáo",
+    "description": "Sáng tác nhạc nền hoặc giai điệu phù hợp với nội dung đa phương tiện, tạo không khí độc đáo",
     "skills": [
       "AI music generation",
-      "Music composition",
-      "Sound design",
-      "Melody creation",
-      "Audio mixing"
+      "AI Music composition",
+      "AI Sound design",
+      "AI Melody creation",
+      "AI Audio mixing"
     ],
     "tools": ["Suno.ai", "Udio", "AIVA", "GarageBand", "FL Studio", "Soundtrap"],
     "knowledge": {
@@ -719,23 +719,23 @@ function buildContextFromDB(query: string): string {
   const isAdminQuery = adminKeywords.some(keyword => q.includes(keyword));
   const isDesign24Query = design24Keywords.some(keyword => q.includes(keyword));
   
-  // ===== ROUTE 1: DU LỊCH → AI Du lịch (10 kỹ năng) =====
+  // ===== ROUTE 1: AI ĐA PHƯƠNG TIỆN (10 kỹ năng) =====
   if (isTourismQuery && !isAdminQuery) {
     const skillsList = [
-      "1. Sáng tạo nội dung: Tạo ra nội dung hấp dẫn, từ bài viết đến các blog du lịch, tối ưu hóa theo xu hướng thị trường",
-      "2. Chụp ảnh: Kỹ thuật chụp ảnh đẹp với smartphone, tự động điều chỉnh ánh sáng, màu sắc và cải thiện chất lượng ảnh",
-      "3. Xử lý ảnh: Chỉnh sửa ảnh, cải thiện độ sắc nét, điều chỉnh màu sắc và loại bỏ phông nền không cần thiết",
-      "4. Thiết kế quảng cáo: Thiết kế quảng cáo du lịch bắt mắt, phù hợp với xu hướng và nhu cầu khách hàng",
-      "5. Quay video: Quay video chất lượng cao bằng smartphone, tự động điều chỉnh ánh sáng và góc quay để tạo thước phim đẹp mắt",
-      "6. Dựng video: Dựng video nhanh chóng và dễ dàng bằng CapCut, tự động chọn cảnh quay, ghép nối và tạo video hoàn chỉnh",
-      "7. Âm thanh: Cải thiện âm thanh trong video, loại bỏ tạp âm và thêm hiệu ứng âm thanh sống động",
-      "8. Kỹ xảo: Tạo ra hiệu ứng hình ảnh và 3D độc đáo cho video du lịch, tăng tính hấp dẫn",
-      "9. Voice: Tạo giọng nói tự nhiên cho các phần lời thoại trong video hoặc bài giới thiệu",
-      "10. Sáng tạo âm nhạc: Sáng tác nhạc nền hoặc giai điệu phù hợp với các video du lịch, tạo không khí độc đáo"
+      "1. Sáng tạo nội dung đa phương tiện: Tạo ra nội dung hấp dẫn cho nhiều nền tảng, từ bài viết đến video, tối ưu hóa theo xu hướng thị trường",
+      "2. Chụp ảnh AI: Kỹ thuật chụp ảnh đẹp với smartphone, tự động điều chỉnh ánh sáng, màu sắc và cải thiện chất lượng ảnh bằng AI",
+      "3. Xử lý ảnh AI: Chỉnh sửa ảnh bằng AI, cải thiện độ sắc nét, điều chỉnh màu sắc và loại bỏ phông nền không cần thiết",
+      "4. Thiết kế đồ họa AI: Thiết kế quảng cáo, poster, banner bắt mắt bằng AI, phù hợp với xu hướng và nhu cầu khách hàng",
+      "5. Quay video AI: Quay video chất lượng cao bằng smartphone, tự động điều chỉnh ánh sáng và góc quay để tạo thước phim đẹp mắt",
+      "6. Dựng video AI: Dựng video nhanh chóng và dễ dàng bằng AI, tự động chọn cảnh quay, ghép nối và tạo video hoàn chỉnh",
+      "7. Xử lý âm thanh AI: Cải thiện âm thanh trong video bằng AI, loại bỏ tạp âm và thêm hiệu ứng âm thanh sống động",
+      "8. Kỹ xảo AI: Tạo ra hiệu ứng hình ảnh và 3D độc đáo bằng AI, tăng tính hấp dẫn cho nội dung đa phương tiện",
+      "9. Tổng hợp giọng nói AI: Tạo giọng nói tự nhiên cho các phần lời thoại trong video hoặc bài giới thiệu bằng AI",
+      "10. Sáng tạo âm nhạc AI: Sáng tác nhạc nền hoặc giai điệu phù hợp với nội dung đa phương tiện, tạo không khí độc đáo"
     ];
     
     blocks.push([
-      "🎯 10 KỸ NĂNG AI CHO HƯỚNG DẪN VIÊN DU LỊCH",
+      "🎯 10 KỸ NĂNG AI ĐA PHƯƠNG TIỆN",
       skillsList.join("\n")
     ].join("\n"));
     

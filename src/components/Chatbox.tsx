@@ -95,7 +95,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
   useEffect(() => {
     if (currentChat && currentChat.messages.length === 0) {
       const welcomeMessageId = addMessage(
-        "Xin chào! Tôi là Trợ lý AI của DESIGN24. Tôi có thể hỗ trợ bạn trong nhiều lĩnh vực học tập và công việc — từ du lịch, hành chính công, đến sáng tạo nội dung và hơn thế nữa. Hãy bắt đầu cuộc trò chuyện để khám phá các kỹ năng hoặc dịch vụ bạn quan tâm nhé!",
+        "Xin chào! Tôi là Trợ lý AI của DESIGN24. Tôi có thể hỗ trợ bạn trong nhiều lĩnh vực học tập và công việc — từ sáng tạo nội dung, thiết kế đồ họa, sản xuất video, truyền thông, quảng cáo, hành chính công và hơn thế nữa. Hãy bắt đầu cuộc trò chuyện để khám phá các kỹ năng hoặc dịch vụ bạn quan tâm nhé!",
         false
       );
     }
@@ -418,7 +418,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
                   Chào mừng đến với Trợ lý AI DESIGN24
                 </h3>
                 <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                  Xin chào! Tôi là Trợ lý AI của DESIGN24. Tôi có thể hỗ trợ bạn trong nhiều lĩnh vực học tập và công việc — từ du lịch, hành chính công, đến sáng tạo nội dung và hơn thế nữa. Hãy bắt đầu cuộc trò chuyện để khám phá các kỹ năng hoặc dịch vụ bạn quan tâm nhé!
+                  Xin chào! Tôi là Trợ lý AI của DESIGN24. Tôi có thể hỗ trợ bạn trong nhiều lĩnh vực học tập và công việc — từ sáng tạo nội dung, thiết kế đồ họa, sản xuất video, truyền thông, quảng cáo, hành chính công và hơn thế nữa. Hãy bắt đầu cuộc trò chuyện để khám phá các kỹ năng hoặc dịch vụ bạn quan tâm nhé!
                 </p>
                 <Button onClick={handleNewChat} variant="hero">
                   Bắt đầu cuộc trò chuyện đầu tiên

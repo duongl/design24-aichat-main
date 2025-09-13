@@ -5,6 +5,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Textarea } from './ui/textarea';
+import { Switch } from './ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Trash2, Save, User, Settings, Briefcase, Palette } from 'lucide-react';
@@ -246,6 +247,24 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                       <span className="text-sm font-medium">{theme.name}</span>
                     </button>
                   ))}
+                </div>
+              </div>
+              
+              {/* Suggestions Toggle */}
+              <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label className="text-base">Gợi ý câu hỏi</Label>
+                    <div className="text-sm text-muted-foreground">
+                      Hiển thị các câu hỏi gợi ý trong giao diện chat
+                    </div>
+                  </div>
+                  <Switch
+                    checked={profile.preferences?.showSuggestions !== false}
+                    onCheckedChange={(checked) => 
+                      updatePreferences({ showSuggestions: checked })
+                    }
+                  />
                 </div>
               </div>
             </CardContent>

@@ -6,6 +6,7 @@ import { ChatInput } from './ChatInput';
 import { ApiKeySetup } from './ApiKeySetup';
 import { ChangePasswordModal } from './ChangePasswordModal';
 import { UserProfileModal } from './UserProfileModal';
+import { SuggestionQuestions } from './SuggestionQuestions';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -15,6 +16,7 @@ import { geminiService } from '@/services/geminiApi';
 import { secureRateLimitingService as rateLimitingService } from '@/services/secureRateLimiting';
 import { useToast } from '@/hooks/use-toast';
 import { UserRole, USER_ROLE_CONFIGS } from '@/types/auth';
+import { userProfileService } from '@/services/userProfile';
 import logoDesign24 from '@/assets/design24-logo.webp';
 
 interface TypingMessage {
@@ -35,7 +37,9 @@ export function Chatbox({ userRole }: ChatboxProps) {
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false);
   const [isUserProfileModalOpen, setIsUserProfileModalOpen] = useState(false);
   const [currentUserRole, setCurrentUserRole] = useState(userRole);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [rateLimitInfo, setRateLimitInfo] = useState(rateLimitingService.getRateLimitInfo(userRole));
+  const [profileUpdateTrigger, setProfileUpdateTrigger] = useState(0);
   
   const {
     chatSessions,
@@ -98,10 +102,29 @@ export function Chatbox({ userRole }: ChatboxProps) {
         "Xin chào! Tôi là Trợ lý AI của DESIGN24. Tôi có thể hỗ trợ bạn trong nhiều lĩnh vực học tập và công việc — từ sáng tạo nội dung, thiết kế đồ họa, sản xuất video, truyền thông, quảng cáo, hành chính công và hơn thế nữa. Hãy bắt đầu cuộc trò chuyện để khám phá các kỹ năng hoặc dịch vụ bạn quan tâm nhé!",
         false
       );
+      
+      // Check if suggestions should be shown
+      const profile = userProfileService.getProfile();
+      const shouldShowSuggestions = profile.preferences?.showSuggestions !== false;
+      setShowSuggestions(shouldShowSuggestions);
     }
   }, [currentChat?.id, addMessage]);
 
+  // Update suggestions visibility when profile changes
+  useEffect(() => {
+    const profile = userProfileService.getProfile();
+    const shouldShowSuggestions = profile.preferences?.showSuggestions !== false;
+    
+    // Only update if we're in a chat with only welcome message
+    if (currentChat && currentChat.messages.length === 1) {
+      setShowSuggestions(shouldShowSuggestions);
+    }
+  }, [currentChat?.messages.length, profileUpdateTrigger]);
+
   const handleSendMessage = async (message: string) => {
+    // Hide suggestions when user sends a message
+    setShowSuggestions(false);
+    
     if (!currentChatId) {
       const newChatId = createNewChat();
       if (!newChatId) return;
@@ -214,6 +237,12 @@ export function Chatbox({ userRole }: ChatboxProps) {
       description: "Bạn có thể bắt đầu cuộc trò chuyện mới.",
       duration: 1300,
     });
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    // Hide suggestions and send the suggestion as a message
+    setShowSuggestions(false);
+    handleSendMessage(suggestion);
   };
 
   const handleSelectChat = (chatId: string) => {
@@ -452,6 +481,21 @@ export function Chatbox({ userRole }: ChatboxProps) {
           </div>
         </ScrollArea>
 
+        {/* Suggestions */}
+        {showSuggestions && currentChat && currentChat.messages.length === 1 && (
+          <div className="px-4 pb-2">
+            <SuggestionQuestions
+              onSuggestionClick={handleSuggestionClick}
+              suggestions={[
+                "Hướng dẫn tạo prompt ảnh",
+                "Hướng dẫn tạo prompt video chuẩn Json",
+                "Câu hỏi gợi ý 3",
+                "Câu hỏi gợi ý 4"
+              ]}
+            />
+          </div>
+        )}
+
         {/* Input Area */}
         <ChatInput
           onSendMessage={handleSendMessage}
@@ -470,7 +514,11 @@ export function Chatbox({ userRole }: ChatboxProps) {
       {/* User Profile Modal */}
       <UserProfileModal
         isOpen={isUserProfileModalOpen}
-        onClose={() => setIsUserProfileModalOpen(false)}
+        onClose={() => {
+          setIsUserProfileModalOpen(false);
+          // Trigger profile update check
+          setProfileUpdateTrigger(prev => prev + 1);
+        }}
       />
     </div>
   );

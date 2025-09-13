@@ -7,6 +7,7 @@ export interface UserProfile {
     videoStyle: 'cinematic' | 'documentary' | 'casual';
     imageStyle: 'realistic' | 'artistic' | 'minimalist';
     themeColor: 'default' | 'blue' | 'green' | 'purple' | 'orange' | 'red';
+    showSuggestions?: boolean;
   };
   projectContext?: {
     currentProject?: string;

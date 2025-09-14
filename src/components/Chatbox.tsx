@@ -141,8 +141,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
 
     if (!geminiService.isConfigured()) {
       toast({
-        title: "Yêu cầu API Key",
-        description: "Vui lòng làm mới trang và nhập khóa API Gemini của bạn.",
+        title: "Yêu cầu API Key cá nhân",
+        description: "Tính năng 20 chat miễn phí đã tạm khóa. Vui lòng nhập API key Gemini cá nhân để sử dụng.",
         variant: "destructive",
       });
       return;
@@ -356,8 +356,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
                 <p className="text-xs text-muted-foreground truncate">
                   DESIGN24 • Trợ lý AI Đa lĩnh vực
                 </p>
-                {/* Rate limit info - hide when using personal key */}
-                {!usingPersonalKey && (
+                {/* Rate limit info - hidden because free chat feature is disabled */}
+                {false && (
                   <div className="hidden lg:flex items-center gap-1 text-xs">
                     <span className="text-muted-foreground">
                       {rateLimitingService.getFormattedLimitInfo(currentUserRole)}

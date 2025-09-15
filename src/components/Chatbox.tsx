@@ -51,10 +51,12 @@ export function Chatbox({ userRole }: ChatboxProps) {
     deleteChatSession,
     renameChatSession,
     clearAllChatSessions,
+    replaceLastAssistantMessage,
   } = useChatSessions();
 
   const [isLoading, setIsLoading] = useState(false);
   const [typingMessage, setTypingMessage] = useState<TypingMessage | null>(null);
+  const [regeneratingId, setRegeneratingId] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
@@ -224,6 +226,69 @@ export function Chatbox({ userRole }: ChatboxProps) {
         description: "Không thể nhận phản hồi từ AI. Vui lòng thử lại.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Regenerate the last AI response using the last user prompt
+  const handleRegenerate = async () => {
+    if (!currentChat || currentChat.messages.length === 0) return;
+
+    if (!isOnline) {
+      toast({
+        title: "Không có kết nối Internet",
+        description: "Vui lòng kiểm tra kết nối internet và thử lại.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!geminiService.isConfigured()) {
+      toast({
+        title: "Yêu cầu API Key cá nhân",
+        description: "Vui lòng nhập API key Gemini để sử dụng.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Find the last user message to use as the prompt
+    const lastUserMsg = [...currentChat.messages].reverse().find(m => m.isUser)?.message;
+    if (!lastUserMsg) return;
+
+    setIsLoading(true);
+    try {
+      // Find the target assistant message to show loading animation
+      let lastUserIndex = -1;
+      for (let i = currentChat.messages.length - 1; i >= 0; i--) {
+        if (currentChat.messages[i].isUser) { lastUserIndex = i; break; }
+      }
+      const targetIndex = lastUserIndex >= 0 ? lastUserIndex + 1 : 0;
+      const targetId = currentChat.messages[targetIndex]?.isUser === false ? currentChat.messages[targetIndex].id : null;
+      if (targetId) setRegeneratingId(targetId);
+
+      // Build conversation context up to the last user message (exclude following AI block)
+      const contextSlice = lastUserIndex >= 0 ? currentChat.messages.slice(0, lastUserIndex + 1) : [];
+      const conversationMessages = contextSlice.map(msg => ({ message: msg.message, isUser: msg.isUser }));
+
+      const response = await geminiService.sendMessage(conversationMessages, lastUserMsg);
+
+      // During regenerate: don't append a second message; just show loading dots on the target bubble
+      // Replace after a short delay to simulate typing
+      setTimeout(async () => {
+        replaceLastAssistantMessage(response);
+        setRegeneratingId(null);
+        if (!usingPersonalKey) {
+          await rateLimitingService.incrementUsage(currentUserRole);
+          setRateLimitInfo(rateLimitingService.getRateLimitInfo(currentUserRole));
+        }
+      }, Math.min(response.length * 20, 3000));
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Xin lỗi, tôi gặp lỗi. Vui lòng thử lại.';
+      replaceLastAssistantMessage(errorMessage);
+      setRegeneratingId(null);
+      toast({ title: 'Lỗi', description: 'Không thể tạo lại phản hồi.', variant: 'destructive' });
     } finally {
       setIsLoading(false);
     }
@@ -456,13 +521,17 @@ export function Chatbox({ userRole }: ChatboxProps) {
             )}
 
             {/* Chat Messages */}
-            {currentChat?.messages.map((message) => (
+            {currentChat?.messages.map((message, idx) => (
               <ChatMessage
                 key={message.id}
                 id={message.id}
                 message={message.message}
                 isUser={message.isUser}
                 timestamp={message.timestamp}
+                canRegenerate={!message.isUser && idx === (currentChat.messages.length - 1) && !isLoading}
+                onRegenerate={handleRegenerate}
+                isTyping={false}
+                showLoadingDots={regeneratingId === message.id}
               />
             ))}
 

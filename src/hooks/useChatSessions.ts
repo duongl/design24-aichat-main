@@ -173,6 +173,74 @@ export function useChatSessions() {
     localStorage.removeItem(STORAGE_KEY);
   }, []);
 
+  // Replace the last assistant (AI) message in the current chat
+  const replaceLastAssistantMessage = useCallback((newMessageText: string) => {
+    if (!currentChatId) return;
+    setChatSessions(prev => {
+      const session = prev[currentChatId];
+      if (!session || session.messages.length === 0) return prev;
+
+      const messages = [...session.messages];
+      // Find the last user message index
+      let lastUserIndex = -1;
+      for (let i = messages.length - 1; i >= 0; i--) {
+        if (messages[i].isUser) {
+          lastUserIndex = i;
+          break;
+        }
+      }
+      // Determine the range of assistant messages after the last user
+      const firstAssistantIndex = lastUserIndex >= 0 ? lastUserIndex + 1 : 0;
+      let cursor = firstAssistantIndex;
+      while (cursor < messages.length && !messages[cursor].isUser) {
+        cursor++;
+      }
+      // [firstAssistantIndex, cursor) is the block of assistant messages to collapse into one
+      if (firstAssistantIndex >= messages.length) {
+        // There is no assistant yet; append one
+        const newAssistant: ChatMessage = {
+          id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          message: newMessageText,
+          isUser: false,
+          timestamp: Date.now(),
+        };
+        messages.push(newAssistant);
+      } else if (messages[firstAssistantIndex].isUser) {
+        // Edge case: next item is user; insert new assistant right after last user
+        const newAssistant: ChatMessage = {
+          id: `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          message: newMessageText,
+          isUser: false,
+          timestamp: Date.now(),
+        };
+        messages.splice(firstAssistantIndex + 1, 0, newAssistant);
+      } else {
+        // Replace the first assistant message content
+        messages[firstAssistantIndex] = {
+          ...messages[firstAssistantIndex],
+          message: newMessageText,
+          timestamp: Date.now(),
+        };
+        // Remove any extra assistant messages after it
+        if (cursor - firstAssistantIndex > 1) {
+          messages.splice(firstAssistantIndex + 1, cursor - firstAssistantIndex - 1);
+        }
+      }
+
+      const updatedSession: ChatSession = {
+        ...session,
+        lastMessage: newMessageText.substring(0, 100),
+        timestamp: Date.now(),
+        messages,
+        messageCount: messages.length,
+      };
+
+      const updated = { ...prev, [currentChatId]: updatedSession };
+      saveChatSessions(updated);
+      return updated;
+    });
+  }, [currentChatId, saveChatSessions]);
+
   // Get current chat session
   const currentChat = currentChatId ? chatSessions[currentChatId] || null : null;
 
@@ -186,5 +254,6 @@ export function useChatSessions() {
     deleteChatSession,
     renameChatSession,
     clearAllChatSessions,
+    replaceLastAssistantMessage,
   };
 }

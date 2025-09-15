@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Bot, User, Copy, Check } from 'lucide-react';
+import { Bot, User, Copy, Check, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ChatMessageProps {
@@ -8,9 +8,12 @@ interface ChatMessageProps {
   isUser: boolean;
   timestamp: number;
   isTyping?: boolean;
+  canRegenerate?: boolean;
+  onRegenerate?: () => void;
+  showLoadingDots?: boolean;
 }
 
-export function ChatMessage({ message, isUser, timestamp, isTyping = false }: ChatMessageProps) {
+export function ChatMessage({ message, isUser, timestamp, isTyping = false, canRegenerate = false, onRegenerate, showLoadingDots = false }: ChatMessageProps) {
   const [copied, setCopied] = useState(false);
   const [displayedMessage, setDisplayedMessage] = useState('');
 
@@ -131,16 +134,16 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
               overflowWrap: 'break-word',
               whiteSpace: 'normal'
             }}
-            dangerouslySetInnerHTML={{ __html: formatMessage(displayedMessage) }}
+            dangerouslySetInnerHTML={{ __html: showLoadingDots && !isUser ? '' : formatMessage(displayedMessage) }}
           />
           
-          {isTyping && !isUser && displayedMessage.length < message.length && (
+          {(isTyping && !isUser && displayedMessage.length < message.length) || (showLoadingDots && !isUser) ? (
             <div className="flex items-center gap-1 mt-2">
               <div className="w-2 h-2 bg-primary rounded-full typing-dots" style={{ animationDelay: '0ms' }}></div>
               <div className="w-2 h-2 bg-primary rounded-full typing-dots" style={{ animationDelay: '150ms' }}></div>
               <div className="w-2 h-2 bg-primary rounded-full typing-dots" style={{ animationDelay: '300ms' }}></div>
             </div>
-          )}
+          ) : null}
         </div>
 
         {/* Message Actions */}
@@ -160,6 +163,17 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false }: Ch
               <Copy className="w-3 h-3" />
             )}
           </Button>
+          {!isUser && canRegenerate && !!onRegenerate && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-auto px-2 py-1 hover:bg-accent"
+              onClick={onRegenerate}
+              title="Tạo lại phản hồi"
+            >
+              <RefreshCw className="w-3 h-3" />
+            </Button>
+          )}
         </div>
       </div>
     </div>

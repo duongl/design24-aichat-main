@@ -99,7 +99,7 @@ export function ChangePasswordModal({ isOpen, onClose, onApiKeySet }: ApiKeyDial
           </form>
 
           <div className="text-xs text-muted-foreground">
-            - Nếu để trống, hệ thống sẽ dùng API key mặc định (bị giới hạn theo gói). Khi đã lưu API key cá nhân, giới hạn sẽ được gỡ bỏ.
+            Tính năng chat miễn phí đang tạm khóa. Bạn cần nhập Gemini API key cá nhân để sử dụng.
           </div>
         </div>
       </DialogContent>

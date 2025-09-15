@@ -842,15 +842,14 @@ class GeminiService {
   private readonly SYSTEM_API_KEY = "AIzaSyDmW78S8InwZCxh01otlZ5pObZQKnKdNvU";
 
   constructor() {
-    // System default API key (fallback)
-    const systemKey = this.SYSTEM_API_KEY;
+    // Only use personal API key, no system fallback
     let personalKey = '';
     try {
       personalKey = localStorage.getItem('gemini_personal_api_key') || '';
     } catch {
       personalKey = '';
     }
-    this.apiKey = personalKey || systemKey;
+    this.apiKey = personalKey; // personal key required
   }
 
   private getSystemPrompt(): string {

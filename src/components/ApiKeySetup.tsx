@@ -39,7 +39,7 @@ export function ApiKeySetup({ onApiKeySet }: ApiKeySetupProps) {
           </div>
           <CardTitle>Thiết lập API Key</CardTitle>
           <CardDescription>
-            Tính năng 20 chat miễn phí đã tạm khóa. Vui lòng nhập API key Gemini cá nhân để sử dụng.
+            Để sử dụng chatbot, bạn cần nhập Gemini API key
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

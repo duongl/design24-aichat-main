@@ -23,7 +23,7 @@ export const getUserAuth = (password: string): UserAuth | null => {
   return {
     role,
     password: AUTH_PASSWORDS[role],
-    dailyLimit: role === UserRole.ADMIN ? -1 : role === UserRole.USER ? 50 : 20,
+    dailyLimit: role === UserRole.ADMIN ? -1 : role === UserRole.USER ? 30 : 30,
     displayName: role === UserRole.ADMIN ? 'Administrator' : 
                  role === UserRole.USER ? 'User' : 'Beta Tester'
   };

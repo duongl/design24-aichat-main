@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, Mic, MicOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { useSpeechToText } from '@/hooks/useSpeechToText';
+import { useToast } from '@/hooks/use-toast';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -12,6 +14,14 @@ interface ChatInputProps {
 export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatInputProps) {
   const [message, setMessage] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { toast } = useToast();
+  const stt = useSpeechToText({
+    onTranscript: (text, isFinal) => {
+      // Append interim or final to input, but do not auto-send
+      if (isFinal) setMessage(prev => (prev ? `${prev} ${text}`.trim() : text));
+    },
+    preferredLanguages: ['vi-VN', 'en-US']
+  });
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -50,6 +60,23 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
             rows={1}
           />
         </div>
+        <Button
+          type="button"
+          variant="outline"
+          className="h-[44px] px-3 flex-shrink-0"
+          disabled={disabled || isLoading || !stt.isSupported}
+          onClick={() => {
+            if (!stt.isSupported) {
+              toast({ title: 'Không hỗ trợ', description: 'Trình duyệt không hỗ trợ ghi âm (Web Speech)', variant: 'destructive' });
+              return;
+            }
+            if (stt.isRecording) stt.stop(); else stt.start();
+          }}
+          aria-label={stt.isRecording ? 'Dừng ghi' : 'Bắt đầu ghi'}
+          title={stt.isSupported ? (stt.isRecording ? 'Dừng ghi' : 'Nhấn để nói') : 'Trình duyệt không hỗ trợ'}
+        >
+          {stt.isRecording ? <MicOff className="w-5 h-5 text-red-500" /> : <Mic className="w-5 h-5" />}
+        </Button>
         
         <Button
           type="submit"

@@ -8,6 +8,7 @@ export interface UserProfile {
     imageStyle: 'realistic' | 'artistic' | 'minimalist';
     themeColor: 'default' | 'blue' | 'green' | 'purple' | 'orange' | 'red';
     showSuggestions?: boolean;
+    sttProvider?: 'webspeech' | 'google';
   };
   projectContext?: {
     currentProject?: string;

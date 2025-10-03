@@ -128,6 +128,40 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
             </CardContent>
           </Card>
 
+          {/* Speech-to-Text Provider */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                Voice input (Speech-to-Text)
+              </CardTitle>
+              <CardDescription>
+                Chọn nhà cung cấp để nhập câu hỏi bằng giọng nói
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <Label className="mb-2 block">Voice input (STT) provider</Label>
+                <Select
+                  value={profile.preferences?.sttProvider || 'webspeech'}
+                  onValueChange={(value: 'webspeech' | 'google') => 
+                    updatePreferences({ sttProvider: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="webspeech">Web Speech API (miễn phí, Chrome)</SelectItem>
+                    <SelectItem value="google">Google Cloud STT (free tier ~60 phút/tháng)</SelectItem>
+                  </SelectContent>
+                </Select>
+                <div className="text-xs text-muted-foreground mt-2">
+                  Web Speech không yêu cầu backend nhưng chủ yếu hỗ trợ Chrome. Google STT cần backend, đổi lại đa trình duyệt và ổn định hơn.
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Preferences */}
           <Card>
             <CardHeader>

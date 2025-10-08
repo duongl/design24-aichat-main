@@ -1,0 +1,468 @@
+{
+  "sokhcn_documents": {
+    "id": "sokhcn-documents",
+    "title": "Tài liệu Sở Khoa học và Công nghệ TP. Cần Thơ",
+    "version": "1.0.0",
+    "last_updated": "2025-01-08",
+    "description": "Cơ sở dữ liệu về chức năng nhiệm vụ các phòng ban và kết luận cuộc họp giao ban của Sở KH&CN TP. Cần Thơ",
+    "phong_ban": [
+      {
+        "id": "P001",
+        "ten_phong": "Văn phòng",
+        "truong_phong": "Nguyễn Thanh Nhàn",
+        "chuc_nang": "Tham mưu, tổng hợp về chương trình, kế hoạch công tác và phục vụ các hoạt động của Sở; giúp Giám đốc Sở trong lãnh đạo, chỉ đạo, điều hành tổng hợp, theo dõi, đôn đốc các phòng, đơn vị thuộc Sở thực hiện chương trình, kế hoạch công tác của Sở; kiểm soát thủ tục hành chính, tổ chức triển khai thực hiện cơ chế một cửa.",
+        "nhiem_vu_chinh": [
+          "Tổng hợp, xây dựng chương trình, kế hoạch công tác định kỳ của Sở",
+          "Thực hiện công tác cải cách hành chính và tổ chức cán bộ",
+          "Quản lý hành chính, văn thư và lưu trữ",
+          "Tham mưu thực hiện công tác pháp chế",
+          "Quản lý đầu tư, đấu thầu và tài chính"
+        ],
+        "tu_khoa": ["văn phòng", "tổng hợp", "kế hoạch", "hành chính", "pháp chế", "văn thư", "lưu trữ", "nguyễn thanh nhàn"],
+        "retrieval": {
+          "keywords": ["văn phòng", "tổng hợp", "kế hoạch", "hành chính", "pháp chế", "văn thư", "lưu trữ", "nguyễn thanh nhàn"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "P002",
+        "ten_phong": "Phòng Quản lý Khoa học",
+        "truong_phong": "Bùi Hồng Xa",
+        "chuc_nang": "Tham mưu, giúp Giám đốc Sở thực hiện chức năng quản lý nhà nước về hoạt động nghiên cứu khoa học, tổ chức khoa học và công nghệ trên địa bàn thành phố theo quy định của pháp luật.",
+        "nhiem_vu_chinh": [
+          "Đặt hàng, tuyển chọn, nghiệm thu nhiệm vụ KH&CN",
+          "Theo dõi, tổng hợp kết quả chuyển giao, ứng dụng kết quả nghiên cứu",
+          "Hướng dẫn, kiểm tra việc thực hiện nhiệm vụ khoa học",
+          "Rà soát thẩm quyền áp dụng Thông tư 09/2024/TT-BKHCN"
+        ],
+        "tu_khoa": ["nghiên cứu", "đề tài", "nghiệm thu", "khoa học", "NQ57"],
+        "retrieval": {
+          "keywords": ["quản lý khoa học", "nghiên cứu", "đề tài", "nghiệm thu", "NQ57", "thông tư 09"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "P003",
+        "ten_phong": "Phòng Sở hữu trí tuệ",
+        "truong_phong": null,
+        "chuc_nang": "Tham mưu, giúp Giám đốc Sở quản lý nhà nước về sở hữu trí tuệ; hướng dẫn Ủy ban nhân dân cấp xã quản lý hoạt động khoa học công nghệ, đổi mới sáng tạo ở cấp xã theo quy định của pháp luật.",
+        "nhiem_vu_chinh": [
+          "Hướng dẫn thủ tục sở hữu công nghiệp",
+          "Quản lý và phát triển chỉ dẫn địa lý, nhãn hiệu vùng",
+          "Quản lý hoạt động sáng kiến"
+        ],
+        "tu_khoa": ["sở hữu trí tuệ", "nhãn hiệu", "sáng kiến", "công nghiệp"],
+        "retrieval": {
+          "keywords": ["sở hữu trí tuệ", "nhãn hiệu", "sáng kiến", "công nghiệp", "chỉ dẫn địa lý"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "P004",
+        "ten_phong": "Phòng Phát triển Công nghệ và Đổi mới sáng tạo",
+        "truong_phong": "Phạm Hoàng Dũng",
+        "chuc_nang": "Tham mưu, giúp Giám đốc Sở thực hiện chức năng quản lý nhà nước về phát triển công nghệ, đổi mới sáng tạo, phát triển công nghệ cao, thị trường và doanh nghiệp khoa học và công nghệ; ứng dụng bức xạ và đồng vị phóng xạ, an toàn bức xạ và hạt nhân trên địa bàn thành phố theo quy định của pháp luật.",
+        "nhiem_vu_chinh": [
+          "Xây dựng chính sách hỗ trợ đổi mới công nghệ đến 2030",
+          "Theo dõi đề án thành lập Quỹ phát triển KH&CN",
+          "Quản lý hoạt động ươm tạo, khởi nghiệp sáng tạo"
+        ],
+        "tu_khoa": ["đổi mới sáng tạo", "công nghệ cao", "ươm tạo", "quỹ phát triển"],
+        "retrieval": {
+          "keywords": ["phát triển công nghệ", "đổi mới sáng tạo", "ươm tạo", "khởi nghiệp", "quỹ phát triển", "công nghệ cao"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "P005",
+        "ten_phong": "Phòng Chuyển đổi số",
+        "truong_phong": "Lưu Vĩnh Thái",
+        "chuc_nang": "Có chức năng tham mưu và triển khai các hoạt động chuyên ngành, giúp Giám đốc Sở thực hiện chức năng quản lý nhà nước về chuyển đổi số, ứng dụng công nghệ thông tin, giao dịch điện tử, phát triển chính quyền số, kinh tế số và xã hội số.",
+        "nhiem_vu_chinh": [
+          "Là cơ quan thường trực công tác chuyển đổi số của thành phố",
+          "Xây dựng, kiểm tra tuân thủ kiến trúc chính quyền số",
+          "Phối hợp phát triển hạ tầng nền tảng số"
+        ],
+        "tu_khoa": ["chuyển đổi số", "kiến trúc số", "dữ liệu", "chính quyền số"],
+        "retrieval": {
+          "keywords": ["chuyển đổi số", "chính quyền số", "kiến trúc số", "dữ liệu", "nền tảng số", "CNTT"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "P006",
+        "ten_phong": "Phòng Công nghệ thông tin - Viễn thông - Bưu chính",
+        "truong_phong": "Trần Bá Quang",
+        "chuc_nang": "Có chức năng tham mưu và triển khai các hoạt động chuyên ngành, giúp Giám đốc Sở thực hiện chức năng quản lý nhà nước về bưu chính; viễn thông; tần số vô tuyến điện; công nghiệp công nghệ thông tin, công nghiệp công nghệ số.",
+        "nhiem_vu_chinh": [
+          "Cấp/thu hồi giấy phép bưu chính, viễn thông, tần số",
+          "Giám sát hạ tầng viễn thông, chất lượng dịch vụ",
+          "Quản lý công nghiệp CNTT, công nghiệp bán dẫn địa phương"
+        ],
+        "tu_khoa": ["viễn thông", "bưu chính", "tần số", "hạ tầng số", "CNTT"],
+        "retrieval": {
+          "keywords": ["viễn thông", "bưu chính", "tần số", "hạ tầng số", "CNTT", "công nghiệp bán dẫn"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "P007",
+        "ten_phong": "Chi cục Tiêu chuẩn Đo lường Chất lượng",
+        "truong_phong": "Lâm Ngọc Thùy",
+        "chuc_nang": "Tham mưu, quản lý hoạt động tiêu chuẩn, đo lường, chất lượng; phối hợp giám sát thực hiện Nghị quyết 57.",
+        "nhiem_vu_chinh": [
+          "Tổ chức tiếp và làm việc với Đoàn Giám sát",
+          "Tham mưu thực hiện công tác Đảng vụ"
+        ],
+        "tu_khoa": ["tiêu chuẩn", "đo lường", "chất lượng", "NQ57"],
+        "retrieval": {
+          "keywords": ["tiêu chuẩn", "đo lường", "chất lượng", "NQ57", "giám sát"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "trung_tam": [
+      {
+        "id": "CT001",
+        "ten_trung_tam": "Trung tâm Kỹ thuật Tiêu chuẩn Đo lường Chất lượng",
+        "giam_doc": "Huỳnh Nguyễn Bảo Loan",
+        "chuc_nang": "Đơn vị thực hiện các dịch vụ kỹ thuật tiêu chuẩn, đo lường, chất lượng.",
+        "nhiem_vu_chinh": [
+          "Thực hiện dịch vụ kỹ thuật",
+          "Hỗ trợ kiểm định, thử nghiệm"
+        ],
+        "tu_khoa": ["trung tâm", "tiêu chuẩn", "kiểm định"],
+        "retrieval": {
+          "keywords": ["trung tâm kỹ thuật", "tiêu chuẩn", "đo lường", "chất lượng", "kiểm định"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "CT002",
+        "ten_trung_tam": "Trung tâm Ứng dụng Tiến bộ KH&CN",
+        "giam_doc": "Nghiêm Phong Vũ",
+        "chuc_nang": "Triển khai, nghiệm thu các dự án ứng dụng tiến bộ KH&CN, quản lý sàn giao dịch công nghệ.",
+        "nhiem_vu_chinh": [
+          "Nghiệm thu, bàn giao dự án Sàn Giao dịch công nghệ"
+        ],
+        "tu_khoa": ["ứng dụng", "sàn giao dịch", "công nghệ"],
+        "retrieval": {
+          "keywords": ["ứng dụng tiến bộ", "sàn giao dịch", "công nghệ", "nghiệm thu"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "CT003",
+        "ten_trung_tam": "Vườn ươm Công nghệ Công nghiệp Việt Nam - Hàn Quốc",
+        "giam_doc": "Phạm Minh Quốc",
+        "chuc_nang": "Ươm tạo doanh nghiệp công nghệ; quản lý cơ chế chi tiêu nội bộ; xin kinh phí.",
+        "nhiem_vu_chinh": [
+          "Xây dựng Quy chế chi tiêu nội bộ",
+          "Hoàn thiện thủ tục đề nghị cấp bổ sung kinh phí phí cơ sở hạ tầng"
+        ],
+        "tu_khoa": ["vườn ươm", "ươm tạo", "Hàn Quốc"],
+        "retrieval": {
+          "keywords": ["vườn ươm", "ươm tạo", "công nghệ", "Hàn Quốc", "quy chế chi tiêu"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "CT004",
+        "ten_trung_tam": "Trung tâm Dịch vụ Khoa học, Công nghệ và Đổi mới sáng tạo",
+        "giam_doc": "Lê Trung Tâm (Phó Giám đốc chỉ đạo)",
+        "chuc_nang": "Cung cấp dịch vụ KH&CN, xử lý tồn đọng, rà soát nhân sự và nguồn thu.",
+        "nhiem_vu_chinh": [
+          "Thống kê, xử lý các nội dung tồn đọng",
+          "Rà soát nhân sự và các nguồn thu để điều chỉnh hồ sơ"
+        ],
+        "tu_khoa": ["dịch vụ", "rà soát", "nguồn thu", "tồn đọng"],
+        "retrieval": {
+          "keywords": ["dịch vụ KH&CN", "rà soát", "nguồn thu", "tồn đọng", "nhân sự"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "CT005",
+        "ten_trung_tam": "Trung tâm Công nghệ số",
+        "giam_doc": "Trần Phước Minh",
+        "chuc_nang": "Triển khai nhiệm vụ theo dự toán, phát triển nền tảng công nghệ số.",
+        "nhiem_vu_chinh": [
+          "Triển khai dự toán được giao",
+          "Phát triển nền tảng số"
+        ],
+        "tu_khoa": ["công nghệ số", "nền tảng", "dự toán"],
+        "retrieval": {
+          "keywords": ["công nghệ số", "nền tảng", "dự toán", "triển khai"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "nhiem_vu_giao_ban": [
+      {
+        "id": "T001",
+        "tieu_de": "Theo dõi, xử lý tồn đọng tại Trung tâm Dịch vụ KH&CN",
+        "noi_dung": "Tiếp tục theo dõi, chỉ đạo Trung tâm Dịch vụ Khoa học, Công nghệ và Đổi mới sáng tạo thống kê, xử lý, giải quyết dứt điểm các nội dung còn tồn đọng trong khả năng có thể giải quyết của Trung tâm; với vấn đề vượt thẩm quyền báo cáo Giám đốc Sở. Báo cáo kết quả hàng tuần (nếu có).",
+        "nguoi_duoc_giao": "Bùi Minh Châu (Phó Giám đốc Sở)",
+        "don_vi_phu_trach": "CT004",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["tồn đọng", "xử lý", "báo cáo hàng tuần"],
+        "retrieval": {
+          "keywords": ["tồn đọng", "xử lý", "báo cáo", "hàng tuần", "Bùi Minh Châu"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T002",
+        "tieu_de": "Rà soát nguồn thu của Trung tâm Dịch vụ KH&CN",
+        "noi_dung": "Chỉ đạo rà soát lại các nguồn thu của Trung tâm Dịch vụ Khoa học, Công nghệ và Đổi mới sáng tạo để điều chỉnh, bổ sung hồ sơ cho đúng quy định.",
+        "nguoi_duoc_giao": "Bùi Minh Châu (Phó Giám đốc Sở)",
+        "don_vi_phu_trach": "CT004",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["rà soát", "nguồn thu", "hồ sơ"],
+        "retrieval": {
+          "keywords": ["rà soát", "nguồn thu", "hồ sơ", "điều chỉnh", "Bùi Minh Châu"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T003",
+        "tieu_de": "Giải quyết nhân sự Trung tâm Thông tin & Dịch vụ KH&CN Hậu Giang",
+        "noi_dung": "Chỉ đạo, tham mưu giải quyết dứt điểm các vấn đề về nhân sự của Trung tâm Thông tin và Dịch vụ khoa học công nghệ tỉnh Hậu Giang.",
+        "nguoi_duoc_giao": "Lê Mỹ Hạnh (Phó Giám đốc Sở)",
+        "don_vi_phu_trach": null,
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["nhân sự", "Hậu Giang", "giải quyết"],
+        "retrieval": {
+          "keywords": ["nhân sự", "Hậu Giang", "giải quyết", "Lê Mỹ Hạnh", "trung tâm thông tin"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T004",
+        "tieu_de": "Ban hành quy định chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức",
+        "noi_dung": "Tiếp tục tập trung tham mưu ban hành quy định về chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức của đơn vị.",
+        "nguoi_duoc_giao": "Thủ trưởng các đơn vị",
+        "don_vi_phu_trach": "Tất cả phòng/đơn vị",
+        "han_hoan_thanh": "2025-10-31",
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "đang thực hiện",
+        "tu_khoa": ["quy định", "chức năng", "nhiệm vụ", "tháng 10"],
+        "retrieval": {
+          "keywords": ["quy định", "chức năng", "nhiệm vụ", "tháng 10", "cơ cấu tổ chức"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T005",
+        "tieu_de": "Hoàn thành nhiệm vụ trung ương giao và cập nhật NQ57",
+        "noi_dung": "Phối hợp Phòng Chuyển đổi số rà soát, hoàn thành các nhiệm vụ trung ương giao cho thành phố; cập nhật thông tin trên hệ thống giám sát, đánh giá việc thực hiện Nghị quyết số 57-NQ/TW; tham mưu Kế hoạch của UBND TP triển khai Kế hoạch số 22-KH/TU.",
+        "nguoi_duoc_giao": "Bùi Hồng Xa (Trưởng Phòng Quản lý Khoa học)",
+        "don_vi_phu_trach": "P002, P005",
+        "han_hoan_thanh": "2025-09-30",
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "đang thực hiện",
+        "tu_khoa": ["NQ57", "trung ương", "30/9", "chuyển đổi số"],
+        "retrieval": {
+          "keywords": ["NQ57", "trung ương", "30/9", "chuyển đổi số", "Bùi Hồng Xa"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T006",
+        "tieu_de": "Rà soát thẩm quyền áp dụng Thông tư 09/2024/TT-BKHCN",
+        "noi_dung": "Rà soát thẩm quyền của Giám đốc Sở được Chủ tịch UBND TP ủy quyền thực hiện một số nội dung tại Thông tư 09/2024/TT-BKHCN và biểu mẫu; tham mưu hướng dẫn biểu mẫu áp dụng cho địa phương nếu có thẩm quyền.",
+        "nguoi_duoc_giao": "Phòng Quản lý Khoa học",
+        "don_vi_phu_trach": "P002",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["thông tư 09", "thẩm quyền", "biểu mẫu"],
+        "retrieval": {
+          "keywords": ["thông tư 09", "thẩm quyền", "biểu mẫu", "BKHCN", "ủy quyền"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T007",
+        "tieu_de": "Xây dựng Nghị quyết chính sách hỗ trợ đổi mới công nghệ đến 2030",
+        "noi_dung": "Tiếp tục thực hiện thủ tục xây dựng Nghị quyết của HĐND TP quy định chính sách hỗ trợ đổi mới công nghệ trên địa bàn TP Cần Thơ đến năm 2030.",
+        "nguoi_duoc_giao": "Phạm Hoàng Dũng (Trưởng Phòng Phát triển CN&ĐMST)",
+        "don_vi_phu_trach": "P004",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["nghị quyết", "đổi mới công nghệ", "2030", "HĐND"],
+        "retrieval": {
+          "keywords": ["nghị quyết", "đổi mới công nghệ", "2030", "HĐND", "Phạm Hoàng Dũng"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T008",
+        "tieu_de": "Theo dõi và tham mưu Đề án thành lập Quỹ phát triển KH&CN",
+        "noi_dung": "Theo dõi, tham mưu Đề án thành lập Quỹ phát triển khoa học và công nghệ của thành phố sau khi UBND TP trình HĐND TP xem xét.",
+        "nguoi_duoc_giao": "Phòng Phát triển Công nghệ và ĐMST",
+        "don_vi_phu_trach": "P004",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["quỹ phát triển", "đề án", "KH&CN"],
+        "retrieval": {
+          "keywords": ["quỹ phát triển", "đề án", "KH&CN", "UBND", "HĐND"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T009",
+        "tieu_de": "Tăng cường quản lý các lĩnh vực CNTT - Viễn thông - Bưu chính",
+        "noi_dung": "Tăng cường quản lý các lĩnh vực được phân công; cân nhắc, kỹ lưỡng trong việc phối hợp với các doanh nghiệp quản lý.",
+        "nguoi_duoc_giao": "Trần Bá Quang (Trưởng Phòng CNTT-VT-BC)",
+        "don_vi_phu_trach": "P006",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["CNTT", "viễn thông", "bưu chính", "doanh nghiệp"],
+        "retrieval": {
+          "keywords": ["CNTT", "viễn thông", "bưu chính", "doanh nghiệp", "Trần Bá Quang"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T010",
+        "tieu_de": "Tổ chức tiếp và làm việc với Đoàn Giám sát theo QĐ 250-QĐ/TU",
+        "noi_dung": "Tham mưu tổ chức tiếp và làm việc với Đoàn Giám sát theo QĐ 250-QĐ/TU ngày 12/8/2025 của Ban Thường vụ Thành ủy giám sát Đảng ủy Sở KHCN về thực hiện NQ57.",
+        "nguoi_duoc_giao": "Chi cục Tiêu chuẩn Đo lường Chất lượng (Lâm Ngọc Thùy)",
+        "don_vi_phu_trach": "P007",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["đoàn giám sát", "QĐ 250", "NQ57", "thành ủy"],
+        "retrieval": {
+          "keywords": ["đoàn giám sát", "QĐ 250", "NQ57", "thành ủy", "Lâm Ngọc Thùy"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T011",
+        "tieu_de": "Nghiệm thu, bàn giao dự án Sàn Giao dịch công nghệ",
+        "noi_dung": "Thực hiện nghiệm thu, bàn giao dự án Sàn Giao dịch công nghệ.",
+        "nguoi_duoc_giao": "Nghiêm Phong Vũ (Giám đốc Trung tâm Ứng dụng)",
+        "don_vi_phu_trach": "CT002",
+        "han_hoan_thanh": "2025-10-30",
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "đang thực hiện",
+        "tu_khoa": ["sàn giao dịch", "nghiệm thu", "30/10"],
+        "retrieval": {
+          "keywords": ["sàn giao dịch", "nghiệm thu", "30/10", "Nghiêm Phong Vũ", "bàn giao"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T012",
+        "tieu_de": "Xây dựng Quy chế chi tiêu nội bộ Vườn ươm",
+        "noi_dung": "Xây dựng và ban hành Quy chế chi tiêu nội bộ của Vườn ươm Công nghệ Công nghiệp VN-HQ.",
+        "nguoi_duoc_giao": "Phạm Minh Quốc (Giám đốc Vườn ươm)",
+        "don_vi_phu_trach": "CT003",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["quy chế", "chi tiêu", "vườn ươm"],
+        "retrieval": {
+          "keywords": ["quy chế", "chi tiêu", "vườn ươm", "Phạm Minh Quốc", "VN-HQ"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T013",
+        "tieu_de": "Hoàn thiện thủ tục đề nghị cấp bổ sung kinh phí Vườn ươm",
+        "noi_dung": "Tham mưu, hoàn thiện thủ tục đề nghị cấp bổ sung kinh phí chi trả phí cơ sở hạ tầng 02 năm 2024 và 2025 cho Vườn ươm.",
+        "nguoi_duoc_giao": "Phạm Minh Quốc (Giám đốc Vườn ươm)",
+        "don_vi_phu_trach": "CT003",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["kinh phí", "cơ sở hạ tầng", "2024-2025"],
+        "retrieval": {
+          "keywords": ["kinh phí", "cơ sở hạ tầng", "2024-2025", "Phạm Minh Quốc", "bổ sung"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "T014",
+        "tieu_de": "Rà soát toàn bộ nhân sự Trung tâm Dịch vụ KH&CN",
+        "noi_dung": "Rà soát toàn bộ nhân sự của Trung tâm theo từng trường hợp cụ thể để tham mưu phương án xử lý cho phù hợp.",
+        "nguoi_duoc_giao": "Lê Trung Tâm (Phó Giám đốc/Trung tâm Dịch vụ)",
+        "don_vi_phu_trach": "CT004",
+        "han_hoan_thanh": null,
+        "nguon_van_ban": "26/SKHCN-VP",
+        "trang_thai": "chưa thực hiện",
+        "tu_khoa": ["nhân sự", "rà soát", "phương án"],
+        "retrieval": {
+          "keywords": ["nhân sự", "rà soát", "phương án", "Lê Trung Tâm", "trung tâm dịch vụ"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "van_ban": [
+      {
+        "id": "DOC001",
+        "so_vb": "26/SKHCN-VP",
+        "tieu_de": "V/v triển khai nội dung Kết luận tại cuộc họp giao ban ngày 29/9/2025",
+        "loai_vb": "Thông báo / Kết luận",
+        "ngay_ban_hanh": "2025-09-29",
+        "nguoi_ky": "Nguyễn Thanh Nhàn",
+        "tom_tat": "Kết luận cuộc họp giao ban (22-28/9/2025) giao nhiệm vụ cụ thể cho lãnh đạo các phòng và trung tâm; yêu cầu hoàn thành một số công việc trong tháng 10/2025 và 30/10/2025.",
+        "tep_nguon": "26-TB Kết luận của GĐ tại cuộc họp giao ban 29.9.2025.signed.signed.pdf",
+        "tu_khoa": ["giao ban", "kết luận", "29/9", "nhiệm vụ"],
+        "retrieval": {
+          "keywords": ["giao ban", "kết luận", "29/9", "nhiệm vụ", "Nguyễn Thanh Nhàn"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DOC002",
+        "so_vb": "QĐ-15/??-SKHCN",
+        "tieu_de": "Quyết định về chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức của các Phòng chuyên môn",
+        "loai_vb": "Quyết định",
+        "ngay_ban_hanh": "2025-07-01",
+        "nguoi_ky": "Giám đốc Sở KH&CN",
+        "tom_tat": "Quy định chi tiết chức năng, nhiệm vụ và quyền hạn của các phòng chuyên môn thuộc Sở KH&CN (Văn phòng, Phòng QLKH, Phòng Sở hữu trí tuệ, Phòng Phát triển CN&ĐMST, Phòng Chuyển đổi số, Phòng CNTT-VT-BC, ...).",
+        "tep_nguon": "15 QD chuc nang nhiem vu cac Phong SKHCN-2025.pdf",
+        "tu_khoa": ["quyết định", "chức năng", "nhiệm vụ", "phòng chuyên môn"],
+        "retrieval": {
+          "keywords": ["quyết định", "chức năng", "nhiệm vụ", "phòng chuyên môn", "cơ cấu tổ chức"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "rulebook": {
+      "scope": [
+        "Câu hỏi về chức năng nhiệm vụ các phòng ban Sở KH&CN TP. Cần Thơ",
+        "Tra cứu thông tin về nhiệm vụ được giao trong cuộc họp giao ban",
+        "Hỏi về trưởng phòng, giám đốc trung tâm và nhiệm vụ cụ thể",
+        "KHÔNG trả lời các câu hỏi ngoài phạm vi Sở KH&CN TP. Cần Thơ"
+      ],
+      "style_tone": {
+        "tone": "chuyên nghiệp, chính xác, rõ ràng",
+        "formatting": ["bullet", "bảng thông tin", "danh sách có cấu trúc"]
+      },
+      "answer_policy": {
+        "priority": [
+          "Ưu tiên thông tin chính xác từ database",
+          "Nếu thiếu dữ liệu → nói 'chưa có trong database' và fallback Gemini (không nhắc model/API)"
+        ]
+      }
+    },
+    "metadata": {
+      "owner": "Sở Khoa học và Công nghệ TP. Cần Thơ",
+      "copyright": "©2025 Sở KH&CN TP. Cần Thơ",
+      "source_notes": "Dữ liệu từ 2 văn bản: Kết luận cuộc họp giao ban 29/9/2025 và Quyết định chức năng nhiệm vụ các phòng 2025"
+    }
+  }
+}

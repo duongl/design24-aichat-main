@@ -20,10 +20,12 @@ interface ChatMessage {
 
 // Import admin AI course database
 import adminAiCourseDb from '../data/admin_ai_course.json';
+import sokhcnDocumentsDb from '../data/sokhcn_documents.json';
 
-// Course database - 10 Kỹ năng AI cho Hướng dẫn viên Du lịch + Admin AI Course + Prompt Engineering
+// Course database - 10 Kỹ năng AI cho Hướng dẫn viên Du lịch + Admin AI Course + Prompt Engineering + Sở KH&CN Documents
 const COURSE_DATABASE = {
   ...adminAiCourseDb,
+  ...sokhcnDocumentsDb,
   "ai_prompt_image": {
     "id": "ai-prompt-image",
     "title": "Prompt Engineering – AI Image",
@@ -712,11 +714,15 @@ function buildContextFromDB(query: string): string {
   // 2. Hành chính công, văn bản, hồ sơ, báo cáo, dịch vụ công → AI Hành chính công (7 chuyên đề)
   const adminKeywords = ["hành chính công", "công vụ", "công văn", "dịch vụ công", "hồ sơ điện tử", "báo cáo số", "dashboard", "bảo mật dữ liệu", "an toàn thông tin", "chuyển đổi số", "eoffice", "văn bản", "thống kê", "automation", "hồ sơ", "báo cáo"];
   
+  // 2.5. Sở KH&CN TP. Cần Thơ → Tài liệu Sở KH&CN
+  const sokhcnKeywords = ["sở kh&cn", "sở khoa học", "cần thơ", "phòng quản lý khoa học", "phòng chuyển đổi số", "phòng phát triển công nghệ", "phòng sở hữu trí tuệ", "phòng cntt", "trung tâm dịch vụ", "vườn ươm", "trưởng phòng", "giám đốc trung tâm", "nhiệm vụ giao ban", "kết luận cuộc họp", "bùi hồng xa", "lưu vĩnh thái", "phạm hoàng dũng", "trần bá quang", "lâm ngọc thùy", "chức năng", "nhiệm vụ", "ai được giao", "hạn hoàn thành", "tháng 10", "văn bản", "ký", "nghiệm thu", "sàn giao dịch", "tồn đọng", "26/skhcn-vp", "nguyễn thanh nhàn", "phạm minh quốc", "nghiêm phong vũ", "lê trung tâm", "trần phước minh", "huỳnh nguyễn bảo loan"];
+  
   // 3. Design24 (dịch vụ, branding, logo, TVC, web, in ấn) → About/Services
   const design24Keywords = ["design24", "thiết kế", "logo", "branding", "tvc", "video marketing", "web", "app", "graphic", "in ấn", "copywriting", "digital marketing", "liên hệ", "contact", "giới thiệu", "about", "dịch vụ", "thông tin"];
   
   const isTourismQuery = tourismKeywords.some(keyword => q.includes(keyword));
   const isAdminQuery = adminKeywords.some(keyword => q.includes(keyword));
+  const isSokhcnQuery = sokhcnKeywords.some(keyword => q.includes(keyword));
   const isDesign24Query = design24Keywords.some(keyword => q.includes(keyword));
   
   // ===== ROUTE 1: AI ĐA PHƯƠNG TIỆN (10 kỹ năng) =====
@@ -764,8 +770,330 @@ function buildContextFromDB(query: string): string {
     return blocks.join("\n\n").slice(0, 6000);
   }
   
+  // ===== ROUTE 2.5: SỞ KH&CN TP. CẦN THƠ → Tài liệu Sở KH&CN (ƯU TIÊN CAO) =====
+  if (isSokhcnQuery) {
+    const sokhcnData = COURSE_DATABASE["sokhcn_documents"] as any;
+    if (sokhcnData) {
+      blocks.push([
+        "🏛️ TÀI LIỆU SỞ KHOA HỌC VÀ CÔNG NGHỆ TP. CẦN THƠ",
+        `${sokhcnData.title} - ${sokhcnData.description}`,
+        `Cập nhật: ${sokhcnData.last_updated}`
+      ].join("\n"));
+      
+      // Tìm thông tin phòng ban - Logic tìm kiếm thông minh hơn
+      if (sokhcnData.phong_ban) {
+        for (const phong of sokhcnData.phong_ban) {
+          // Tìm kiếm theo tên phòng, trưởng phòng, hoặc keywords
+          const phongName = phong.ten_phong.toLowerCase();
+          const truongPhong = phong.truong_phong?.toLowerCase() || "";
+          const phongKeywords = phong.retrieval?.keywords?.join("|") || "";
+          
+          // Tạo các từ cận nghĩa cho tìm kiếm
+          const synonyms = {
+            "giám đốc": ["giám đốc", "giam doc", "director", "lãnh đạo", "trưởng", "người đứng đầu"],
+            "chức năng": ["chức năng", "chuc nang", "function", "nhiệm vụ", "vai trò", "trách nhiệm"],
+            "nhiệm vụ": ["nhiệm vụ", "nhiem vu", "task", "công việc", "việc làm", "duty", "responsibility"],
+            "trưởng phòng": ["trưởng phòng", "truong phong", "head", "leader", "manager"],
+            "phòng": ["phòng", "phong", "department", "division", "office"],
+            "chuyển đổi số": ["chuyển đổi số", "chuyen doi so", "digital transformation", "digitalization"],
+            "công nghệ": ["công nghệ", "cong nghe", "technology", "tech", "kỹ thuật", "ky thuat"],
+            "sở hữu trí tuệ": ["sở hữu trí tuệ", "so huu tri tue", "intellectual property", "ip"],
+            "quản lý khoa học": ["quản lý khoa học", "quan ly khoa hoc", "science management", "research management"]
+          };
+          
+          // Kiểm tra match với từ cận nghĩa
+          let isMatch = false;
+          
+          // Match tên phòng
+          if (q.includes(phongName) || phongName.includes(q)) {
+            isMatch = true;
+          }
+          
+          // Match tên trưởng phòng
+          if (truongPhong && (q.includes(truongPhong) || truongPhong.includes(q))) {
+            isMatch = true;
+          }
+          
+          // Match keywords
+          if (phongKeywords && new RegExp(`(${phongKeywords})`, "i").test(q)) {
+            isMatch = true;
+          }
+          
+          // Match từ cận nghĩa
+          for (const [key, values] of Object.entries(synonyms)) {
+            if (q.includes(key)) {
+              for (const synonym of values) {
+                if (phongName.includes(synonym) || (truongPhong && truongPhong.includes(synonym)) || phongKeywords.includes(synonym)) {
+                  isMatch = true;
+                  break;
+                }
+              }
+            }
+          }
+          
+          // Match cụ thể cho các phòng
+          if (q.includes("chuyển đổi") || q.includes("số")) {
+            if (phongName.includes("chuyển đổi số")) {
+              isMatch = true;
+            }
+          }
+          
+          if (q.includes("sở hữu") || q.includes("trí tuệ")) {
+            if (phongName.includes("sở hữu trí tuệ")) {
+              isMatch = true;
+            }
+          }
+          
+          if (q.includes("quản lý") && q.includes("khoa học")) {
+            if (phongName.includes("quản lý khoa học")) {
+              isMatch = true;
+            }
+          }
+          
+          if (isMatch) {
+            blocks.push([
+              `📋 ${phong.ten_phong.toUpperCase()}`,
+              phong.truong_phong ? `Trưởng phòng: ${phong.truong_phong}` : "Trưởng phòng: Chưa có thông tin",
+              `Chức năng: ${phong.chuc_nang}`,
+              `Nhiệm vụ chính: ${phong.nhiem_vu_chinh.join("; ")}`
+            ].filter(Boolean).join("\n"));
+            break;
+          }
+        }
+      }
+      
+      // Tìm thông tin trung tâm - Logic tìm kiếm thông minh hơn với từ cận nghĩa
+      if (sokhcnData.trung_tam) {
+        for (const trung_tam of sokhcnData.trung_tam) {
+          const ttName = trung_tam.ten_trung_tam.toLowerCase();
+          const giamDoc = trung_tam.giam_doc?.toLowerCase() || "";
+          const ttKeywords = trung_tam.retrieval?.keywords?.join("|") || "";
+          
+          // Tạo các từ cận nghĩa cho tìm kiếm
+          const synonyms = {
+            "giám đốc": ["giám đốc", "giam doc", "director", "lãnh đạo", "trưởng", "người đứng đầu"],
+            "chức năng": ["chức năng", "chuc nang", "function", "nhiệm vụ", "vai trò", "trách nhiệm"],
+            "nhiệm vụ": ["nhiệm vụ", "nhiem vu", "task", "công việc", "việc làm", "duty", "responsibility"],
+            "vườn ươm": ["vườn ươm", "vuon uom", "incubator", "ươm tạo", "uom tao"],
+            "trung tâm": ["trung tâm", "trung tam", "center", "centre", "đơn vị", "don vi"],
+            "công nghệ": ["công nghệ", "cong nghe", "technology", "tech", "kỹ thuật", "ky thuat"],
+            "hàn quốc": ["hàn quốc", "han quoc", "korea", "korean", "vn-hq", "vietnam-korea"]
+          };
+          
+          // Kiểm tra match với từ cận nghĩa
+          let isMatch = false;
+          
+          // Match tên trung tâm
+          if (ttName.includes(q) || q.includes(ttName)) {
+            isMatch = true;
+          }
+          
+          // Match tên giám đốc
+          if (giamDoc.includes(q) || q.includes(giamDoc)) {
+            isMatch = true;
+          }
+          
+          // Match keywords
+          if (ttKeywords && new RegExp(`(${ttKeywords})`, "i").test(q)) {
+            isMatch = true;
+          }
+          
+          // Match từ cận nghĩa
+          for (const [key, values] of Object.entries(synonyms)) {
+            if (q.includes(key)) {
+              for (const synonym of values) {
+                if (ttName.includes(synonym) || giamDoc.includes(synonym) || ttKeywords.includes(synonym)) {
+                  isMatch = true;
+                  break;
+                }
+              }
+            }
+          }
+          
+          // Match cụ thể cho Vườn ươm
+          if (q.includes("vườn") || q.includes("ươm") || q.includes("hàn quốc") || q.includes("vn-hq")) {
+            if (ttName.includes("vườn ươm") || ttName.includes("hàn quốc")) {
+              isMatch = true;
+            }
+          }
+          
+          if (isMatch) {
+            blocks.push([
+              `🏢 ${trung_tam.ten_trung_tam.toUpperCase()}`,
+              `Giám đốc: ${trung_tam.giam_doc}`,
+              `Chức năng: ${trung_tam.chuc_nang}`,
+              `Nhiệm vụ chính: ${trung_tam.nhiem_vu_chinh.join("; ")}`
+            ].filter(Boolean).join("\n"));
+            break;
+          }
+        }
+      }
+      
+      // Tìm nhiệm vụ giao ban - Logic tìm kiếm thông minh hơn
+      if (sokhcnData.nhiem_vu_giao_ban) {
+        for (const nhiem_vu of sokhcnData.nhiem_vu_giao_ban) {
+          const nvTitle = nhiem_vu.tieu_de.toLowerCase();
+          const nvNguoiGiao = nhiem_vu.nguoi_duoc_giao?.toLowerCase() || "";
+          const nvNoiDung = nhiem_vu.noi_dung?.toLowerCase() || "";
+          const nvKeywords = nhiem_vu.retrieval?.keywords?.join("|") || "";
+          
+          const isMatch = nvTitle.includes(q) || 
+                         q.includes(nvTitle) ||
+                         nvNguoiGiao.includes(q) ||
+                         q.includes(nvNguoiGiao) ||
+                         nvNoiDung.includes(q) ||
+                         q.includes(nvNoiDung) ||
+                         (nvKeywords && new RegExp(`(${nvKeywords})`, "i").test(q));
+          
+          if (isMatch) {
+            blocks.push([
+              `📝 ${nhiem_vu.tieu_de.toUpperCase()}`,
+              `Người được giao: ${nhiem_vu.nguoi_duoc_giao}`,
+              `Đơn vị phụ trách: ${nhiem_vu.don_vi_phu_trach || "Chưa xác định"}`,
+              nhiem_vu.han_hoan_thanh ? `Hạn hoàn thành: ${nhiem_vu.han_hoan_thanh}` : "Hạn hoàn thành: Chưa có",
+              `Trạng thái: ${nhiem_vu.trang_thai}`,
+              `Nội dung: ${nhiem_vu.noi_dung}`
+            ].filter(Boolean).join("\n"));
+            break;
+          }
+        }
+      }
+      
+      // Tìm văn bản - Logic tìm kiếm thông minh hơn
+      if (sokhcnData.van_ban) {
+        for (const van_ban of sokhcnData.van_ban) {
+          const vbSo = van_ban.so_vb?.toLowerCase() || "";
+          const vbTitle = van_ban.tieu_de?.toLowerCase() || "";
+          const vbNguoiKy = van_ban.nguoi_ky?.toLowerCase() || "";
+          const vbKeywords = van_ban.retrieval?.keywords?.join("|") || "";
+          
+          const isMatch = vbSo.includes(q) || 
+                         q.includes(vbSo) ||
+                         vbTitle.includes(q) ||
+                         q.includes(vbTitle) ||
+                         vbNguoiKy.includes(q) ||
+                         q.includes(vbNguoiKy) ||
+                         (vbKeywords && new RegExp(`(${vbKeywords})`, "i").test(q));
+          
+          if (isMatch) {
+            blocks.push([
+              `📄 ${van_ban.tieu_de.toUpperCase()}`,
+              `Số văn bản: ${van_ban.so_vb}`,
+              `Loại: ${van_ban.loai_vb}`,
+              `Ngày ban hành: ${van_ban.ngay_ban_hanh}`,
+              `Người ký: ${van_ban.nguoi_ky}`,
+              `Tóm tắt: ${van_ban.tom_tat}`
+            ].filter(Boolean).join("\n"));
+            break;
+          }
+        }
+      }
+      
+      // Nếu không tìm thấy match cụ thể, trả về tất cả dữ liệu có liên quan với từ cận nghĩa
+      if (blocks.length <= 1) { // Chỉ có header
+        const generalSynonyms = {
+          "giám đốc": ["giám đốc", "giam doc", "director", "lãnh đạo", "trưởng", "người đứng đầu"],
+          "chức năng": ["chức năng", "chuc nang", "function", "nhiệm vụ", "vai trò", "trách nhiệm"],
+          "nhiệm vụ": ["nhiệm vụ", "nhiem vu", "task", "công việc", "việc làm", "duty", "responsibility"],
+          "trưởng phòng": ["trưởng phòng", "truong phong", "head", "leader", "manager"],
+          "phòng": ["phòng", "phong", "department", "division", "office"],
+          "trung tâm": ["trung tâm", "trung tam", "center", "centre", "đơn vị", "don vi"],
+          "vườn ươm": ["vườn ươm", "vuon uom", "incubator", "ươm tạo", "uom tao"],
+          "công nghệ": ["công nghệ", "cong nghe", "technology", "tech", "kỹ thuật", "ky thuat"]
+        };
+        
+        // Tìm kiếm tất cả phòng ban có chứa từ khóa hoặc từ cận nghĩa
+        if (sokhcnData.phong_ban) {
+          for (const phong of sokhcnData.phong_ban) {
+            const phongText = `${phong.ten_phong} ${phong.truong_phong || ""} ${phong.chuc_nang}`.toLowerCase();
+            let shouldInclude = false;
+            
+            // Kiểm tra match trực tiếp
+            if (phongText.includes(q) || q.includes("phòng") || q.includes("trưởng phòng")) {
+              shouldInclude = true;
+            }
+            
+            // Kiểm tra từ cận nghĩa
+            for (const [key, values] of Object.entries(generalSynonyms)) {
+              if (q.includes(key)) {
+                for (const synonym of values) {
+                  if (phongText.includes(synonym)) {
+                    shouldInclude = true;
+                    break;
+                  }
+                }
+              }
+            }
+            
+            if (shouldInclude) {
+              blocks.push([
+                `📋 ${phong.ten_phong.toUpperCase()}`,
+                phong.truong_phong ? `Trưởng phòng: ${phong.truong_phong}` : "Trưởng phòng: Chưa có thông tin",
+                `Chức năng: ${phong.chuc_nang}`,
+                `Nhiệm vụ chính: ${phong.nhiem_vu_chinh.join("; ")}`
+              ].filter(Boolean).join("\n"));
+              break;
+            }
+          }
+        }
+        
+        // Tìm kiếm tất cả trung tâm có chứa từ khóa hoặc từ cận nghĩa
+        if (sokhcnData.trung_tam) {
+          for (const trung_tam of sokhcnData.trung_tam) {
+            const ttText = `${trung_tam.ten_trung_tam} ${trung_tam.giam_doc || ""} ${trung_tam.chuc_nang}`.toLowerCase();
+            let shouldInclude = false;
+            
+            // Kiểm tra match trực tiếp
+            if (ttText.includes(q) || q.includes("trung tâm") || q.includes("giám đốc")) {
+              shouldInclude = true;
+            }
+            
+            // Kiểm tra từ cận nghĩa
+            for (const [key, values] of Object.entries(generalSynonyms)) {
+              if (q.includes(key)) {
+                for (const synonym of values) {
+                  if (ttText.includes(synonym)) {
+                    shouldInclude = true;
+                    break;
+                  }
+                }
+              }
+            }
+            
+            if (shouldInclude) {
+              blocks.push([
+                `🏢 ${trung_tam.ten_trung_tam.toUpperCase()}`,
+                `Giám đốc: ${trung_tam.giam_doc}`,
+                `Chức năng: ${trung_tam.chuc_nang}`,
+                `Nhiệm vụ chính: ${trung_tam.nhiem_vu_chinh.join("; ")}`
+              ].filter(Boolean).join("\n"));
+              break;
+            }
+          }
+        }
+        
+        // Tìm kiếm tất cả nhiệm vụ có chứa từ khóa
+        if (sokhcnData.nhiem_vu_giao_ban) {
+          for (const nhiem_vu of sokhcnData.nhiem_vu_giao_ban) {
+            const nvText = `${nhiem_vu.tieu_de} ${nhiem_vu.nguoi_duoc_giao} ${nhiem_vu.noi_dung}`.toLowerCase();
+            if (nvText.includes(q) || q.includes("nhiệm vụ") || q.includes("giao ban") || q.includes("hạn hoàn thành")) {
+              blocks.push([
+                `📝 ${nhiem_vu.tieu_de.toUpperCase()}`,
+                `Người được giao: ${nhiem_vu.nguoi_duoc_giao}`,
+                nhiem_vu.han_hoan_thanh ? `Hạn hoàn thành: ${nhiem_vu.han_hoan_thanh}` : "Hạn hoàn thành: Chưa có"
+              ].filter(Boolean).join("\n"));
+              break;
+            }
+          }
+        }
+      }
+      
+      return blocks.join("\n\n").slice(0, 6000);
+    }
+  }
+  
   // ===== ROUTE 2: HÀNH CHÍNH CÔNG → AI Hành chính công (7 chuyên đề) =====
-  if (isAdminQuery && !isTourismQuery) {
+  if (isAdminQuery && !isTourismQuery && !isSokhcnQuery) {
     const adminCourse = COURSE_DATABASE["admin_ai_course"] as any;
     if (adminCourse) {
       blocks.push([

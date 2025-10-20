@@ -1237,7 +1237,7 @@ class GeminiService {
     return div.innerHTML;
   }
 
-  async sendMessage(messages: ChatMessage[], userMessage: string): Promise<string> {
+  async sendMessage(messages: ChatMessage[], userMessage: string, retryCount: number = 0): Promise<string> {
     if (!this.apiKey) {
       throw new Error('API_KEY_NOT_CONFIGURED');
     }
@@ -1327,12 +1327,41 @@ ${userMessage}
     } catch (error) {
       if (error instanceof Error) {
         if (error.name === 'AbortError') {
-          return 'Sorry, the request timed out. Please try again.';
+          return '⏱️ **Timeout:** Yêu cầu đã hết thời gian chờ. Vui lòng thử lại sau.';
         }
+        
+        // Xử lý lỗi 503 (Service Unavailable) với retry tự động
+        if (error.message.includes('503')) {
+          if (retryCount < 2) {
+            // Retry sau 2 giây cho lần đầu, 5 giây cho lần thứ 2
+            const delay = retryCount === 0 ? 2000 : 5000;
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return this.sendMessage(messages, userMessage, retryCount + 1);
+          }
+          
+          return '🚫 **Gemini API đang quá tải**\n\n' +
+                 'Đã thử lại 2 lần nhưng API vẫn bận. Hãy thử:\n' +
+                 '• Chờ 1-2 phút rồi thử lại\n' +
+                 '• Thử lại vào giờ ít người dùng hơn\n' +
+                 '• Hoặc hỏi câu hỏi khác trong lúc chờ';
+        }
+        
+        // Xử lý lỗi 429 (Rate Limit)
+        if (error.message.includes('429')) {
+          return '⏳ **Quá nhiều yêu cầu**\n\n' +
+                 'Bạn đã gửi quá nhiều tin nhắn trong thời gian ngắn. Vui lòng chờ một chút rồi thử lại.';
+        }
+        
+        // Xử lý lỗi 400 (Bad Request)
+        if (error.message.includes('400')) {
+          return '❌ **Yêu cầu không hợp lệ**\n\n' +
+                 'Có vẻ như tin nhắn của bạn chứa nội dung không được hỗ trợ. Vui lòng thử lại với nội dung khác.';
+        }
+        
         console.error('Gemini API Error:', error);
-        return `I apologize, but I encountered an error: ${error.message}. Please try again.`;
+        return `⚠️ **Lỗi API:** ${error.message}\n\nVui lòng thử lại sau hoặc liên hệ hỗ trợ nếu lỗi tiếp tục xảy ra.`;
       }
-      return 'An unexpected error occurred. Please try again.';
+      return '❓ **Lỗi không xác định**\n\nĐã xảy ra lỗi không mong muốn. Vui lòng thử lại sau.';
     }
   }
 

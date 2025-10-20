@@ -557,9 +557,16 @@ export function Chatbox({ userRole }: ChatboxProps) {
               onSuggestionClick={handleSuggestionClick}
               suggestions={[
                 "Hướng dẫn tạo prompt ảnh",
-                "Hướng dẫn tạo prompt video chuẩn Json",
+                "Hướng dẫn tạo prompt video chuẩn Veo 3",
                 "10 kỹ năng AI lĩnh vực Thiết kế & Truyền thông đa phương tiện",
-                "Ứng dụng AI trong thủ tục hành chính"
+                "Ứng dụng AI trong thủ tục hành chính",
+                "Thiết kế đồ họa",
+                "Đa phương tiện",
+                "Kiến trúc - nội thất",
+                "Sáng tạo truyện tranh",
+                "Sáng tạo âm nhạc",
+                "Hành chính văn phòng",
+                "Marketing - bán hàng"
               ]}
             />
           </div>

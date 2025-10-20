@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Chatbox } from '@/components/Chatbox';
-import { PasswordProtection } from '@/components/PasswordProtection';
 import { UserRole } from '@/types/auth';
 
 const Index = () => {
-  const [isPasswordVerified, setIsPasswordVerified] = useState(false);
-  const [userRole, setUserRole] = useState<UserRole | null>(null);
+  const [userRole, setUserRole] = useState<UserRole>(UserRole.USER);
 
   useEffect(() => {
-    // Check if password was already verified
-    const verified = localStorage.getItem('password_verified');
-    const role = localStorage.getItem('user_role') as UserRole;
-    if (verified === 'true' && role) {
-      setIsPasswordVerified(true);
-      setUserRole(role);
-    }
+    // Set default user role and mark as verified
+    localStorage.setItem('password_verified', 'true');
+    localStorage.setItem('user_role', UserRole.USER);
+    setUserRole(UserRole.USER);
 
     // Update document title
     document.title = 'DESIGN24 - AI Chat Assistant for Tour Guides';
@@ -25,15 +20,6 @@ const Index = () => {
       metaDescription.setAttribute('content', 'Professional AI chatbox for DESIGN24\'s AI Skills for Tour Guides course. Learn digital marketing, photography, AI tools, and more for tourism professionals.');
     }
   }, []);
-
-  const handlePasswordCorrect = (role: UserRole) => {
-    setIsPasswordVerified(true);
-    setUserRole(role);
-  };
-
-  if (!isPasswordVerified || !userRole) {
-    return <PasswordProtection onPasswordCorrect={handlePasswordCorrect} />;
-  }
 
   return <Chatbox userRole={userRole} />;
 };

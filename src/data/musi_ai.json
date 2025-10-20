@@ -1,0 +1,522 @@
+{
+  "musi_ai_documents": {
+    "id": "musi-ai-documents",
+    "title": "Hướng dẫn AI cho Thiết kế & Sáng tạo",
+    "version": "1.0.0",
+    "last_updated": "2025-01-08",
+    "description": "Cơ sở dữ liệu hướng dẫn ứng dụng AI trong các lĩnh vực: Thiết kế đồ họa, Đa phương tiện, Kiến trúc-nội thất, Sáng tạo truyện tranh, Sáng tạo âm nhạc, Hành chính văn phòng, Marketing-bán hàng",
+    "huong_dan_co_ban": [
+      {
+        "id": "HD001",
+        "tieu_de": "Giới thiệu Suno AI",
+        "mo_ta": "Suno AI là công cụ tạo nhạc bằng AI mạnh mẽ, hỗ trợ tạo ra bài hát hoàn chỉnh với lời và nhạc",
+        "noi_dung": [
+          "Đăng ký tài khoản miễn phí tại suno.ai",
+          "Chọn chế độ Simple Mode cho người mới bắt đầu",
+          "Nhập mô tả ngắn gọn về bài hát muốn tạo",
+          "Chờ AI xử lý và tạo ra bài hát (2-3 phút)",
+          "Tải xuống hoặc chia sẻ bài hát đã tạo"
+        ],
+        "tu_khoa": ["suno ai", "giới thiệu", "đăng ký", "simple mode"],
+        "retrieval": {
+          "keywords": ["suno ai", "giới thiệu", "đăng ký", "simple mode", "bắt đầu"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "HD002",
+        "tieu_de": "Hai chế độ sử dụng",
+        "mo_ta": "Suno AI có 2 chế độ chính: Simple Mode và Custom Mode",
+        "noi_dung": [
+          "Simple Mode: Nhập mô tả ngắn, AI tự động tạo cấu trúc",
+          "Custom Mode: Kiểm soát chi tiết cấu trúc bài hát với các thẻ [Intro], [Verse], [Chorus]",
+          "Simple Mode phù hợp cho người mới, Custom Mode cho người có kinh nghiệm"
+        ],
+        "tu_khoa": ["simple mode", "custom mode", "chế độ", "cấu trúc"],
+        "retrieval": {
+          "keywords": ["simple mode", "custom mode", "chế độ", "cấu trúc", "thẻ"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "HD003",
+        "tieu_de": "Cú pháp Prompt hiệu quả",
+        "mo_ta": "Hướng dẫn viết prompt để tạo ra bài hát đúng ý muốn",
+        "noi_dung": [
+          "Bắt đầu với thể loại nhạc (Genre): Pop, Rock, Electronic, Jazz...",
+          "Thêm tâm trạng (Mood): Happy, Sad, Energetic, Calm...",
+          "Mô tả nhạc cụ: Guitar, Piano, Drums, Synth...",
+          "Chỉ định phong cách hát: Male/Female, High/Low voice, Soft/Loud...",
+          "Thêm hiệu ứng sản xuất: Reverb, Echo, Distortion..."
+        ],
+        "tu_khoa": ["prompt", "cú pháp", "thể loại", "tâm trạng", "nhạc cụ"],
+        "retrieval": {
+          "keywords": ["prompt", "cú pháp", "thể loại", "tâm trạng", "nhạc cụ", "phong cách hát"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "danh_muc_ung_dung": [
+      {
+        "id": "DM001",
+        "ten_danh_muc": "Thiết kế đồ họa",
+        "mo_ta": "Ứng dụng AI trong thiết kế đồ họa, tạo hình ảnh và visual content",
+        "noi_dung": [
+          "Tạo logo và brand identity với AI",
+          "Thiết kế poster, banner quảng cáo",
+          "Tạo mockup sản phẩm",
+          "Chỉnh sửa và retouch ảnh",
+          "Tạo infographic và data visualization"
+        ],
+        "cong_cu": ["Midjourney", "DALL-E", "Stable Diffusion", "Canva AI", "Adobe Firefly"],
+        "tu_khoa": ["thiết kế đồ họa", "logo", "poster", "mockup", "brand identity"],
+        "retrieval": {
+          "keywords": ["thiết kế đồ họa", "logo", "poster", "mockup", "brand identity", "visual content"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DM002",
+        "ten_danh_muc": "Đa phương tiện",
+        "mo_ta": "Sáng tạo nội dung đa phương tiện với AI",
+        "noi_dung": [
+          "Tạo video với AI từ text prompt",
+          "Sản xuất podcast và audio content",
+          "Tạo animation và motion graphics",
+          "Livestream và interactive content",
+          "Tích hợp AI trong production workflow"
+        ],
+        "cong_cu": ["Runway ML", "Pika Labs", "ElevenLabs", "Murf", "Synthesia"],
+        "tu_khoa": ["đa phương tiện", "video", "podcast", "animation", "livestream"],
+        "retrieval": {
+          "keywords": ["đa phương tiện", "video", "podcast", "animation", "livestream", "multimedia"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DM003",
+        "ten_danh_muc": "Kiến trúc - nội thất",
+        "mo_ta": "Ứng dụng AI trong thiết kế kiến trúc và nội thất",
+        "noi_dung": [
+          "Tạo concept design kiến trúc",
+          "Thiết kế nội thất và space planning",
+          "3D visualization và rendering",
+          "Tối ưu hóa không gian và ánh sáng",
+          "Phân tích và dự đoán xu hướng thiết kế"
+        ],
+        "cong_cu": ["Midjourney", "DALL-E", "Autodesk AI", "SketchUp AI", "Archicad"],
+        "tu_khoa": ["kiến trúc", "nội thất", "3d", "rendering", "space planning"],
+        "retrieval": {
+          "keywords": ["kiến trúc", "nội thất", "3d", "rendering", "space planning", "concept design"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DM004",
+        "ten_danh_muc": "Sáng tạo truyện tranh",
+        "mo_ta": "Tạo truyện tranh và comic với AI",
+        "noi_dung": [
+          "Tạo nhân vật và character design",
+          "Vẽ background và scene setting",
+          "Tạo storyboard và layout",
+          "Viết dialogue và script",
+          "Tạo comic book hoàn chỉnh"
+        ],
+        "cong_cu": ["Midjourney", "DALL-E", "Comic AI", "Storyboard That", "Canva"],
+        "tu_khoa": ["truyện tranh", "comic", "nhân vật", "storyboard", "character design"],
+        "retrieval": {
+          "keywords": ["truyện tranh", "comic", "nhân vật", "storyboard", "character design", "manga"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DM005",
+        "ten_danh_muc": "Sáng tạo âm nhạc",
+        "mo_ta": "Tạo nhạc và audio content với AI",
+        "noi_dung": [
+          "Tạo beat và instrumental với Suno AI",
+          "Viết lời bài hát",
+          "Tạo sound effects và background music",
+          "Mix và master audio",
+          "Tạo jingle và theme song"
+        ],
+        "cong_cu": ["Suno AI", "AIVA", "Amper Music", "Mubert", "Soundraw"],
+        "tu_khoa": ["sáng tạo âm nhạc", "beat", "instrumental", "sound effects", "jingle"],
+        "retrieval": {
+          "keywords": ["sáng tạo âm nhạc", "beat", "instrumental", "sound effects", "jingle", "music production"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DM006",
+        "ten_danh_muc": "Hành chính văn phòng",
+        "mo_ta": "Ứng dụng AI trong công việc hành chính và văn phòng",
+        "noi_dung": [
+          "Tạo và chỉnh sửa văn bản hành chính",
+          "Tóm tắt và phân tích tài liệu",
+          "Quản lý lịch trình và meeting",
+          "Tạo báo cáo và presentation",
+          "Tự động hóa workflow văn phòng"
+        ],
+        "cong_cu": ["ChatGPT", "Claude", "Notion AI", "Microsoft Copilot", "Google Workspace AI"],
+        "tu_khoa": ["hành chính", "văn phòng", "văn bản", "báo cáo", "workflow"],
+        "retrieval": {
+          "keywords": ["hành chính", "văn phòng", "văn bản", "báo cáo", "workflow", "office automation"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "DM007",
+        "ten_danh_muc": "Marketing - bán hàng",
+        "mo_ta": "Sử dụng AI trong marketing và bán hàng",
+        "noi_dung": [
+          "Tạo content marketing và copywriting",
+          "Phân tích customer behavior và insights",
+          "Tối ưu hóa SEO và SEM",
+          "Tạo email marketing và campaigns",
+          "Chatbot và customer service automation"
+        ],
+        "cong_cu": ["Jasper", "Copy.ai", "HubSpot AI", "Mailchimp AI", "Zendesk AI"],
+        "tu_khoa": ["marketing", "bán hàng", "content", "seo", "email marketing"],
+        "retrieval": {
+          "keywords": ["marketing", "bán hàng", "content", "seo", "email marketing", "sales automation"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "the_loai_nhac": [
+      {
+        "id": "TL001",
+        "ten_the_loai": "Pop",
+        "mo_ta": "Nhạc pop với giai điệu bắt tai, dễ nghe",
+        "dac_trung": [
+          "Giai điệu đơn giản, dễ nhớ",
+          "Nhịp điệu ổn định, thường 4/4",
+          "Ca từ dễ hiểu, gần gũi"
+        ],
+        "vi_du_prompt": "Upbeat pop song with catchy melody, modern production, female vocals",
+        "tu_khoa": ["pop", "nhạc pop", "catchy", "melody"],
+        "retrieval": {
+          "keywords": ["pop", "nhạc pop", "catchy", "melody", "upbeat"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "TL002",
+        "ten_the_loai": "Rock",
+        "mo_ta": "Nhạc rock với guitar điện mạnh mẽ",
+        "dac_trung": [
+          "Guitar điện là nhạc cụ chính",
+          "Nhịp điệu mạnh mẽ, năng động",
+          "Thường có solo guitar"
+        ],
+        "vi_du_prompt": "Energetic rock song with distorted electric guitars, driving drums, male vocals",
+        "tu_khoa": ["rock", "nhạc rock", "guitar", "electric"],
+        "retrieval": {
+          "keywords": ["rock", "nhạc rock", "guitar", "electric", "distorted"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "TL003",
+        "ten_the_loai": "Electronic",
+        "mo_ta": "Nhạc điện tử với synthesizer và beat điện tử",
+        "dac_trung": [
+          "Synthesizer và beat điện tử",
+          "Nhiều hiệu ứng âm thanh",
+          "Thường có drop mạnh mẽ"
+        ],
+        "vi_du_prompt": "Electronic dance music with heavy bass, synthesizer leads, build-up and drop",
+        "tu_khoa": ["electronic", "edm", "synthesizer", "beat"],
+        "retrieval": {
+          "keywords": ["electronic", "edm", "synthesizer", "beat", "dance"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "TL004",
+        "ten_the_loai": "Lofi Hip Hop",
+        "mo_ta": "Nhạc lofi với beat chậm, tâm trạng thư giãn",
+        "dac_trung": [
+          "Beat chậm, thư giãn",
+          "Âm thanh vintage, ấm áp",
+          "Thường có tiếng vinyl crackle"
+        ],
+        "vi_du_prompt": "Chill lofi hip hop with vinyl crackle, soft drums, mellow piano",
+        "tu_khoa": ["lofi", "hip hop", "chill", "vinyl"],
+        "retrieval": {
+          "keywords": ["lofi", "hip hop", "chill", "vinyl", "mellow"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "TL005",
+        "ten_the_loai": "Jazz",
+        "mo_ta": "Nhạc jazz với hòa âm phức tạp và improvisation",
+        "dac_trung": [
+          "Hòa âm phức tạp",
+          "Nhiều improvisation",
+          "Sử dụng nhiều nhạc cụ acoustic"
+        ],
+        "vi_du_prompt": "Smooth jazz with saxophone, piano, walking bass, relaxed tempo",
+        "tu_khoa": ["jazz", "saxophone", "piano", "improvisation"],
+        "retrieval": {
+          "keywords": ["jazz", "saxophone", "piano", "improvisation", "smooth"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "cau_truc_bai_hat": [
+      {
+        "id": "CT001",
+        "ten_cau_truc": "Cấu trúc Pop chuẩn",
+        "mo_ta": "Cấu trúc bài hát pop thông dụng với Intro-Verse-Chorus",
+        "bo_cuc": [
+          "[Intro] - 4-8 bars",
+          "[Verse 1] - 8-16 bars",
+          "[Chorus] - 8-16 bars",
+          "[Verse 2] - 8-16 bars",
+          "[Chorus] - 8-16 bars",
+          "[Bridge] - 4-8 bars",
+          "[Chorus] - 8-16 bars",
+          "[Outro] - 4-8 bars"
+        ],
+        "meo": "Giữ verse ngắn, đi thẳng vào hook; bridge nên khác biệt để tạo điểm nhấn",
+        "tu_khoa": ["cấu trúc pop", "verse", "chorus", "bridge"],
+        "retrieval": {
+          "keywords": ["cấu trúc pop", "verse", "chorus", "bridge", "intro", "outro"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "CT002",
+        "ten_cau_truc": "Cấu trúc Rock",
+        "mo_ta": "Cấu trúc bài hát rock với intro mạnh mẽ",
+        "bo_cuc": [
+          "[Intro] - Guitar riff, 4-8 bars",
+          "[Verse] - 8-16 bars",
+          "[Chorus] - 8-16 bars",
+          "[Verse] - 8-16 bars",
+          "[Chorus] - 8-16 bars",
+          "[Guitar Solo] - 8-16 bars",
+          "[Chorus] - 8-16 bars",
+          "[Outro] - Fade out hoặc outro mạnh"
+        ],
+        "meo": "Thêm guitar solo để tạo điểm nhấn; outro có thể fade out hoặc kết thúc mạnh",
+        "tu_khoa": ["cấu trúc rock", "guitar solo", "riff", "fade out"],
+        "retrieval": {
+          "keywords": ["cấu trúc rock", "guitar solo", "riff", "fade out", "outro mạnh"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "CT003",
+        "ten_cau_truc": "Cấu trúc Electronic",
+        "mo_ta": "Cấu trúc nhạc điện tử với build-up và drop",
+        "bo_cuc": [
+          "[Intro] - 8-16 bars",
+          "[Build-up] - 16-32 bars",
+          "[Drop] - 32 bars",
+          "[Break] - 16 bars",
+          "[Build-up 2] - 16 bars",
+          "[Drop 2] - 32 bars",
+          "[Outro] - 16 bars"
+        ],
+        "meo": "Tạo tension trong build-up, drop phải mạnh mẽ; sử dụng automation để tạo hiệu ứng",
+        "tu_khoa": ["cấu trúc electronic", "build-up", "drop", "break"],
+        "retrieval": {
+          "keywords": ["cấu trúc electronic", "build-up", "drop", "break", "automation"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "prompt_templates": [
+      {
+        "id": "PT001",
+        "ten_template": "Pop Ballad",
+        "mo_ta": "Template cho bài hát pop ballad tình cảm",
+        "template": "Genre: Pop Ballad | Mood: Emotional, Romantic | Instruments: Piano, Strings, Soft Drums | Vocals: Female/Male, Soft, Emotional | Production: Reverb, Echo | Theme: Love, Heartbreak",
+        "vi_du": "Genre: Pop Ballad | Mood: Emotional, Romantic | Instruments: Piano, Strings, Soft Drums | Vocals: Female, Soft, Emotional | Production: Reverb, Echo | Theme: Love, Heartbreak",
+        "tu_khoa": ["pop ballad", "tình cảm", "romantic", "piano"],
+        "retrieval": {
+          "keywords": ["pop ballad", "tình cảm", "romantic", "piano", "emotional"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "PT002",
+        "ten_template": "Rock Anthem",
+        "mo_ta": "Template cho bài hát rock anthem mạnh mẽ",
+        "template": "Genre: Rock | Mood: Powerful, Energetic | Instruments: Electric Guitars, Heavy Drums, Bass | Vocals: Male, Strong, Powerful | Production: Distortion, Compression | Theme: Victory, Strength",
+        "vi_du": "Genre: Rock | Mood: Powerful, Energetic | Instruments: Electric Guitars, Heavy Drums, Bass | Vocals: Male, Strong, Powerful | Production: Distortion, Compression | Theme: Victory, Strength",
+        "tu_khoa": ["rock anthem", "mạnh mẽ", "powerful", "electric guitar"],
+        "retrieval": {
+          "keywords": ["rock anthem", "mạnh mẽ", "powerful", "electric guitar", "energetic"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "PT003",
+        "ten_template": "Lofi Study",
+        "mo_ta": "Template cho nhạc lofi học tập",
+        "template": "Genre: Lofi Hip Hop | Mood: Chill, Relaxed | Instruments: Mellow Piano, Soft Drums, Vinyl Crackle | Vocals: Instrumental | Production: Tape Saturation, Sidechain | Theme: Study, Focus",
+        "vi_du": "Genre: Lofi Hip Hop | Mood: Chill, Relaxed | Instruments: Mellow Piano, Soft Drums, Vinyl Crackle | Vocals: Instrumental | Production: Tape Saturation, Sidechain | Theme: Study, Focus",
+        "tu_khoa": ["lofi study", "chill", "relaxed", "instrumental"],
+        "retrieval": {
+          "keywords": ["lofi study", "chill", "relaxed", "instrumental", "study"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "PT004",
+        "ten_template": "Electronic Dance",
+        "mo_ta": "Template cho nhạc electronic dance",
+        "template": "Genre: Electronic Dance Music | Mood: Energetic, Euphoric | Instruments: Synthesizer, 808 Drums, Bass | Vocals: Female/Male, Auto-tuned | Production: Sidechain, Reverb, Build-up | Theme: Party, Celebration",
+        "vi_du": "Genre: Electronic Dance Music | Mood: Energetic, Euphoric | Instruments: Synthesizer, 808 Drums, Bass | Vocals: Female, Auto-tuned | Production: Sidechain, Reverb, Build-up | Theme: Party, Celebration",
+        "tu_khoa": ["electronic dance", "energetic", "euphoric", "synthesizer"],
+        "retrieval": {
+          "keywords": ["electronic dance", "energetic", "euphoric", "synthesizer", "party"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "meo_va_luu_y": [
+      {
+        "id": "M001",
+        "tieu_de": "Mẹo viết prompt hiệu quả",
+        "noi_dung": [
+          "Giữ prompt ngắn gọn, 1-3 câu",
+          "Sử dụng từ khóa cụ thể thay vì mô tả trừu tượng",
+          "Tránh mâu thuẫn trong prompt (ví dụ: vừa slow vừa fast)",
+          "Thêm thông tin về BPM nếu cần thiết",
+          "Sử dụng tính từ mô tả cảm xúc rõ ràng"
+        ],
+        "vi_du": "Thay vì 'bài hát mạnh mẽ' → 'energetic rock with distorted guitars'",
+        "tu_khoa": ["mẹo prompt", "hiệu quả", "từ khóa", "cụ thể"],
+        "retrieval": {
+          "keywords": ["mẹo prompt", "hiệu quả", "từ khóa", "cụ thể", "BPM"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "M002",
+        "tieu_de": "Tối ưu hóa chất lượng âm thanh",
+        "noi_dung": [
+          "Chọn 2-3 nhạc cụ chính để tránh lộn xộn",
+          "Sử dụng hiệu ứng phù hợp với thể loại",
+          "Cân bằng giữa các yếu tố trong mix",
+          "Thêm reverb để tạo không gian",
+          "Sử dụng sidechain compression cho nhạc dance"
+        ],
+        "vi_du": "Pop: Piano + Guitar + Drums | Electronic: Synth + 808 + Bass",
+        "tu_khoa": ["chất lượng âm thanh", "mix", "hiệu ứng", "reverb"],
+        "retrieval": {
+          "keywords": ["chất lượng âm thanh", "mix", "hiệu ứng", "reverb", "sidechain"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "M003",
+        "tieu_de": "Xử lý lỗi thường gặp",
+        "noi_dung": [
+          "Nếu bài hát không đúng vibe → điều chỉnh mood và genre",
+          "Nếu giọng hát không phù hợp → thay đổi vocal style",
+          "Nếu nhạc cụ quá nhiều → giảm số lượng instrument",
+          "Nếu tempo không đúng → thêm BPM vào prompt",
+          "Nếu chất lượng kém → thêm production effects"
+        ],
+        "vi_du": "Lỗi: Bài pop nhưng nghe như rock → Thay 'rock guitars' bằng 'pop guitars'",
+        "tu_khoa": ["xử lý lỗi", "troubleshooting", "điều chỉnh", "vibe"],
+        "retrieval": {
+          "keywords": ["xử lý lỗi", "troubleshooting", "điều chỉnh", "vibe", "tempo"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "cau_hoi_thuong_gap": [
+      {
+        "id": "FAQ001",
+        "cau_hoi": "Làm sao để tạo bài hát có giọng hát tiếng Việt?",
+        "tra_loi": "Hiện tại Suno AI chủ yếu hỗ trợ tiếng Anh. Để có giọng hát tiếng Việt, bạn có thể thử thêm 'Vietnamese lyrics' hoặc 'Vietnamese language' vào prompt, nhưng kết quả có thể không ổn định.",
+        "tu_khoa": ["tiếng việt", "vietnamese", "giọng hát", "lyrics"],
+        "retrieval": {
+          "keywords": ["tiếng việt", "vietnamese", "giọng hát", "lyrics", "ngôn ngữ"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "FAQ002",
+        "cau_hoi": "Tại sao bài hát tạo ra không đúng ý muốn?",
+        "tra_loi": "Có thể do prompt không đủ cụ thể hoặc có mâu thuẫn. Hãy thử: 1) Làm rõ genre và mood, 2) Giảm số lượng yếu tố, 3) Sử dụng từ khóa cụ thể hơn, 4) Thử lại với prompt khác.",
+        "tu_khoa": ["không đúng ý", "prompt", "cụ thể", "từ khóa"],
+        "retrieval": {
+          "keywords": ["không đúng ý", "prompt", "cụ thể", "từ khóa", "mâu thuẫn"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "FAQ003",
+        "cau_hoi": "Có thể tạo bài hát dài hơn 2 phút không?",
+        "tra_loi": "Suno AI thường tạo bài hát 1-2 phút. Để tạo bài dài hơn, bạn có thể thử thêm '[Extended]' hoặc 'longer version' vào prompt, nhưng kết quả có thể không ổn định.",
+        "tu_khoa": ["độ dài", "dài hơn", "extended", "longer"],
+        "retrieval": {
+          "keywords": ["độ dài", "dài hơn", "extended", "longer", "phút"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "FAQ004",
+        "cau_hoi": "Làm sao để tạo nhạc instrumental (không lời)?",
+        "tra_loi": "Thêm 'instrumental' hoặc 'no vocals' vào prompt. Ví dụ: 'Chill instrumental with piano and strings' hoặc 'Upbeat electronic instrumental with synthesizer'.",
+        "tu_khoa": ["instrumental", "không lời", "no vocals", "nhạc không lời"],
+        "retrieval": {
+          "keywords": ["instrumental", "không lời", "no vocals", "nhạc không lời", "piano"],
+          "match_threshold": 0.75
+        }
+      },
+      {
+        "id": "FAQ005",
+        "cau_hoi": "Có thể sử dụng tên nghệ sĩ trong prompt không?",
+        "tra_loi": "Có thể tham khảo phong cách của nghệ sĩ nhưng tránh sử dụng tên cụ thể để tránh vi phạm bản quyền. Thay vào đó, mô tả phong cách: 'in the style of 80s pop' thay vì 'like Madonna'.",
+        "tu_khoa": ["nghệ sĩ", "phong cách", "style", "bản quyền"],
+        "retrieval": {
+          "keywords": ["nghệ sĩ", "phong cách", "style", "bản quyền", "80s pop"],
+          "match_threshold": 0.75
+        }
+      }
+    ],
+    "rulebook": {
+      "scope": [
+        "Câu hỏi về cách sử dụng Suno AI để tạo nhạc",
+        "Hướng dẫn viết prompt hiệu quả cho Suno AI",
+        "Giải thích về các thể loại nhạc và cấu trúc bài hát",
+        "Mẹo và lưu ý khi sử dụng Suno AI",
+        "Ứng dụng AI trong thiết kế đồ họa",
+        "Sáng tạo nội dung đa phương tiện",
+        "Thiết kế kiến trúc và nội thất với AI",
+        "Tạo truyện tranh và comic",
+        "Sáng tạo âm nhạc và audio content",
+        "Hành chính văn phòng và tự động hóa",
+        "Marketing và bán hàng với AI",
+        "KHÔNG trả lời các câu hỏi ngoài phạm vi các danh mục đã định"
+      ],
+      "style_tone": {
+        "tone": "thân thiện, nhiệt tình, dễ hiểu",
+        "formatting": ["bullet", "ví dụ cụ thể", "template có sẵn"]
+      },
+      "answer_policy": {
+        "priority": [
+          "Ưu tiên thông tin chính xác từ database",
+          "Luôn cung cấp ví dụ cụ thể khi có thể",
+          "Gợi ý công cụ AI phù hợp cho từng danh mục",
+          "Nếu thiếu dữ liệu → nói 'chưa có trong database' và fallback Gemini"
+        ]
+      }
+    },
+    "metadata": {
+      "owner": "AI Music Assistant",
+      "copyright": "©2025 AI Music Assistant",
+      "source_notes": "Dữ liệu tổng hợp từ kinh nghiệm sử dụng Suno AI và best practices của cộng đồng"
+    }
+  }
+}

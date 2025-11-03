@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Bot, User, Copy, Check, RefreshCw } from 'lucide-react';
+import { Bot, User, Copy, Check, RefreshCw, Volume2, VolumeX } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 
 interface ChatMessageProps {
   id: string;
@@ -17,6 +18,12 @@ interface ChatMessageProps {
 export function ChatMessage({ message, isUser, timestamp, isTyping = false, canRegenerate = false, onRegenerate, showLoadingDots = false, images }: ChatMessageProps) {
   const [copied, setCopied] = useState(false);
   const [displayedMessage, setDisplayedMessage] = useState('');
+  const tts = useTextToSpeech({ 
+    lang: 'vi-VN',
+    rate: 1,
+    pitch: 1,
+    volume: 1
+  });
 
   useEffect(() => {
     if (isTyping && !isUser) {
@@ -213,11 +220,31 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false, canR
             size="sm"
             className="h-auto p-1 hover:bg-accent"
             onClick={handleCopy}
+            title="Sao chép"
           >
             {copied ? (
               <Check className="w-3 h-3 text-green-500" />
             ) : (
               <Copy className="w-3 h-3" />
+            )}
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            className="h-auto p-1 hover:bg-accent"
+            onClick={() => {
+              if (tts.isSpeaking) {
+                tts.stop();
+              } else {
+                tts.speak(message);
+              }
+            }}
+            title={tts.isSpeaking ? 'Dừng đọc' : 'Đọc văn bản'}
+          >
+            {tts.isSpeaking ? (
+              <VolumeX className="w-3 h-3 text-red-500" />
+            ) : (
+              <Volume2 className="w-3 h-3" />
             )}
           </Button>
           {!isUser && canRegenerate && !!onRegenerate && (

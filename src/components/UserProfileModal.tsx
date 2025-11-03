@@ -34,13 +34,16 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
   const handleSave = async () => {
     setIsLoading(true);
     try {
+      // Save profile
       userProfileService.saveProfile(profile);
+      
       toast({
         title: "Đã lưu profile",
         description: "Thông tin cá nhân đã được cập nhật thành công.",
       });
       onClose();
     } catch (error) {
+      console.error('Error saving profile:', error);
       toast({
         title: "Lỗi",
         description: "Không thể lưu profile. Vui lòng thử lại.",
@@ -157,6 +160,33 @@ export const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onCl
                 </Select>
                 <div className="text-xs text-muted-foreground mt-2">
                   Web Speech không yêu cầu backend nhưng chủ yếu hỗ trợ Chrome. Google STT cần backend, đổi lại đa trình duyệt và ổn định hơn.
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Text-to-Speech Provider */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                Voice output (Text-to-Speech)
+              </CardTitle>
+              <CardDescription>
+                Chọn nhà cung cấp để đọc câu trả lời bằng giọng nói
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div>
+                <Label className="mb-2 block">Voice output (TTS) provider</Label>
+                <div className="p-3 bg-muted rounded-lg">
+                  <div className="font-medium">Gemini 2.5 Flash Preview TTS</div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    Sử dụng Gemini API với giọng nữ Việt Nam miền Nam (Kore). Dùng cùng Gemini API key với chat. 
+                    <br />
+                    <span className="text-amber-600 dark:text-amber-400">
+                      ⚠ Lưu ý: Model này đang preview, có thể chưa available hoặc cần quyền truy cập đặc biệt.
+                    </span>
+                  </div>
                 </div>
               </div>
             </CardContent>

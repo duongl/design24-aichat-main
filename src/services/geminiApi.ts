@@ -630,7 +630,7 @@ const COURSE_DATABASE = {
     },
     "faqs": [
       {"q": "AI voice có nghe tự nhiên không?", "a": "Hiện tại ElevenLabs và Murf.ai đã rất tự nhiên, khó phân biệt với người thật."},
-      {"q": "Có thể tạo giọng nói tiếng Việt không?", "a": "Có, nhiều tool hỗ trợ tiếng Việt chất lượng cao như FPT.AI, Zalo AI."}
+      {"q": "Có thể tạo giọng nói tiếng Việt không?", "a": "Có, ứng dụng sử dụng Web Speech API để đọc văn bản tiếng Việt."}
     ],
     "retrieval": {
       "keywords": ["voice", "giọng nói", "text to speech", "ai voice", "voiceover"],

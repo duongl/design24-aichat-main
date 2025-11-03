@@ -9,6 +9,7 @@ export interface UserProfile {
     themeColor: 'default' | 'blue' | 'green' | 'purple' | 'orange' | 'red';
     showSuggestions?: boolean;
     sttProvider?: 'webspeech' | 'google';
+    ttsProvider?: 'webspeech';
   };
   projectContext?: {
     currentProject?: string;

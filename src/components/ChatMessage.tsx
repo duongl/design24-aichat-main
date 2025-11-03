@@ -11,9 +11,10 @@ interface ChatMessageProps {
   canRegenerate?: boolean;
   onRegenerate?: () => void;
   showLoadingDots?: boolean;
+  images?: string[];
 }
 
-export function ChatMessage({ message, isUser, timestamp, isTyping = false, canRegenerate = false, onRegenerate, showLoadingDots = false }: ChatMessageProps) {
+export function ChatMessage({ message, isUser, timestamp, isTyping = false, canRegenerate = false, onRegenerate, showLoadingDots = false, images }: ChatMessageProps) {
   const [copied, setCopied] = useState(false);
   const [displayedMessage, setDisplayedMessage] = useState('');
 
@@ -124,18 +125,74 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false, canR
           isUser 
             ? 'bg-chat-gradient text-primary-foreground' 
             : 'bg-card border border-border'
-        } rounded-2xl p-4 shadow-soft`}>
-          <div 
-            className={`text-sm leading-relaxed break-words overflow-wrap-break-word whitespace-normal ${
-              displayedMessage.length < 20 ? 'short-message' : ''
-            }`}
-            style={{ 
-              wordBreak: 'break-word',
-              overflowWrap: 'break-word',
-              whiteSpace: 'normal'
-            }}
-            dangerouslySetInnerHTML={{ __html: showLoadingDots && !isUser ? '' : formatMessage(displayedMessage) }}
-          />
+        } rounded-2xl shadow-soft ${
+          images && images.length > 0 && !displayedMessage 
+            ? images.length === 4 
+              ? 'p-2' 
+              : images.length === 1 
+              ? 'p-3' 
+              : 'p-2'
+            : 'p-4'
+        }`}>
+          {/* Image Display */}
+          {images && images.length > 0 && (
+            <div 
+              className={`${displayedMessage ? 'mb-3' : ''} ${
+                images.length === 1 
+                  ? 'w-full' 
+                  : images.length === 2
+                  ? 'grid grid-cols-2 gap-1.5'
+                  : images.length === 3
+                  ? 'grid grid-cols-2 gap-1.5'
+                  : 'grid grid-cols-2 gap-1.5'
+              }`}
+              style={{
+                maxWidth: images.length === 1 ? '100%' : images.length === 4 ? '380px' : images.length === 3 ? '340px' : '320px'
+              }}
+            >
+              {images.map((image, index) => (
+                <div
+                  key={index}
+                  className={`relative ${
+                    images.length === 1 
+                      ? 'w-full' 
+                      : images.length === 3 && index === 0
+                      ? 'col-span-2'
+                      : 'w-full'
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    className={`w-full h-auto rounded-lg border border-border/50 cursor-pointer hover:opacity-90 transition-opacity ${
+                      images.length === 1 
+                        ? 'max-h-[400px] object-contain' 
+                        : images.length === 4
+                        ? 'aspect-square object-cover'
+                        : images.length === 3 && index === 0
+                        ? 'aspect-[2/1] object-cover'
+                        : 'aspect-square object-cover'
+                    }`}
+                    onClick={() => window.open(image, '_blank')}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {displayedMessage && (
+            <div 
+              className={`text-sm leading-relaxed break-words overflow-wrap-break-word whitespace-normal ${
+                displayedMessage.length < 20 ? 'short-message' : ''
+              }`}
+              style={{ 
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
+                whiteSpace: 'normal'
+              }}
+              dangerouslySetInnerHTML={{ __html: showLoadingDots && !isUser ? '' : formatMessage(displayedMessage) }}
+            />
+          )}
           
           {(isTyping && !isUser && displayedMessage.length < message.length) || (showLoadingDots && !isUser) ? (
             <div className="flex items-center gap-1 mt-2">

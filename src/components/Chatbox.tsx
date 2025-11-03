@@ -123,7 +123,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     }
   }, [currentChat?.messages.length, profileUpdateTrigger]);
 
-  const handleSendMessage = async (message: string) => {
+  const handleSendMessage = async (message: string, images?: string[]) => {
     // Hide suggestions when user sends a message
     setShowSuggestions(false);
     
@@ -164,19 +164,20 @@ export function Chatbox({ userRole }: ChatboxProps) {
       return;
     }
 
-    // Add user message
-    addMessage(message, true);
+    // Add user message with images
+    addMessage(message, true, images);
     setIsLoading(true);
 
     try {
       // Create conversation context for API
       const conversationMessages = currentChat?.messages.map(msg => ({
         message: msg.message,
-        isUser: msg.isUser
+        isUser: msg.isUser,
+        images: msg.images
       })) || [];
 
       // Get AI response
-      const response = await geminiService.sendMessage(conversationMessages, message);
+      const response = await geminiService.sendMessage(conversationMessages, message, images);
 
       // Show typing animation
       const typingId = `typing-${Date.now()}`;
@@ -532,6 +533,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
                 onRegenerate={handleRegenerate}
                 isTyping={false}
                 showLoadingDots={regeneratingId === message.id}
+                images={message.images}
               />
             ))}
 
@@ -566,7 +568,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
                 "Sáng tạo truyện tranh",
                 "Sáng tạo âm nhạc",
                 "Hành chính văn phòng",
-                "Marketing - bán hàng"
+                "Viết content quảng cáo",
+                "Viết kịch bản video"
               ]}
             />
           </div>

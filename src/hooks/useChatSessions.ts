@@ -5,6 +5,7 @@ export interface ChatMessage {
   message: string;
   isUser: boolean;
   timestamp: number;
+  images?: string[]; // Array of base64 image data URLs
 }
 
 export interface ChatSession {
@@ -75,7 +76,7 @@ export function useChatSessions() {
   }, [chatSessions, saveChatSessions]);
 
   // Add a message to the current chat
-  const addMessage = useCallback((message: string, isUser: boolean) => {
+  const addMessage = useCallback((message: string, isUser: boolean, images?: string[]) => {
     if (!currentChatId) return;
 
     const messageId = `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -84,6 +85,7 @@ export function useChatSessions() {
       message,
       isUser,
       timestamp: Date.now(),
+      images,
     };
 
     setChatSessions(prev => {

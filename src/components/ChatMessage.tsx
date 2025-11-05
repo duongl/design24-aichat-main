@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Bot, User, Copy, Check, RefreshCw, Volume2, VolumeX } from 'lucide-react';
+import { Bot, User, Copy, Check, RefreshCw, Volume2, VolumeX, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTextToSpeech } from '@/hooks/useTextToSpeech';
+import type { ChatMessageDocument } from '@/hooks/useChatSessions';
 
 interface ChatMessageProps {
   id: string;
@@ -13,9 +14,10 @@ interface ChatMessageProps {
   onRegenerate?: () => void;
   showLoadingDots?: boolean;
   images?: string[];
+  documents?: ChatMessageDocument[];
 }
 
-export function ChatMessage({ message, isUser, timestamp, isTyping = false, canRegenerate = false, onRegenerate, showLoadingDots = false, images }: ChatMessageProps) {
+export function ChatMessage({ message, isUser, timestamp, isTyping = false, canRegenerate = false, onRegenerate, showLoadingDots = false, images, documents }: ChatMessageProps) {
   const [copied, setCopied] = useState(false);
   const [displayedMessage, setDisplayedMessage] = useState('');
   const tts = useTextToSpeech({ 
@@ -133,14 +135,46 @@ export function ChatMessage({ message, isUser, timestamp, isTyping = false, canR
             ? 'bg-chat-gradient text-primary-foreground' 
             : 'bg-card border border-border'
         } rounded-2xl shadow-soft ${
-          images && images.length > 0 && !displayedMessage 
-            ? images.length === 4 
+          (images && images.length > 0 && !displayedMessage) || (documents && documents.length > 0 && !displayedMessage)
+            ? images && images.length === 4 
               ? 'p-2' 
-              : images.length === 1 
+              : images && images.length === 1 
               ? 'p-3' 
               : 'p-2'
             : 'p-4'
         }`}>
+          {/* Document Display */}
+          {documents && documents.length > 0 && (
+            <div className={`${displayedMessage ? 'mb-3' : ''} flex flex-col gap-2`}>
+              {documents.map((doc, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${
+                    isUser 
+                      ? 'bg-white/20 border-white/30 backdrop-blur-sm' 
+                      : 'bg-muted border-border'
+                  }`}
+                >
+                  <FileText className={`w-4 h-4 flex-shrink-0 ${
+                    isUser ? 'text-white' : 'text-primary'
+                  }`} />
+                  <div className="flex-1 min-w-0">
+                    <p className={`text-xs font-medium truncate ${
+                      isUser ? 'text-white' : 'text-foreground'
+                    }`}>
+                      {doc.fileName}
+                    </p>
+                    <p className={`text-xs ${
+                      isUser ? 'text-white/80' : 'text-muted-foreground'
+                    }`}>
+                      {doc.pageCount ? `${doc.pageCount} trang` : ''} • {(doc.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Image Display */}
           {images && images.length > 0 && (
             <div 

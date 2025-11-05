@@ -123,7 +123,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
     }
   }, [currentChat?.messages.length, profileUpdateTrigger]);
 
-  const handleSendMessage = async (message: string, images?: string[]) => {
+  const handleSendMessage = async (message: string, images?: string[], documentText?: string, documents?: import('@/hooks/useChatSessions').ChatMessageDocument[]) => {
     // Hide suggestions when user sends a message
     setShowSuggestions(false);
     
@@ -164,8 +164,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
       return;
     }
 
-    // Add user message with images
-    addMessage(message, true, images);
+    // Add user message with images and documents
+    addMessage(message, true, images, documents);
     setIsLoading(true);
 
     try {
@@ -176,8 +176,11 @@ export function Chatbox({ userRole }: ChatboxProps) {
         images: msg.images
       })) || [];
 
+      // Combine message with document text if provided
+      const fullMessage = documentText ? `${message}\n\n${documentText}` : message;
+      
       // Get AI response
-      const response = await geminiService.sendMessage(conversationMessages, message, images);
+      const response = await geminiService.sendMessage(conversationMessages, fullMessage, images);
 
       // Show typing animation
       const typingId = `typing-${Date.now()}`;
@@ -534,6 +537,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
                 isTyping={false}
                 showLoadingDots={regeneratingId === message.id}
                 images={message.images}
+                documents={message.documents}
               />
             ))}
 

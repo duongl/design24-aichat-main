@@ -1,15 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Loader2, Mic, MicOff, Image as ImageIcon, X } from 'lucide-react';
+import { Send, Loader2, Mic, MicOff, Image as ImageIcon, X, FileText, Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useSpeechToText } from '@/hooks/useSpeechToText';
 import { useToast } from '@/hooks/use-toast';
+import { extractTextFromDocument, formatDocumentText, type ExtractedDocument } from '@/lib/documentExtractor';
 
 const MAX_IMAGES = 4;
 const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB per image
+const MAX_DOCUMENTS = 2;
+const MAX_DOCUMENT_SIZE = 20 * 1024 * 1024; // 20MB per document
+
+import type { ChatMessageDocument } from '@/hooks/useChatSessions';
 
 interface ChatInputProps {
-  onSendMessage: (message: string, images?: string[]) => void;
+  onSendMessage: (message: string, images?: string[], documentText?: string, documents?: ChatMessageDocument[]) => void;
   isLoading: boolean;
   disabled?: boolean;
 }
@@ -18,7 +23,10 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
   const [message, setMessage] = useState('');
   const [images, setImages] = useState<string[]>([]);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [documents, setDocuments] = useState<ExtractedDocument[]>([]);
+  const [isExtracting, setIsExtracting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const documentInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
   const finalTextRef = useRef('');
@@ -129,19 +137,114 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
     setImageFiles(prev => prev.filter((_, i) => i !== index));
   };
 
+  const handleDocumentSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    
+    if (documents.length + files.length > MAX_DOCUMENTS) {
+      toast({
+        title: 'Quá nhiều tài liệu',
+        description: `Bạn chỉ có thể upload tối đa ${MAX_DOCUMENTS} tài liệu.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const validFiles: File[] = [];
+    
+    // Validate files
+    for (const file of files) {
+      const fileName = file.name.toLowerCase();
+      const isPDF = fileName.endsWith('.pdf');
+      const isWord = fileName.endsWith('.docx') || fileName.endsWith('.doc');
+      
+      if (!isPDF && !isWord) {
+        toast({
+          title: 'Định dạng không hợp lệ',
+          description: `${file.name} không phải là PDF hoặc Word. Chỉ hỗ trợ .pdf, .doc, .docx`,
+          variant: 'destructive',
+        });
+        continue;
+      }
+
+      if (file.size > MAX_DOCUMENT_SIZE) {
+        toast({
+          title: 'Tài liệu quá lớn',
+          description: `${file.name} vượt quá ${MAX_DOCUMENT_SIZE / 1024 / 1024}MB.`,
+          variant: 'destructive',
+        });
+        continue;
+      }
+
+      validFiles.push(file);
+    }
+
+    if (validFiles.length === 0) return;
+
+    setIsExtracting(true);
+
+    try {
+      // Extract text from all documents
+      const extractPromises = validFiles.map(file => extractTextFromDocument(file));
+      const extractedDocs = await Promise.all(extractPromises);
+      
+      setDocuments(prev => [...prev, ...extractedDocs]);
+      
+      toast({
+        title: 'Đã đọc tài liệu',
+        description: `Đã trích xuất text từ ${extractedDocs.length} tài liệu. Text sẽ được gửi kèm tin nhắn.`,
+      });
+    } catch (error) {
+      toast({
+        title: 'Lỗi đọc tài liệu',
+        description: error instanceof Error ? error.message : 'Không thể đọc tài liệu. Vui lòng thử lại.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsExtracting(false);
+      // Reset input
+      if (documentInputRef.current) {
+        documentInputRef.current.value = '';
+      }
+    }
+  };
+
+  const handleRemoveDocument = (index: number) => {
+    setDocuments(prev => prev.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const hasContent = message.trim() || images.length > 0;
+    const hasContent = message.trim() || images.length > 0 || documents.length > 0;
     
     if (hasContent && !isLoading && !disabled) {
       // Stop recording if it's active when sending message
       if (stt.isRecording) {
         stt.stop();
       }
-      onSendMessage(message.trim() || (images.length > 0 ? 'Xem ảnh' : ''), images.length > 0 ? images : undefined);
+      
+      // Combine document texts
+      const documentText = documents.length > 0
+        ? documents.map(doc => formatDocumentText(doc)).join('\n\n---\n\n')
+        : undefined;
+      
+      // Extract document metadata (without text content)
+      const documentMetadata: ChatMessageDocument[] = documents.map(doc => ({
+        fileName: doc.fileName,
+        fileType: doc.fileType,
+        pageCount: doc.pageCount,
+        size: doc.size,
+      }));
+      
+      onSendMessage(
+        message.trim() || (images.length > 0 ? 'Xem ảnh' : '') || (documents.length > 0 ? 'Phân tích tài liệu' : ''),
+        images.length > 0 ? images : undefined,
+        documentText,
+        documentMetadata.length > 0 ? documentMetadata : undefined
+      );
       setMessage('');
       setImages([]);
       setImageFiles([]);
+      setDocuments([]);
       finalTextRef.current = ''; // Reset final text reference
     }
   };
@@ -178,6 +281,39 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
         </div>
       )}
 
+      {/* Document Preview */}
+      {documents.length > 0 && (
+        <div className="mb-3 flex flex-wrap gap-2">
+          {documents.map((doc, index) => (
+            <div key={index} className="relative group flex items-center gap-2 px-3 py-2 bg-muted rounded-lg border border-border">
+              <FileText className="w-4 h-4 text-primary" />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium truncate">{doc.fileName}</p>
+                <p className="text-xs text-muted-foreground">
+                  {doc.pageCount ? `${doc.pageCount} trang` : ''} • {(doc.size / 1024 / 1024).toFixed(2)} MB
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => handleRemoveDocument(index)}
+                className="w-5 h-5 bg-destructive text-destructive-foreground rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                aria-label="Xóa tài liệu"
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Loading indicator for document extraction */}
+      {isExtracting && (
+        <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
+          <Loader className="w-4 h-4 animate-spin" />
+          <span>Đang đọc tài liệu...</span>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="flex items-end gap-3">
         <div className="flex-1">
           <Textarea
@@ -202,6 +338,16 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
           disabled={disabled || isLoading || images.length >= MAX_IMAGES}
         />
         
+        <input
+          type="file"
+          ref={documentInputRef}
+          accept=".pdf,.doc,.docx"
+          multiple
+          onChange={handleDocumentSelect}
+          className="hidden"
+          disabled={disabled || isLoading || isExtracting || documents.length >= MAX_DOCUMENTS}
+        />
+        
         <Button
           type="button"
           variant="outline"
@@ -213,6 +359,20 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
           <ImageIcon className="w-5 h-5" />
           {images.length > 0 && (
             <span className="ml-1 text-xs">{images.length}/{MAX_IMAGES}</span>
+          )}
+        </Button>
+
+        <Button
+          type="button"
+          variant="outline"
+          className="h-[44px] px-3 flex-shrink-0"
+          disabled={disabled || isLoading || isExtracting || documents.length >= MAX_DOCUMENTS}
+          onClick={() => documentInputRef.current?.click()}
+          title={documents.length >= MAX_DOCUMENTS ? `Tối đa ${MAX_DOCUMENTS} tài liệu` : 'Upload PDF/Word (tối ưu quota)'}
+        >
+          <FileText className="w-5 h-5" />
+          {documents.length > 0 && (
+            <span className="ml-1 text-xs">{documents.length}/{MAX_DOCUMENTS}</span>
           )}
         </Button>
         <Button
@@ -241,7 +401,7 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
         
         <Button
           type="submit"
-          disabled={(!message.trim() && images.length === 0) || isLoading || disabled}
+          disabled={(!message.trim() && images.length === 0 && documents.length === 0) || isLoading || disabled}
           variant="primary"
           className="h-[44px] px-4 flex-shrink-0"
         >

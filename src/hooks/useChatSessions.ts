@@ -1,11 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 
+export interface ChatMessageDocument {
+  fileName: string;
+  fileType: 'pdf' | 'docx' | 'doc';
+  pageCount?: number;
+  size: number;
+}
+
 export interface ChatMessage {
   id: string;
   message: string;
   isUser: boolean;
   timestamp: number;
   images?: string[]; // Array of base64 image data URLs
+  documents?: ChatMessageDocument[]; // Array of document metadata
 }
 
 export interface ChatSession {
@@ -76,7 +84,7 @@ export function useChatSessions() {
   }, [chatSessions, saveChatSessions]);
 
   // Add a message to the current chat
-  const addMessage = useCallback((message: string, isUser: boolean, images?: string[]) => {
+  const addMessage = useCallback((message: string, isUser: boolean, images?: string[], documents?: ChatMessageDocument[]) => {
     if (!currentChatId) return;
 
     const messageId = `msg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -86,6 +94,7 @@ export function useChatSessions() {
       isUser,
       timestamp: Date.now(),
       images,
+      documents,
     };
 
     setChatSessions(prev => {

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { AlertTriangle, Wifi, WifiOff, Plus, Menu, Key, User } from 'lucide-react';
 import { ChatSidebar } from './ChatSidebar';
 import { ChatMessage } from './ChatMessage';
-import { ChatInput } from './ChatInput';
+import { ChatInput, type ChatInputRef } from './ChatInput';
 import { ApiKeySetup } from './ApiKeySetup';
 import { ChangePasswordModal } from './ChangePasswordModal';
 import { UserProfileModal } from './UserProfileModal';
@@ -59,6 +59,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
   const [regeneratingId, setRegeneratingId] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatInputRef = useRef<ChatInputRef>(null);
   const { toast } = useToast();
   const [usingPersonalKey, setUsingPersonalKey] = useState(geminiService.usingPersonalKey());
 
@@ -483,8 +484,8 @@ export function Chatbox({ userRole }: ChatboxProps) {
         </header>
 
         {/* Messages Area */}
-        <ScrollArea className="flex-1 p-2 sm:p-4">
-          <div className="max-w-4xl mx-auto w-full">
+        <ScrollArea className="flex-1">
+          <div className="max-w-4xl mx-auto w-full p-2 sm:p-4">
             {!geminiService.isConfigured() && (
               <Alert className="mb-4">
                 <AlertTriangle className="h-4 w-4" />
@@ -581,6 +582,7 @@ export function Chatbox({ userRole }: ChatboxProps) {
 
         {/* Input Area */}
         <ChatInput
+          ref={chatInputRef}
           onSendMessage={handleSendMessage}
           isLoading={isLoading}
           disabled={!currentChatId || !geminiService.isConfigured() || !isOnline}

@@ -21,13 +21,29 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const { toast } = useToast();
+  const finalTextRef = useRef('');
+  
   const stt = useSpeechToText({
     onTranscript: (text, isFinal) => {
-      // Append interim or final to input, but do not auto-send
-      if (isFinal) setMessage(prev => (prev ? `${prev} ${text}`.trim() : text));
+      // Update message with both interim and final text
+      // For continuous mode, we want to show interim results and append final ones
+      if (isFinal) {
+        finalTextRef.current = finalTextRef.current + text;
+        setMessage(finalTextRef.current);
+      } else {
+        // Show final text + current interim text
+        setMessage(finalTextRef.current + (finalTextRef.current ? ' ' : '') + text);
+      }
     },
     preferredLanguages: ['vi-VN', 'en-US']
   });
+  
+  // Reset final text when stopping recording
+  useEffect(() => {
+    if (!stt.isRecording) {
+      finalTextRef.current = '';
+    }
+  }, [stt.isRecording]);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -118,10 +134,15 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
     const hasContent = message.trim() || images.length > 0;
     
     if (hasContent && !isLoading && !disabled) {
+      // Stop recording if it's active when sending message
+      if (stt.isRecording) {
+        stt.stop();
+      }
       onSendMessage(message.trim() || (images.length > 0 ? 'Xem ảnh' : ''), images.length > 0 ? images : undefined);
       setMessage('');
       setImages([]);
       setImageFiles([]);
+      finalTextRef.current = ''; // Reset final text reference
     }
   };
 
@@ -204,7 +225,13 @@ export function ChatInput({ onSendMessage, isLoading, disabled = false }: ChatIn
               toast({ title: 'Không hỗ trợ', description: 'Trình duyệt không hỗ trợ ghi âm (Web Speech)', variant: 'destructive' });
               return;
             }
-            if (stt.isRecording) stt.stop(); else stt.start();
+            if (stt.isRecording) {
+              stt.stop();
+              finalTextRef.current = ''; // Reset when manually stopping
+            } else {
+              finalTextRef.current = ''; // Reset when starting new recording
+              stt.start();
+            }
           }}
           aria-label={stt.isRecording ? 'Dừng ghi' : 'Bắt đầu ghi'}
           title={stt.isSupported ? (stt.isRecording ? 'Dừng ghi' : 'Nhấn để nói') : 'Trình duyệt không hỗ trợ'}

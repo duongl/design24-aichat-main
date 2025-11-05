@@ -38,6 +38,7 @@ export function useSpeechToText(options: UseSpeechToTextOptions = {}): UseSpeech
 
   const recognitionRef = useRef<any>(null);
   const activeLangRef = useRef<'vi-VN' | 'en-US'>(getInitialLang(options.preferredLanguages));
+  const isRecordingRef = useRef(false);
 
   const isWebSpeechAvailable = typeof window !== 'undefined' && (
     (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
@@ -62,6 +63,7 @@ export function useSpeechToText(options: UseSpeechToTextOptions = {}): UseSpeech
   }, []);
 
   const stop = useCallback(() => {
+    isRecordingRef.current = false;
     setIsRecording(false);
     cleanupRecognition();
   }, [cleanupRecognition]);
@@ -76,7 +78,7 @@ export function useSpeechToText(options: UseSpeechToTextOptions = {}): UseSpeech
 
     rec.lang = activeLangRef.current;
     rec.interimResults = true;
-    rec.continuous = false;
+    rec.continuous = true; // Keep listening continuously until manually stopped
 
     rec.onresult = (event: any) => {
       let interim = '';
@@ -96,14 +98,35 @@ export function useSpeechToText(options: UseSpeechToTextOptions = {}): UseSpeech
       }
     };
 
-    rec.onerror = () => {
-      setIsRecording(false);
+    rec.onerror = (event: any) => {
+      // Don't stop on all errors - some are recoverable
+      // Only stop on serious errors like no-speech or not-allowed
+      if (event.error === 'no-speech' || event.error === 'not-allowed' || event.error === 'aborted') {
+        isRecordingRef.current = false;
+        setIsRecording(false);
+      }
+      // For other errors, keep trying (continuous mode)
     };
 
     rec.onend = () => {
-      setIsRecording(false);
+      // Only restart if we're still supposed to be recording
+      // This handles the case where continuous mode ends due to timeout
+      // but we want to keep it running until manually stopped
+      if (isRecordingRef.current) {
+        // Try to restart if it stopped unexpectedly
+        try {
+          rec.start();
+        } catch (e) {
+          // If restart fails, stop recording
+          isRecordingRef.current = false;
+          setIsRecording(false);
+        }
+      } else {
+        setIsRecording(false);
+      }
     };
 
+    isRecordingRef.current = true;
     rec.start();
     setIsRecording(true);
   }, [isWebSpeechAvailable, options]);
